@@ -577,6 +577,7 @@ button:hover {
 
 .blog-card,
 .service-card {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -585,7 +586,10 @@ button:hover {
   text-align: left;
   transition: transform 0.3s;
 }
-
+.blog-card:hover, .service-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+}
 .blog-card img,
 .service-card i {
   width: 100%;
