@@ -13,6 +13,7 @@ class HostelViewSet(viewsets.ModelViewSet):
     queryset = Hostel.objects.all()
     serializer_class = HostelSerializer
 
+    # Custom action to filter hostels based on various parameters
     @action(detail=False, methods=['post'], url_path='filter')
     def filter_hostels(self, request):
 
@@ -112,4 +113,28 @@ class HostelViewSet(viewsets.ModelViewSet):
         # Serialize and return the filtered data
         serializer = HostelSerializer(hostels, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    # Override list function for manual pagination
+    def list(self, request, *args, **kwargs):
+        limit = int(request.query_params.get('limit', 10)) 
+        offset = int(request.query_params.get('offset', 0))  
+
+        # Get all hostels
+        hostels = Hostel.objects.all()
+
+        # Apply manual pagination
+        paginated_hostels = hostels[offset:offset + limit]
+
+        # Serialize the data
+        serializer = HostelSerializer(paginated_hostels, many=True)
+
+        # Prepare response data with pagination info
+        response_data = {
+            'hostels': serializer.data,
+            'total_count': hostels.count(),  
+            'has_more': offset + limit < hostels.count() 
+        }
+
+        return Response(response_data)
+
     
