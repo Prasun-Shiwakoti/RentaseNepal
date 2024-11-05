@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Bagbazar",
+    "image": "img/bagbazar.jpeg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  },
+  {
+    "id": 2,
+    "name": "Maitidevi",
+    "image": "img/maitidevi.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  },
+  {
+    "id": 3,
+    "name": "Baneshwor",
+    "image": "img/baneshwor.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  },
+  {
+    "id": 4,
+    "name": "Kalimati",
+    "image": "img/maitidevi.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  },
+  {
+    "id": 5,
+    "name": "Koteshwor",
+    "image": "img/koteshwor.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  },
+  {
+    "id": 5,
+    "name": "Koteshwor",
+    "image": "img/koteshwor.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  },
+  {
+    "id": 5,
+    "name": "Koteshwor",
+    "image": "img/koteshwor.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  },
+  {
+    "id": 5,
+    "name": "Koteshwor",
+    "image": "img/koteshwor.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+  }
+]

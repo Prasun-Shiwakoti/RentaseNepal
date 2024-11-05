@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Hostel", 
+    "image": "img/hostel1.jpg",
+    "title": "Hostel 1",
+    "price": "Rs. 10,500",
+    "gender": "Boys",
+    "location": "Location 1",
+    "rating": 4.5,
+    "isFeatured": true
+  },
+  {
+    "id": 2,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Hostel 11",
+    "price": "Rs. 9,000",
+    "gender": "Boys",
+    "location": "Location 11",
+    "rating": 4.2,
+    "isFeatured": false
+  },
+  {
+    "id": 3,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Hostel 21",
+    "price": "Rs. 8,500",
+    "gender": "Girls",
+    "location": "Location 21",
+    "rating": 4.0,
+    "isFeatured": true
+  },
+  {
+    "id": 4,
+    "name": "Hostel",
+    "image": "img/hostel1.jpg",
+    "title": "Hostel 31",
+    "price": "Rs. 11,000",
+    "gender": "Girls",
+    "location": "Location 31",
+    "rating": 4.8,
+    "isFeatured": false
+  },
+  {
+    "id": 5,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Hostel 41",
+    "price": "Rs. 7,500",
+    "gender": "Boys",
+    "location": "Location 41",
+    "rating": 3.9,
+    "isFeatured": true
+  },
+  {
+    "id": 6,
+    "name": "Hostel",
+    "image": "img/hostel1.jpg",
+    "title": "Hostel 51",
+    "price": "Rs. 12,000",
+    "gender": "Girls",
+    "location": "Location 51",
+    "rating": 4.7,
+    "isFeatured": false
+  },
+  {
+    "id": 7,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Hostel 61",
+    "price": "Rs. 9,800",
+    "gender": "Boys",
+    "location": "Location 61",
+    "rating": 4.1,
+    "isFeatured": true
+  },
+  {
+    "id": 8,
+    "name": "Hostel",
+    "image": "img/hostel1.jpg",
+    "title": "Hostel 71",
+    "price": "Rs. 8,300",
+    "gender": "Girls",
+    "location": "Location 71",
+    "rating": 3.8,
+    "isFeatured": false
+  },
+  {
+    "id": 9,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Hostel 81",
+    "price": "Rs. 10,200",
+    "gender": "Boys",
+    "location": "Location 81",
+    "rating": 4.3,
+    "isFeatured": true
+  },
+  {
+    "id": 10,
+    "name": "Hostel",
+    "image": "img/hostel1.jpg",
+    "title": "Hostel 91",
+    "price": "Rs. 7,700",
+    "gender": "Girls",
+    "location": "Location 91",
+    "rating": 3.6,
+    "isFeatured": false
+  }
+]
