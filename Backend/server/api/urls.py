@@ -1,6 +1,10 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import HostelViewSet
+
+router = DefaultRouter()
+router.register(r"hostels", HostelViewSet, basename='hostel')
 
 urlpatterns = [
-    path('hostels/', views.get_hostels, name='get_hostels'),
+    path("", include(router.urls)),
 ]
