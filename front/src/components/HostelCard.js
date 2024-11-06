@@ -13,7 +13,7 @@ const HostelCard = ({ image, name, isFeatured, rating, location, price, gender }
         <div className="card-location">
           <i className="bi bi-geo-alt-fill"></i> {location}
         </div>
-        <div className="card-price">{price}</div>
+        <div className="card-price">Rs. {price}</div>
         <div className="card-gender">{gender} Hostel</div>
       </div>
     </div>

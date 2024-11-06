@@ -6,13 +6,13 @@ import hostels from '../data/hostels.json';
 const FeaturedHostels = () => {
     return (
         <div className="featuredhostel-section">
-            <h1>Featured Hostels</h1>
+            <h2>Featured Hostels</h2>
             <div className="scrollable-cards">
-                {hostels.map((hostel, index) => (
+                {hostels.filter(hostel => hostel.isFeatured).map((hostel, index) => (
                     <HostelCard
                         key={index}
                         image={hostel.image}
-                        name={hostel.name}
+                        name={hostel.title}
                         isFeatured={hostel.isFeatured}
                         rating={hostel.rating}
                         location={hostel.location}

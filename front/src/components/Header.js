@@ -2,16 +2,23 @@ import React from 'react';
 import Nav from './Nav';
 import SearchBar from './SearchBar';
 import '../style.css';
-const Header = () => {
+const Header = ({ blogRef, contactRef, serviceRef }) => {
   return (
     <header className="header-section">
-      <Nav />
+      <Nav 
+        blogRef={blogRef}
+        contactRef={contactRef}
+        serviceRef={serviceRef}
+        isHome={true}
+      />
       <div className="upper-home">
         <div className="upperhome-box">
           <h1>Rentase</h1>
           <p>find your ideal accomodation <br /> Hostels of your choice</p>
         </div>
-        <SearchBar/>
+        <div className="search_bar">
+          <SearchBar/>
+        </div>
       </div>
     </header>
   );

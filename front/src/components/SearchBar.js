@@ -1,37 +1,50 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style.css';
 
 const SearchBar = () => {
-  // const [location, setLocation] = useState('');
+  const [location, setLocation] = useState('');
+  const [institute, setInstitute] = useState('');
+  const navigate = useNavigate();
 
-  // const handleSearch = () => {
-  //   // Handle the search functionality
-  //   console.log('Searching for:', location);
-  // };
-
+  // Function to handle search
+  const handleSearch = (e) => {
+    e.preventDefault();
+    
+    // Redirect to the search results page with the query params
+    if(location || institute){
+      navigate(`/search-results?location=${location}&institute=${institute}`);
+    }
+    else{
+      const search_bar= document.getElementsByClassName("home-search")[0];
+      search_bar.style.boxShadow = "0 10px 30px #ff0000";
+      search_bar.style.border="4px solid #ff0000";
+      alert("Search Field Empty");
+    }
+  };
   return (
-    <div className="search_bar">
-      <form action="" className="home-search">
-        <i className="bi bi-geo-alt-fill"></i>
-        <input type="search" placeholder="Search by location..." className="home-search-input" />
+      <form action="" className="home-search" onSubmit={handleSearch}>
+        <i className="bi bi-geo-alt-fill"/>
+        <input
+            id="search_location"
+            type="search"
+            placeholder="Enter Location"
+            className="home-search-input"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+          <i className="bi bi-buildings-fill"></i>
+          <input
+            id="search_institute"
+            type="search"
+            placeholder="Enter Nearby Institute"
+            className="home-search-input"
+            value={institute}
+            onChange={(e) => setInstitute(e.target.value)}
+          />
 
-        <select className="filter-select" name="gender">
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-
-        <select className="filter-select" name="institute">
-          <option value="">Select Nearby Institute</option>
-          <option value="institute1">Institute 1</option>
-          <option value="institute2">Institute 2</option>
-          <option value="institute3">Institute 3</option>
-        </select>
-
-        <button className="button">Search</button>
+        <button type="submit" className="button">Search</button>
       </form>
-    </div>
   );
 };
 
