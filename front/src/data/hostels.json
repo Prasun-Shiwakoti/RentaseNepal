@@ -1,112 +1,194 @@
 [
   {
     "id": 1,
-    "name": "Hostel", 
+    "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 1",
+    "title": "Sunrise Boys Hostel",
     "price": "Rs. 10,500",
     "gender": "Boys",
     "location": "Location 1",
     "rating": 4.5,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitute": "Tribhuvan University"
   },
   {
     "id": 2,
     "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 11",
+    "title": "Everest Boys Hostel",
     "price": "Rs. 9,000",
     "gender": "Boys",
     "location": "Location 11",
     "rating": 4.2,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitute": "Kathmandu University"
   },
   {
     "id": 3,
     "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 21",
+    "title": "Himalayan Girls Hostel",
     "price": "Rs. 8,500",
     "gender": "Girls",
     "location": "Location 21",
     "rating": 4.0,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitute": "Patan Academy of Health Sciences"
   },
   {
     "id": 4,
     "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 31",
+    "title": "Pine Tree Girls Hostel",
     "price": "Rs. 11,000",
     "gender": "Girls",
     "location": "Location 31",
     "rating": 4.8,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitute": "Pokhara University"
   },
   {
     "id": 5,
     "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 41",
+    "title": "River Valley Boys Hostel",
     "price": "Rs. 7,500",
     "gender": "Boys",
     "location": "Location 41",
     "rating": 3.9,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitute": "Agriculture and Forestry University"
   },
   {
     "id": 6,
     "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 51",
+    "title": "Skyline Girls Hostel",
     "price": "Rs. 12,000",
     "gender": "Girls",
     "location": "Location 51",
     "rating": 4.7,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitute": "Lumbini Buddhist University"
   },
   {
     "id": 7,
     "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 61",
+    "title": "Green Field Boys Hostel",
     "price": "Rs. 9,800",
     "gender": "Boys",
     "location": "Location 61",
     "rating": 4.1,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitute": "Mid-Western University"
   },
   {
     "id": 8,
     "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 71",
+    "title": "Lotus Girls Hostel",
     "price": "Rs. 8,300",
     "gender": "Girls",
     "location": "Location 71",
     "rating": 3.8,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitute": "Far-Western University"
   },
   {
     "id": 9,
     "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 81",
+    "title": "Ocean View Boys Hostel",
     "price": "Rs. 10,200",
     "gender": "Boys",
     "location": "Location 81",
     "rating": 4.3,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitute": "Nepal Sanskrit University"
   },
   {
     "id": 10,
     "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 91",
+    "title": "Golden Girls Hostel",
     "price": "Rs. 7,700",
     "gender": "Girls",
     "location": "Location 91",
     "rating": 3.6,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitute": "Rajarshi Janak University"
+  },
+  {
+    "id": 11,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Mountainside Boys Hostel",
+    "price": "Rs. 8,900",
+    "gender": "Boys",
+    "location": "Location 101",
+    "rating": 4.4,
+    "isFeatured": true,
+    "nearbyInstitute": "Purbanchal University"
+  },
+  {
+    "id": 12,
+    "name": "Hostel",
+    "image": "img/hostel1.jpg",
+    "title": "Rosewood Girls Hostel",
+    "price": "Rs. 9,300",
+    "gender": "Girls",
+    "location": "Location 111",
+    "rating": 4.1,
+    "isFeatured": false,
+    "nearbyInstitute": "Janakpur Engineering College"
+  },
+  {
+    "id": 13,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Peaceful Boys Hostel",
+    "price": "Rs. 11,300",
+    "gender": "Boys",
+    "location": "Location 121",
+    "rating": 4.6,
+    "isFeatured": true,
+    "nearbyInstitute": "Nepal Medical College"
+  },
+  {
+    "id": 14,
+    "name": "Hostel",
+    "image": "img/hostel1.jpg",
+    "title": "Silver Oak Girls Hostel",
+    "price": "Rs. 7,900",
+    "gender": "Girls",
+    "location": "Location 131",
+    "rating": 3.7,
+    "isFeatured": false,
+    "nearbyInstitute": "Dharan Nursing College"
+  },
+  {
+    "id": 15,
+    "name": "Hostel",
+    "image": "img/hostel2.jpg",
+    "title": "Forest Hill Boys Hostel",
+    "price": "Rs. 9,400",
+    "gender": "Boys",
+    "location": "Location 141",
+    "rating": 4.2,
+    "isFeatured": true,
+    "nearbyInstitute": "Mahendra Ratna Campus"
+  },
+  {
+    "id": 16,
+    "name": "Hostel",
+    "image": "img/hostel1.jpg",
+    "title": "Crystal Lake Girls Hostel",
+    "price": "Rs. 8,100",
+    "gender": "Girls",
+    "location": "Location 151",
+    "rating": 3.9,
+    "isFeatured": false,
+    "nearbyInstitute": "Hetauda College of Management"
   }
 ]
