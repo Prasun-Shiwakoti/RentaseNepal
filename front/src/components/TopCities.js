@@ -17,7 +17,7 @@ const TopCities = () => {
   return (
     <div className="topcities-section">
       <div className="topcities-container">
-        <h1>Our Top Places</h1>
+        <h2>Our Top Places</h2>
         <p>Choose The places You’ll Be Living In Next, Or Look For Flatmates And Rooms Near You</p>
         <div className="grid top-cities-grid">
           {topCitiesData

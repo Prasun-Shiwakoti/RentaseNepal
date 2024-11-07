@@ -1,112 +1,178 @@
 [
   {
     "id": 1,
-    "name": "Hostel", 
     "image": "img/hostel1.jpg",
-    "title": "Hostel 1",
-    "price": "Rs. 10,500",
+    "title": "Sunrise Boys Hostel",
+    "price": 10500,
     "gender": "Boys",
     "location": "Location 1",
     "rating": 4.5,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitutes": [1, 2]
   },
   {
     "id": 2,
-    "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 11",
-    "price": "Rs. 9,000",
+    "title": "Everest Boys Hostel",
+    "price": 9000,
     "gender": "Boys",
     "location": "Location 11",
     "rating": 4.2,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitutes": [2, 3]
   },
   {
     "id": 3,
-    "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 21",
-    "price": "Rs. 8,500",
+    "title": "Himalayan Girls Hostel",
+    "price": 8500,
     "gender": "Girls",
     "location": "Location 21",
     "rating": 4.0,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitutes": [3]
   },
   {
     "id": 4,
-    "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 31",
-    "price": "Rs. 11,000",
+    "title": "Pine Tree Girls Hostel",
+    "price": 11000,
     "gender": "Girls",
     "location": "Location 31",
     "rating": 4.8,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitutes": [4]
   },
   {
     "id": 5,
-    "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 41",
-    "price": "Rs. 7,500",
+    "title": "River Valley Boys Hostel",
+    "price": 7500,
     "gender": "Boys",
     "location": "Location 41",
     "rating": 3.9,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitutes": [5]
   },
   {
     "id": 6,
-    "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 51",
-    "price": "Rs. 12,000",
+    "title": "Skyline Girls Hostel",
+    "price": 12000,
     "gender": "Girls",
     "location": "Location 51",
     "rating": 4.7,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitutes": [6]
   },
   {
     "id": 7,
-    "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 61",
-    "price": "Rs. 9,800",
+    "title": "Green Field Boys Hostel",
+    "price": 9800,
     "gender": "Boys",
     "location": "Location 61",
     "rating": 4.1,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitutes": [7]
   },
   {
     "id": 8,
-    "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 71",
-    "price": "Rs. 8,300",
+    "title": "Lotus Girls Hostel",
+    "price": 8300,
     "gender": "Girls",
     "location": "Location 71",
     "rating": 3.8,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitutes": [8]
   },
   {
     "id": 9,
-    "name": "Hostel",
     "image": "img/hostel2.jpg",
-    "title": "Hostel 81",
-    "price": "Rs. 10,200",
+    "title": "Ocean View Boys Hostel",
+    "price": 10200,
     "gender": "Boys",
     "location": "Location 81",
     "rating": 4.3,
-    "isFeatured": true
+    "isFeatured": true,
+    "nearbyInstitutes": [9]
   },
   {
     "id": 10,
-    "name": "Hostel",
     "image": "img/hostel1.jpg",
-    "title": "Hostel 91",
-    "price": "Rs. 7,700",
+    "title": "Golden Girls Hostel",
+    "price": 7700,
     "gender": "Girls",
     "location": "Location 91",
     "rating": 3.6,
-    "isFeatured": false
+    "isFeatured": false,
+    "nearbyInstitutes": [10]
+  },
+  {
+    "id": 11,
+    "image": "img/hostel2.jpg",
+    "title": "Mountainside Boys Hostel",
+    "price": 8900,
+    "gender": "Boys",
+    "location": "Location 101",
+    "rating": 4.4,
+    "isFeatured": true,
+    "nearbyInstitutes": [11]
+  },
+  {
+    "id": 12,
+    "image": "img/hostel1.jpg",
+    "title": "Rosewood Girls Hostel",
+    "price": 9300,
+    "gender": "Girls",
+    "location": "Location 111",
+    "rating": 4.1,
+    "isFeatured": false,
+    "nearbyInstitutes": [12]
+  },
+  {
+    "id": 13,
+    "image": "img/hostel2.jpg",
+    "title": "Peaceful Boys Hostel",
+    "price": 11300,
+    "gender": "Boys",
+    "location": "Location 121",
+    "rating": 4.6,
+    "isFeatured": true,
+    "nearbyInstitutes": [13]
+  },
+  {
+    "id": 14,
+    "image": "img/hostel1.jpg",
+    "title": "Silver Oak Girls Hostel",
+    "price": 7900,
+    "gender": "Girls",
+    "location": "Location 131",
+    "rating": 3.7,
+    "isFeatured": false,
+    "nearbyInstitutes": [14]
+  },
+  {
+    "id": 15,
+    "image": "img/hostel2.jpg",
+    "title": "Eagle's Nest Boys Hostel",
+    "price": 8100,
+    "gender": "Boys",
+    "location": "Location 141",
+    "rating": 4.0,
+    "isFeatured": true,
+    "nearbyInstitutes": [15]
+  },
+  {
+    "id": 16,
+    "image": "img/hostel1.jpg",
+    "title": "Blue Sky Boys Hostel",
+    "price": 9500,
+    "gender": "Boys",
+    "location": "Location 151",
+    "rating": 4.2,
+    "isFeatured": false,
+    "nearbyInstitutes": [16]
   }
 ]

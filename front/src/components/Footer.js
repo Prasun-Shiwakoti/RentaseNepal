@@ -41,10 +41,10 @@ const Footer = () => {
           Phone: +977980000000
         </p>
         <div className="social-icons">
-          <a href="#"><i className="bi bi-facebook"></i></a>
-          <a href="#"><i className="bi bi-instagram"></i></a>
-          <a href="#"><i className="bi bi-whatsapp"></i></a>
-          <a href="#"><i className="bi bi-gmail"></i></a>
+          <a href="https://www.facebook.com/people/Rentase-Nepal/61559722175314/"><i className="bi bi-facebook"/></a>
+          <a href="https://www.facebook.com/groups/1007483277562234/"><i className="bi bi-instagram"/></a>
+          <a href="https://www.facebook.com/groups/1007483277562234/"><i className="bi bi-whatsapp"/></a>
+          <a href="https://www.facebook.com/groups/1007483277562234/"><i className="bi bi-envelope"/></a>
         </div>
       </div>
 

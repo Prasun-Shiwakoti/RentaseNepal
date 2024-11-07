@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Tribhuvan University",
+    "nearbyHostels": [1, 2, 5]
+  },
+  {
+    "id": 2,
+    "name": "Kathmandu University",
+    "nearbyHostels": [2, 3]
+  },
+  {
+    "id": 3,
+    "name": "Patan Academy of Health Sciences",
+    "nearbyHostels": [3]
+  },
+  {
+    "id": 4,
+    "name": "Pokhara University",
+    "nearbyHostels": [4]
+  },
+  {
+    "id": 5,
+    "name": "Agriculture and Forestry University",
+    "nearbyHostels": [5]
+  },
+  {
+    "id": 6,
+    "name": "Lumbini Buddhist University",
+    "nearbyHostels": [6]
+  },
+  {
+    "id": 7,
+    "name": "Mid-Western University",
+    "nearbyHostels": [7]
+  },
+  {
+    "id": 8,
+    "name": "Far-Western University",
+    "nearbyHostels": [8]
+  },
+  {
+    "id": 9,
+    "name": "Nepal Sanskrit University",
+    "nearbyHostels": [9]
+  },
+  {
+    "id": 10,
+    "name": "Rajarshi Janak University",
+    "nearbyHostels": [10]
+  },
+  {
+    "id": 11,
+    "name": "Purbanchal University",
+    "nearbyHostels": [11]
+  },
+  {
+    "id": 12,
+    "name": "Janakpur Engineering College",
+    "nearbyHostels": [12]
+  },
+  {
+    "id": 13,
+    "name": "Nepal Medical College",
+    "nearbyHostels": [13]
+  },
+  {
+    "id": 14,
+    "name": "Dharan Nursing College",
+    "nearbyHostels": [14]
+  },
+  {
+    "id": 15,
+    "name": "Mahendra Ratna Campus",
+    "nearbyHostels": [15]
+  },
+  {
+    "id": 16,
+    "name": "Hetauda College of Management",
+    "nearbyHostels": [16]
+  }
+]
