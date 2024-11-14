@@ -28,3 +28,23 @@ function goToDetails(cityName) {
 
 
 document.querySelectorAll('.hidden-row').forEach(row => row.style.display = 'none');
+
+
+// hostel detail page functions
+
+function showmorephotos() {
+  const galleryContainer = document.querySelector(".additional-images");
+  const extraGallery = document.getElementById("extraGallery");
+  galleryContainer.classList.toggle("show-extra");
+  extraGallery.style.display = extraGallery.style.display === "grid" ? "none" : "grid";
+}
+
+function opengooglemaps(){
+            
+  const mapUrl = "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8";
+
+
+   window.open(mapUrl, "_blank");
+
+
+}
