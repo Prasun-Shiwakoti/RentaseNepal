@@ -1,8 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const HostelCard = ({ image, name, isFeatured, rating, location, price, gender }) => {
+const HostelCard = ({ id, image, name, isFeatured, rating, location, price, gender }) => {
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    navigate(`/hostel/${id}`);
+  };
   return (
-    <div className="card">
+    <div className="card" onClick={handleCardClick}>
       {isFeatured && <div className="ribbon">Featured</div>}
       <img src={image} alt={name} />
       <div className="card-content">

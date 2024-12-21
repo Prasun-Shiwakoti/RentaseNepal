@@ -163,6 +163,7 @@ const SearchResults = () => {
           filteredHostels.map((hostel) => (
             <HostelCard
               key={hostel.id}
+              id={hostel.id}
               image={hostel.image}
               name={hostel.title}
               isFeatured={hostel.isFeatured}

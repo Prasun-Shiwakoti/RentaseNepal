@@ -1,178 +1,1111 @@
 [
   {
     "id": 1,
-    "image": "img/hostel1.jpg",
+    "image": "../img/hostel1.jpg",
     "title": "Sunrise Boys Hostel",
     "price": 10500,
     "gender": "Boys",
     "location": "Location 1",
     "rating": 4.5,
     "isFeatured": true,
-    "nearbyInstitutes": [1, 2]
+    "nearbyInstitutes": [1, 2],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3000,
+      "oneSeater": 18000,
+      "twoSeater": 12000,
+      "threeSeater": 9000,
+      "fourSeater": 9500
+    },
+    "facilities": [
+      "Mess not available",
+      "Semi furnished",
+      "Generator",
+      "Car parking",
+      "Kitchen",
+      "Geyser",
+      "Heater",
+      "Air Conditioner",
+      "Air Cooler",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Purano baneshwor",
+      "hospitalOrPharmacy": "Hope XYZ",
+      "schools": "CGJSNFJS",
+      "shoppingMalls": "Best Buy Shopping Center",
+      "cafesAndRestaurants": "La Palpasa"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 8:00pm"
+      },
+      {
+        "icon": null,
+        "description": "Smoking and Beverages: Not Allowed"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Chiya Biscuit",
+        "lunch": "Daal Bhaat",
+        "dinner": "Chicken Daal Bhaat"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Aalu Paratha",
+        "lunch": "Chicken Daal Bhaat",
+        "dinner": "Daal Bhaat"
+      }
+    ]
   },
   {
     "id": 2,
-    "image": "img/hostel2.jpg",
+    "image": "../img/hostel2.jpg",
     "title": "Everest Boys Hostel",
     "price": 9000,
     "gender": "Boys",
     "location": "Location 11",
     "rating": 4.2,
     "isFeatured": false,
-    "nearbyInstitutes": [2, 3]
+    "nearbyInstitutes": [2, 3],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 2500,
+      "oneSeater": 16000,
+      "twoSeater": 11000,
+      "threeSeater": 8000,
+      "fourSeater": 8500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Air Conditioner"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Kalanki bus stop",
+      "hospitalOrPharmacy": "Healthy Care Pharmacy",
+      "schools": "Patan School",
+      "shoppingMalls": "Patan Plaza",
+      "cafesAndRestaurants": "Coffee Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 7:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No alcohol or smoking"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/abcdEfGHI",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Chana Paratha",
+        "lunch": "Momo",
+        "dinner": "Daal Bhaat"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Bread and Jam",
+        "lunch": "Fried Rice",
+        "dinner": "Dal Tarka"
+      }
+    ]
   },
   {
     "id": 3,
-    "image": "img/hostel2.jpg",
+    "image": "../img/hostel2.jpg",
     "title": "Himalayan Girls Hostel",
     "price": 8500,
     "gender": "Girls",
     "location": "Location 21",
     "rating": 4.0,
     "isFeatured": true,
-    "nearbyInstitutes": [3]
+    "nearbyInstitutes": [3],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 2700,
+      "oneSeater": 14500,
+      "twoSeater": 10000,
+      "threeSeater": 7000,
+      "fourSeater": 7500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Kitchen",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Patan Bus Station",
+      "hospitalOrPharmacy": "Med Care Pharmacy",
+      "schools": "Saraswati School",
+      "shoppingMalls": "Sundar Shopping Mall",
+      "cafesAndRestaurants": "Café Mocha"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 8:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No visitors allowed after 9:00pm"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/hijKLMNOP",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Momos",
+        "lunch": "Fried Rice",
+        "dinner": "Chicken Curry"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Paratha",
+        "lunch": "Dal Tarka",
+        "dinner": "Daal Bhaat"
+      }
+    ]
   },
   {
     "id": 4,
-    "image": "img/hostel1.jpg",
+    "image": "../img/hostel1.jpg",
     "title": "Pine Tree Girls Hostel",
     "price": 11000,
     "gender": "Girls",
     "location": "Location 31",
     "rating": 4.8,
     "isFeatured": false,
-    "nearbyInstitutes": [4]
+    "nearbyInstitutes": [4],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3500,
+      "oneSeater": 19000,
+      "twoSeater": 13000,
+      "threeSeater": 10000,
+      "fourSeater": 10500
+    },
+    "facilities": [
+      "Mess not available",
+      "Fully furnished",
+      "Laundry",
+      "Car parking",
+      "Kitchen",
+      "Air Conditioner",
+      "Heater"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Sundar Nagar",
+      "hospitalOrPharmacy": "Global Health",
+      "schools": "Saraswati School",
+      "shoppingMalls": "Global Plaza",
+      "cafesAndRestaurants": "Sundar Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 9:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No late night visitors"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Bread Butter",
+        "lunch": "Dal Bhaat",
+        "dinner": "Momos"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Egg Roll",
+        "lunch": "Rice and Curry",
+        "dinner": "Noodles"
+      }
+    ]
   },
   {
     "id": 5,
-    "image": "img/hostel2.jpg",
-    "title": "River Valley Boys Hostel",
-    "price": 7500,
+    "image": "../img/hostel2.jpg",
+    "title": "Mountain View Boys Hostel",
+    "price": 9500,
     "gender": "Boys",
     "location": "Location 41",
-    "rating": 3.9,
-    "isFeatured": true,
-    "nearbyInstitutes": [5]
+    "rating": 4.3,
+    "isFeatured": false,
+    "nearbyInstitutes": [5, 6],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 2800,
+      "oneSeater": 16500,
+      "twoSeater": 11500,
+      "threeSeater": 8500,
+      "fourSeater": 9000
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Boudha Bus Stop",
+      "hospitalOrPharmacy": "Health Point Pharmacy",
+      "schools": "Boudha High School",
+      "shoppingMalls": "Boudha Plaza",
+      "cafesAndRestaurants": "Cafe Boudha"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 8:30pm"
+      },
+      {
+        "icon": null,
+        "description": "No smoking inside the premises"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Toast and Jam",
+        "lunch": "Dal Bhaat",
+        "dinner": "Chicken Curry"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Porridge",
+        "lunch": "Rice and Curry",
+        "dinner": "Momos"
+      }
+    ]
   },
   {
     "id": 6,
-    "image": "img/hostel1.jpg",
-    "title": "Skyline Girls Hostel",
+    "image": "../img/hostel1.jpg",
+    "title": "Snow Peak Boys Hostel",
     "price": 12000,
-    "gender": "Girls",
+    "gender": "Boys",
     "location": "Location 51",
-    "rating": 4.7,
-    "isFeatured": false,
-    "nearbyInstitutes": [6]
+    "rating": 4.6,
+    "isFeatured": true,
+    "nearbyInstitutes": [6, 7],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3200,
+      "oneSeater": 20000,
+      "twoSeater": 14000,
+      "threeSeater": 10000,
+      "fourSeater": 10500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Kitchen",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Kalimati Bus Station",
+      "hospitalOrPharmacy": "Snow Peak Pharmacy",
+      "schools": "Snow Peak School",
+      "shoppingMalls": "Snow Mall",
+      "cafesAndRestaurants": "Snow Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 9:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No late night visitors"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Boiled Eggs",
+        "lunch": "Daal Bhaat",
+        "dinner": "Momos"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Pancakes",
+        "lunch": "Vegetable Curry",
+        "dinner": "Rice and Dal"
+      }
+    ]
   },
   {
     "id": 7,
-    "image": "img/hostel2.jpg",
-    "title": "Green Field Boys Hostel",
-    "price": 9800,
-    "gender": "Boys",
+    "image": "../img/hostel2.jpg",
+    "title": "Red Valley Girls Hostel",
+    "price": 8500,
+    "gender": "Girls",
     "location": "Location 61",
     "rating": 4.1,
-    "isFeatured": true,
-    "nearbyInstitutes": [7]
+    "isFeatured": false,
+    "nearbyInstitutes": [7],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 2500,
+      "oneSeater": 16000,
+      "twoSeater": 11000,
+      "threeSeater": 8000,
+      "fourSeater": 8500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Ring Road",
+      "hospitalOrPharmacy": "Health Pharmacy",
+      "schools": "Blue Moon School",
+      "shoppingMalls": "Valley Mall",
+      "cafesAndRestaurants": "Red Valley Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 7:30pm"
+      },
+      {
+        "icon": null,
+        "description": "No smoking inside the hostel"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Sandwich",
+        "lunch": "Rice and Chicken",
+        "dinner": "Dal Bhaat"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Eggs and Toast",
+        "lunch": "Momos",
+        "dinner": "Vegetable Curry"
+      }
+    ]
   },
   {
     "id": 8,
-    "image": "img/hostel1.jpg",
-    "title": "Lotus Girls Hostel",
-    "price": 8300,
+    "image": "../img/hostel2.jpg",
+    "title": "Everest Girls Hostel",
+    "price": 11000,
     "gender": "Girls",
     "location": "Location 71",
-    "rating": 3.8,
-    "isFeatured": false,
-    "nearbyInstitutes": [8]
+    "rating": 4.7,
+    "isFeatured": true,
+    "nearbyInstitutes": [8],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3200,
+      "oneSeater": 18500,
+      "twoSeater": 13000,
+      "threeSeater": 9500,
+      "fourSeater": 10500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Thamel Bus Station",
+      "hospitalOrPharmacy": "Everest Care Pharmacy",
+      "schools": "Everest School",
+      "shoppingMalls": "Everest Mall",
+      "cafesAndRestaurants": "Everest Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 10:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No visitors after 9:00pm"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Momos",
+        "lunch": "Rice and Curry",
+        "dinner": "Dal Tarka"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Poha",
+        "lunch": "Pasta",
+        "dinner": "Noodles"
+      }
+    ]
   },
   {
     "id": 9,
-    "image": "img/hostel2.jpg",
-    "title": "Ocean View Boys Hostel",
-    "price": 10200,
+    "image": "../img/hostel1.jpg",
+    "title": "Sapphire Boys Hostel",
+    "price": 10000,
     "gender": "Boys",
     "location": "Location 81",
-    "rating": 4.3,
-    "isFeatured": true,
-    "nearbyInstitutes": [9]
+    "rating": 4.2,
+    "isFeatured": false,
+    "nearbyInstitutes": [9],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3000,
+      "oneSeater": 17500,
+      "twoSeater": 12000,
+      "threeSeater": 9000,
+      "fourSeater": 9500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Chabahil Bus Stop",
+      "hospitalOrPharmacy": "Chabahil Pharmacy",
+      "schools": "Sapphire School",
+      "shoppingMalls": "Sapphire Plaza",
+      "cafesAndRestaurants": "Sapphire Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 8:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No smoking inside the hostel"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Cereal and Milk",
+        "lunch": "Rice and Daal",
+        "dinner": "Momos"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Sandwich",
+        "lunch": "Dal Bhat",
+        "dinner": "Fried Rice"
+      }
+    ]
   },
   {
     "id": 10,
-    "image": "img/hostel1.jpg",
-    "title": "Golden Girls Hostel",
-    "price": 7700,
-    "gender": "Girls",
+    "image": "../img/hostel2.jpg",
+    "title": "Sunrise Boys Hostel",
+    "price": 10500,
+    "gender": "Boys",
     "location": "Location 91",
-    "rating": 3.6,
-    "isFeatured": false,
-    "nearbyInstitutes": [10]
+    "rating": 4.4,
+    "isFeatured": true,
+    "nearbyInstitutes": [10],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3300,
+      "oneSeater": 19000,
+      "twoSeater": 13000,
+      "threeSeater": 9500,
+      "fourSeater": 10000
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Boudha Bus Stop",
+      "hospitalOrPharmacy": "Sunrise Pharmacy",
+      "schools": "Sunrise High School",
+      "shoppingMalls": "Sunrise Plaza",
+      "cafesAndRestaurants": "Sunrise Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 9:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No late-night visitors"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Toast with Butter",
+        "lunch": "Dal Bhaat with Veg Curry",
+        "dinner": "Fried Chicken"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Poha",
+        "lunch": "Rice and Curry",
+        "dinner": "Vegetable Stir-fry"
+      }
+    ]
   },
   {
     "id": 11,
-    "image": "img/hostel2.jpg",
-    "title": "Mountainside Boys Hostel",
-    "price": 8900,
-    "gender": "Boys",
+    "image": "../img/hostel2.jpg",
+    "title": "Golden Peak Girls Hostel",
+    "price": 9500,
+    "gender": "Girls",
     "location": "Location 101",
-    "rating": 4.4,
-    "isFeatured": true,
-    "nearbyInstitutes": [11]
+    "rating": 4.5,
+    "isFeatured": false,
+    "nearbyInstitutes": [11],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 2700,
+      "oneSeater": 16000,
+      "twoSeater": 11000,
+      "threeSeater": 8500,
+      "fourSeater": 9000
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Lazimpat Bus Stop",
+      "hospitalOrPharmacy": "Golden Pharmacy",
+      "schools": "Golden Peak Academy",
+      "shoppingMalls": "Golden Mall",
+      "cafesAndRestaurants": "Golden Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 8:30pm"
+      },
+      {
+        "icon": null,
+        "description": "No smoking inside"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Pancakes",
+        "lunch": "Rice and Daal",
+        "dinner": "Dal Tarka"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Eggs with Toast",
+        "lunch": "Vegetable Curry",
+        "dinner": "Momos"
+      }
+    ]
   },
   {
     "id": 12,
-    "image": "img/hostel1.jpg",
-    "title": "Rosewood Girls Hostel",
-    "price": 9300,
+    "image": "../img/hostel1.jpg",
+    "title": "Himalayan Girls Hostel",
+    "price": 12000,
     "gender": "Girls",
     "location": "Location 111",
-    "rating": 4.1,
-    "isFeatured": false,
-    "nearbyInstitutes": [12]
+    "rating": 4.8,
+    "isFeatured": true,
+    "nearbyInstitutes": [12],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3500,
+      "oneSeater": 22000,
+      "twoSeater": 15000,
+      "threeSeater": 11000,
+      "fourSeater": 11500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Tinkune Bus Stop",
+      "hospitalOrPharmacy": "Himalayan Pharmacy",
+      "schools": "Himalayan Academy",
+      "shoppingMalls": "Himalayan Plaza",
+      "cafesAndRestaurants": "Himalayan Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 9:30pm"
+      },
+      {
+        "icon": null,
+        "description": "No visitors after 10:00pm"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Boiled Eggs",
+        "lunch": "Rice and Chicken",
+        "dinner": "Dal Bhaat"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Omelette with Toast",
+        "lunch": "Vegetable Curry",
+        "dinner": "Fried Rice"
+      }
+    ]
   },
   {
     "id": 13,
-    "image": "img/hostel2.jpg",
-    "title": "Peaceful Boys Hostel",
-    "price": 11300,
+    "image": "../img/hostel1.jpg",
+    "title": "Skyline Boys Hostel",
+    "price": 8500,
     "gender": "Boys",
     "location": "Location 121",
-    "rating": 4.6,
-    "isFeatured": true,
-    "nearbyInstitutes": [13]
+    "rating": 4.1,
+    "isFeatured": false,
+    "nearbyInstitutes": [13],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 2500,
+      "oneSeater": 15000,
+      "twoSeater": 10000,
+      "threeSeater": 8000,
+      "fourSeater": 8500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Pashupati Bus Stop",
+      "hospitalOrPharmacy": "Skyline Pharmacy",
+      "schools": "Skyline School",
+      "shoppingMalls": "Skyline Plaza",
+      "cafesAndRestaurants": "Skyline Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 10:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No late-night visitors"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Cornflakes with Milk",
+        "lunch": "Rice and Fish Curry",
+        "dinner": "Momos"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Paratha with Curd",
+        "lunch": "Dal Bhaat",
+        "dinner": "Pasta"
+      }
+    ]
   },
   {
     "id": 14,
-    "image": "img/hostel1.jpg",
-    "title": "Silver Oak Girls Hostel",
-    "price": 7900,
-    "gender": "Girls",
+    "image": "../img/hostel2.jpg",
+    "title": "Horizon Boys Hostel",
+    "price": 9000,
+    "gender": "Boys",
     "location": "Location 131",
-    "rating": 3.7,
-    "isFeatured": false,
-    "nearbyInstitutes": [14]
+    "rating": 4.3,
+    "isFeatured": true,
+    "nearbyInstitutes": [14],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 2800,
+      "oneSeater": 16000,
+      "twoSeater": 11000,
+      "threeSeater": 8500,
+      "fourSeater": 9000
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Naya Bus Stop",
+      "hospitalOrPharmacy": "Horizon Pharmacy",
+      "schools": "Horizon School",
+      "shoppingMalls": "Horizon Mall",
+      "cafesAndRestaurants": "Horizon Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 9:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No smoking inside"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Oats with Honey",
+        "lunch": "Rice and Chicken Curry",
+        "dinner": "Fried Rice"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Poha",
+        "lunch": "Dal Bhaat",
+        "dinner": "Spaghetti"
+      }
+    ]
   },
   {
     "id": 15,
-    "image": "img/hostel2.jpg",
-    "title": "Eagle's Nest Boys Hostel",
-    "price": 8100,
-    "gender": "Boys",
+    "image": "../img/hostel1.jpg",
+    "title": "Majestic Girls Hostel",
+    "price": 11000,
+    "gender": "Girls",
     "location": "Location 141",
-    "rating": 4.0,
-    "isFeatured": true,
-    "nearbyInstitutes": [15]
+    "rating": 4.6,
+    "isFeatured": false,
+    "nearbyInstitutes": [15],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3200,
+      "oneSeater": 19000,
+      "twoSeater": 13000,
+      "threeSeater": 9500,
+      "fourSeater": 10500
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "New Baneshwor Bus Stop",
+      "hospitalOrPharmacy": "Majestic Pharmacy",
+      "schools": "Majestic School",
+      "shoppingMalls": "Majestic Mall",
+      "cafesAndRestaurants": "Majestic Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 10:00pm"
+      },
+      {
+        "icon": null,
+        "description": "No alcohol inside"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Toast with Jam",
+        "lunch": "Dal Bhaat with Sabzi",
+        "dinner": "Momos"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Fried Rice",
+        "lunch": "Chicken Curry with Rice",
+        "dinner": "Pasta"
+      }
+    ]
   },
   {
     "id": 16,
-    "image": "img/hostel1.jpg",
-    "title": "Blue Sky Boys Hostel",
-    "price": 9500,
-    "gender": "Boys",
+    "image": "../img/hostel1.jpg",
+    "title": "Elite Girls Hostel",
+    "price": 12500,
+    "gender": "Girls",
     "location": "Location 151",
-    "rating": 4.2,
-    "isFeatured": false,
-    "nearbyInstitutes": [16]
+    "rating": 4.7,
+    "isFeatured": true,
+    "nearbyInstitutes": [16],
+    "additionalPhotos": [
+      "../img/baneshwor.jpg",
+      "../img/bg.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg",
+      "../img/bagbazar.jpeg",
+      "../img/hostel2.jpg",
+      "../img/hostel1.jpg",
+      "../img/maitidevi.jpg"
+    ],
+    "feeStructure": {
+      "admissionFee": 3500,
+      "oneSeater": 22000,
+      "twoSeater": 15000,
+      "threeSeater": 11000,
+      "fourSeater": 12000
+    },
+    "facilities": [
+      "Mess available",
+      "Fully furnished",
+      "Laundry",
+      "Generator",
+      "Car parking",
+      "Geyser",
+      "Washing Machine"
+    ],
+    "nearbyFacilities": {
+      "transportation": "Ratomate Bus Stop",
+      "hospitalOrPharmacy": "Elite Pharmacy",
+      "schools": "Elite Academy",
+      "shoppingMalls": "Elite Plaza",
+      "cafesAndRestaurants": "Elite Cafe"
+    },
+    "rules": [
+      {
+        "icon": "bi bi-alarm",
+        "description": "Arrival time: 9:30pm"
+      },
+      {
+        "icon": null,
+        "description": "No visitors after 10:00pm"
+      }
+    ],
+    "mapLocation": "https://maps.app.goo.gl/sxJPfkXcWtH7HrRQ8",
+    "messMenu": [
+      {
+        "day": "Monday",
+        "breakfast": "Cereal with Milk",
+        "lunch": "Dal Bhaat with Chicken",
+        "dinner": "Fried Rice"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Sandwiches",
+        "lunch": "Rice and Vegetable Curry",
+        "dinner": "Pasta"
+      }
+    ]
   }
 ]
