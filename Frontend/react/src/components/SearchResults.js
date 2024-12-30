@@ -11,7 +11,7 @@ const SearchResults = () => {
   const locationQuery = queryParams.get('location') || '';
   const instituteQuery = queryParams.get('institute') || '';
 
-  const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [priceRange, setPriceRange] = useState([0, 15000]);
   const [gender, setGender] = useState('');
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState('price');
@@ -29,9 +29,9 @@ const SearchResults = () => {
         connect: true,
         range: {
           min: 0,
-          max: 10000,
+          max: 15000,
         },
-        step: 50,
+        step: 500,
         tooltips: [true, true],
         format: {
           to: (value) => Math.round(value),
@@ -99,7 +99,7 @@ const SearchResults = () => {
   }, [filterAndSortHostels]);
 
   const resetFilters = () => {
-    setPriceRange([0, 10000]);
+    setPriceRange([0, 15000]);
     setGender('');
     setMinRating(0);
     setSortBy('price');

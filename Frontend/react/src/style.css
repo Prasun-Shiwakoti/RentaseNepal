@@ -428,6 +428,7 @@ button:hover {
     cursor: pointer;
     min-width: 300px;
     scroll-snap-align: start;
+    max-height: 380px;
 }
 
 .card:hover {

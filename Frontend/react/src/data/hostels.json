@@ -5,7 +5,7 @@
     "title": "Sunrise Boys Hostel",
     "price": 10500,
     "gender": "Boys",
-    "location": "Location 1",
+    "location": "Location 10",
     "rating": 4.5,
     "isFeatured": true,
     "nearbyInstitutes": [1, 2],

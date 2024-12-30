@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-// Assuming you have a list of hostels in a JSON file or an API
-import hostels from "../data/hostels.json"; // Example: If you're using a JSON file
+import hostels from "../data/hostels.json"; 
 
 const HostelDetails = () => {
   const { id } = useParams(); // Get the hostel ID from the URL
@@ -17,7 +16,7 @@ const HostelDetails = () => {
   }, [id]);
 
   if (!hostel) {
-    return <p>Loading...</p>; // You can display a loading state until data is available
+    return <p>Loading...</p>; // display a loading state until data is available
   }
 
   const openGoogleMaps = () => {
@@ -109,18 +108,16 @@ const HostelDetails = () => {
               {/* Rules */}
               <div className="hosteldetail-info">
                 <div className="hosteldetail-title">Rules</div>
+                <div className="rule">
                 {hostel.rules.map((rule, index) => (
-                  <div key={index} className="rule">
-                    {rule.icon && (
-                      <div className="rule-icon-box">
+                    <div key={index} className="rule-icon-box">
                         <p>
                           <i className={rule.icon}></i>
                         </p>
+                        <p>{rule.description}</p>
                       </div>
-                    )}
-                    <p>{rule.description}</p>
-                  </div>
                 ))}
+                </div>
               </div>
             </div>
           </div>
