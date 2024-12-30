@@ -74,23 +74,6 @@ h1{
     color: gray;
 }
 
-nav .nav-list ul li:nth-last-child(2) {
-    border: 1px solid gray;
-    border-radius: 20px;
-    padding: 3px 20px;
-
-}
-
-nav .nav-list ul li:nth-last-child(2) a {
-    color: black;
-
-}
-
-nav .nav-list ul li:nth-last-child(2) a:hover {
-    color: gray;
-
-}
-
 nav .nav-list a {
     text-decoration: none;
     color: gray;
@@ -113,22 +96,11 @@ nav .nav-list .login_section {
 
 }
 
-nav .nav-list ul li:nth-last-child(1) {
+ nav .nav-list ul li:nth-last-child(1), 
+ nav .nav-list ul li:nth-last-child(2)  {
     border: 1px solid gray;
     border-radius: 20px;
     padding: 3px 20px;
-}
-
-
-nav .nav-list ul li:nth-last-child(1) a {
-    color: black;
-
-}
-
-nav .nav-list ul li:nth-last-child(1) a:hover {
-    background-color: red;
-    color: gray;
-
 }
 
 i.bi.bi-person {
@@ -1098,3 +1070,275 @@ color: #555;
     align-items: center;
     margin-bottom: 20px;
 }
+
+
+/* Admin Page */
+
+.admin-page {
+    padding: 20px;
+  }
+  
+  .tables-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .table-section {
+    flex: 1;
+  }
+  
+  .table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .admin-table th {
+    background-color: #f4f4f4;
+    position: sticky;
+    top: 0;
+  }
+
+
+  /* Admin Login Page Styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f2f4f5, #9b9bcf);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .login-box {
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .form-group {
+    border: none;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 2px #0f326e, 0 0 0 3px #a8bfe1eb;
+    margin-bottom: 15px;
+  }
+
+  .form-group :focus {
+      box-shadow: 0 0 10px hsl(228, 66%, 53%);
+  }
+
+  .login-box>h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .form-group> input {
+    outline: none;
+    border:none;
+    border-radius: 20px;
+    width: 100%;
+    background-color: #fff;
+    color: hsl(228, 15%, 50%);
+    padding: 15px 20px;
+    text-align: center;
+  }
+  
+  .login-box>.error {
+    color: #ff4d4d;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .login-button{
+    width: 100%;
+  }
+
+
+  /* ListYourHostel */
+
+  .hostel-form-container{
+    background: linear-gradient(135deg, #f2f4f5, #9b9bcf);
+    display:flex;
+  }
+  .hostel-form {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hostel-form h1 {
+    text-align: center;
+    /* color: #333; */
+  }
+  
+  .hostel-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #555;
+  }
+  
+  .hostel-form input,
+  .hostel-form select,
+  .hostel-form button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .amenity {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .amenity.selected {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  .emoji {
+    font-size: 24px;
+  }
+  
+  .name {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .weekly-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr repeat(3, 2fr);
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .menu-header,
+  .menu-day-name {
+    text-align: center;
+    font-size: 15px;
+    font-weight:400;
+    background-color: #007bff;
+    color:white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .meal-cell {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+  }
+  
+  .meal-cell input {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  .meal-cell input:focus {
+    border:none;
+    outline:none;
+    box-shadow: 0 0 10px hsl(228, 66%, 53%);
+  }
+  
+  
+  .fee-structure-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .input-row input {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  /* .input-row button {
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  } */
+  
+  /* .input-row button:hover {
+    background-color: #0056b3;
+  } */
+  
+  .fee-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+  
+  .rules-grid input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

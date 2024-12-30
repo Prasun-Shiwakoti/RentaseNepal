@@ -4,7 +4,7 @@ import { scrollToSection } from '../App.js';
 import { Link } from 'react-router-dom';
 
 
-const Nav = ({ blogRef, contactRef, serviceRef, isHome }) => {
+const Nav = ({ blogRef, contactRef, serviceRef, isHome, isAdminLoggedIn }) => {
   return (
     <nav className="navBar">
       <h4>
@@ -17,7 +17,7 @@ const Nav = ({ blogRef, contactRef, serviceRef, isHome }) => {
       <div className="nav-list">
         <ul>
 
-          <li><a href="/">Home</a></li>
+          <li><Link to="/">Home</Link></li>
 
           {isHome &&
             <>
@@ -27,13 +27,16 @@ const Nav = ({ blogRef, contactRef, serviceRef, isHome }) => {
             </>
           }
           {/* <li ><a  href="#"><i className="bi bi-globe"></i>Language</a></li> */}
-          <li><a href="">List Your Properties</a></li>
+          <li><Link to="/list-your-hostel">List Your Hostel</Link></li>
 
           <div className="login_section">
 
-            <li> <a href="#">Log in</a></li>
+            {!isAdminLoggedIn ? (
+              <li><Link to="/admin-login">Log In</Link></li>
+            ) : (
+              <li><Link to="/admin"><i className="bi bi-person"></i></Link></li>
 
-            <i className="bi bi-person"></i>
+            )}
           </div>
 
         </ul>

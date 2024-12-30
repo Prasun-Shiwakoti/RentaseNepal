@@ -11,6 +11,7 @@ const FeaturedHostels = () => {
                 {hostels.filter(hostel => hostel.isFeatured).map((hostel, index) => (
                     <HostelCard
                         key={index}
+                        id={hostel.id}
                         image={hostel.image}
                         name={hostel.title}
                         isFeatured={hostel.isFeatured}

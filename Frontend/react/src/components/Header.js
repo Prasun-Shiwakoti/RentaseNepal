@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from './Nav';
 import SearchBar from './SearchBar';
 import '../style.css';
-const Header = ({ blogRef, contactRef, serviceRef }) => {
+const Header = ({ blogRef, contactRef, serviceRef, isAdminLoggedIn }) => {
   return (
     <header className="header-section">
       <Nav 
@@ -10,6 +10,7 @@ const Header = ({ blogRef, contactRef, serviceRef }) => {
         contactRef={contactRef}
         serviceRef={serviceRef}
         isHome={true}
+        isAdminLoggedIn={isAdminLoggedIn}
       />
       <div className="upper-home">
         <div className="upperhome-box">
