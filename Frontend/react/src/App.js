@@ -11,6 +11,7 @@ import Nav from './components/Nav';
 import SearchBar from './components/SearchBar';
 import './style.css';
 import ScrollToTop from './components/ScrollToTop';
+import HostelDetails from './components/HostelDetails';
 
 export const scrollToSection = (elementRef) => {
   window.scrollTo({
@@ -55,6 +56,12 @@ const App = () => {
               </div>
               <SearchResults />
             </>
+          } />
+          <Route path="/hostel/:id" element={
+            <div>
+              <Nav/>
+              <HostelDetails />
+            </div>
           } />
         </Routes>
         <div ref={contactRef}>
