@@ -3,9 +3,143 @@
 
 ## Overview
 
-The Hostel API allows you to retrieve a list of hostels with both filtering and pagination functionalities. You can specify filter criteria such as `gender`, `max_price`, `min_price`, `amenities`, and `arrival_time` in the POST request body. Additionally, use `limit` and `offset` parameters to retrieve paginated data as needed.
+The Hostel API allows you to add, update, delete, retrieve a list of hostels with both filtering and pagination functionalities. You can specify filter criteria such as `gender`, `max_price`, `min_price`, `amenities`, and `arrival_time` in the POST request body. Additionally, use `limit` and `offset` parameters to retrieve paginated data as needed.
 
-## 1. Filter API
+
+---
+
+## **1. Adding a Hostel**
+### **Endpoint:**  
+`POST /hostels/`
+
+### **Description:**  
+Allows authenticated admins to create a new hostel.
+
+### **Request Requirements:**
+- **Authentication:** Admin privileges required.
+- **Data:** Include necessary fields.
+
+### **Response:**  
+- **201 Created:** Hostel successfully added.  
+  Example:  
+  ```json
+  {
+    "status": true,
+    "message": "Hostel created successfully.",
+    "data": { /* hostel details */ }
+  }
+  ```
+- **400 Bad Request:** Validation error or invalid input.
+
+---
+
+## **2. Updating a Hostel**
+### **Endpoint:**  
+`PUT /hostels/{id}/`
+
+### **Description:**  
+Allows authenticated admins to update hostel details. Supports both full and partial updates.
+
+### **Request Requirements:**
+- **Authentication:** Admin privileges required.
+- **Data:** Fields to update.
+
+### **Response:**  
+- **200 OK:** Hostel successfully updated.  
+  Example:  
+  ```json
+  {
+    "status": true,
+    "message": "Hostel updated successfully.",
+    "data": { /* updated hostel details */ }
+  }
+  ```
+- **400 Bad Request:** Validation error or invalid input.
+
+---
+
+## **3. Deleting a Hostel**
+### **Endpoint:**  
+`DELETE /hostels/{id}/`
+
+### **Description:**  
+Allows authenticated admins to delete a hostel.
+
+### **Request Requirements:**
+- **Authentication:** Admin privileges required.
+
+### **Response:**  
+- **204 No Content:** Hostel successfully deleted.  
+  Example:  
+  ```json
+  {
+    "status": true,
+    "message": "Hostel deleted successfully.",
+    "data": {}
+  }
+  ```
+- **401 Unauthorized:** User lacks required permissions.
+
+---
+
+## **4. User Registration**
+### **Endpoint:**  
+`POST /users/`
+
+### **Description:**  
+Allows admins to register a new user.  
+
+### **Request Requirements:**
+- **Authentication:** Admin privileges required.
+- **Data:** Include user information as per the `UserSerializer`.
+
+### **Response:**  
+- **201 Created:** User successfully registered.  
+  Example:  
+  ```json
+  {
+    "status": true,
+    "message": "User registered successfully.",
+    "data": {
+      "username": "new_user",
+      "email": "user@example.com",
+      "role": "admin",
+      "token": "generated_token"
+    }
+  }
+  ```
+- **400 Bad Request:** Validation error.
+
+---
+
+## **5. User Login**
+### **Endpoint:**  
+`POST /users/login/`
+
+### **Description:**  
+Authenticate an existing user and retrieve a token for subsequent requests.
+
+### **Request Requirements:**
+- **Data:** Provide `username` and `password`.
+
+### **Response:**  
+- **200 OK:** Authentication successful.  
+  Example:  
+  ```json
+  {
+    "status": true,
+    "message": "Login successful.",
+    "data": {
+      "token": "user_token"
+    }
+  }
+  ```
+- **401 Unauthorized:** Invalid credentials.
+
+--- 
+
+
+## 6. Filter API
 ### Endpoint
 
 **POST** `/api/hostels/filter/`
@@ -106,7 +240,7 @@ On a successful request, the API will return a JSON array of hostels matching th
 - **200 OK**: Request was successful, and the filtered hostels are returned.
 - **400 Bad Request**: Invalid request parameters or missing required parameters.
 
-## 2. Pagination API
+## 7. Pagination API
 ### Endpoint
 
 **GET** `/api/hostels?offset=offset&limit=limit`
