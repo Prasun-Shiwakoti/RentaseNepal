@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -16,12 +17,13 @@ class Hostel(models.Model):
     contact_information = models.CharField(max_length=255)
     latitude = models.FloatField()
     longitude = models.FloatField()
+    approved = models.BooleanField(default=False)
 
     # Accommodation Details (Price of Seater Rooms)
-    single_seater_price = models.IntegerField(blank=True, null=True, default=-1)
-    two_seater_price = models.IntegerField(blank=True, null=True, default=-1)
-    three_seater_price = models.IntegerField(blank=True, null=True, default=-1)
-    four_seater_price = models.IntegerField(blank=True, null=True, default=-1)
+    single_seater_price = models.IntegerField( default=0)
+    two_seater_price = models.IntegerField( default=0)
+    three_seater_price = models.IntegerField(default=0)
+    four_seater_price = models.IntegerField(default=0)
 
     # Amenities
     gender = models.IntegerField(choices=GENDER_CHOICES)
@@ -48,3 +50,29 @@ class Hostel(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.location}"
+
+
+class Blogs(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    image = models.ImageField(upload_to='images/')
+    link = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+    
+
+class CustomUsers(models.Model):
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('staff', 'Staff'),
+        ('normal', 'Normal User'),
+    ]
+
+    name = models.CharField(max_length=100)
+    stats = models.JSONField(default=dict, null=True, blank=True)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='normal')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='custom_user')
+    
+    def __str__(self):
+        return f"{self.name} ({self.role})"
