@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import TopCities from './components/TopCities';
@@ -15,6 +15,7 @@ import './style.css';
 import ScrollToTop from './components/ScrollToTop';
 import HostelDetails from './components/HostelDetails';
 import ListYourHostel from './components/ListYourHostel';
+import BlogDetail from './components/BlogDetail';
 
 export const scrollToSection = (elementRef) => {
   window.scrollTo({
@@ -51,6 +52,12 @@ const App = () => {
                 <Blogs />
               </div>
             </>
+          } />
+          <Route path="/blog/:id" element={
+            <div>
+              <Nav isAdminLoggedIn={isAdminLoggedIn} />
+              <BlogDetail />
+            </div>
           } />
           <Route path="/search-results" element={
             <>

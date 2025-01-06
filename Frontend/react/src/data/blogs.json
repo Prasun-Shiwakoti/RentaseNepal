@@ -1,20 +1,98 @@
 [
   {
+    "id": 1,
     "title": "5 Tips for Choosing the Perfect Hostel",
-    "image": "img/blog1.jpeg",
+    "image": "/img/blog1.jpeg",
     "summary": "Choosing the right hostel can be tricky. Here are five essential tips to help you make the best decision.",
-    "link": "#"
+    "link": "#",
+    "date": "2024-12-30",
+    "views": 1250,
+    "author": "Admin",
+    "hook": "Looking for the perfect hostel to call home? We've got you covered!",
+    "content": [
+      "Finding the perfect hostel is like finding a home away from home. It's not just about a bed to sleep in; it's about the experience, the people you meet, and the memories you make. With so many options, how do you pick the right one?",
+      "Start with the basics—location. Staying near public transport, your school, or tourist attractions can save you time and money. Reviews can also be your best friend. Honest guest feedback often reveals the real story behind the glossy pictures on booking websites.",
+      "Don’t overlook amenities. Free Wi-Fi, complimentary breakfast, and secure lockers can make your stay more comfortable. Finally, consider the atmosphere. Some hostels are perfect for socializing with fellow travelers, while others are better suited for peace and quiet. A little research goes a long way in ensuring a great experience."
+    ]
   },
   {
+    "id": 2,
+    "title": "Best Areas to Stay in Kathmandu",
+    "image": "/img/blog2.jpg",
+    "summary": "Explore the best areas to stay in Kathmandu, from bustling tourist hubs to tranquil retreats.",
+    "link": "#",
+    "date": "2024-12-30",
+    "views": 2055,
+    "author": "Admin",
+    "hook": "Are you looking for the best areas to stay in Kathmandu? You’re in luck!",
+    "content": [
+      "Kathmandu offers a wide range of neighborhoods to suit every traveler’s needs. For those seeking vibrant nightlife and tourist conveniences, Thamel is the go-to area. Packed with restaurants, bars, and souvenir shops, it’s a hub for international travelers.",
+      "If you prefer a quieter, more local experience, consider staying in Lazimpat. Known for its upscale hotels and embassies, Lazimpat offers a serene atmosphere just minutes from Thamel. For budget travelers, Patan is an excellent choice. Famous for its ancient Durbar Square and affordable accommodations, Patan combines culture and cost-effectiveness.",
+      "For nature lovers, Boudha provides a peaceful retreat near the iconic Boudhanath Stupa. Whether you’re looking for luxury, adventure, or cultural immersion, Kathmandu has an area to match your travel style."
+    ]
+  },
+  {
+    "id": 3,
     "title": "Top Student-Friendly Areas in Kathmandu",
-    "image": "img/blog2.jpg",
-    "summary": "Discover the best neighborhoods in Kathmandu that cater to students' needs and budget.",
-    "link": "#"
+    "image": "/img/blog3.jpg",
+    "summary": "Discover the best neighborhoods in Kathmandu that cater to students' needs and budgets.",
+    "link": "#",
+    "date": "2024-12-29",
+    "views": 980,
+    "author": "Admin",
+    "hook": "Are you looking for the best areas to stay in Kathmandu? You’re in luck!",
+    "content": [
+      "Kathmandu is a city teeming with opportunities for students, and finding the right place to stay can make all the difference. Some neighborhoods stand out for their affordability, accessibility, and student-friendly vibe.",
+      "Baneshwor is a top choice, offering easy access to colleges, eateries, and public transport. For those who prefer a quieter environment, Maitidevi provides a serene atmosphere with nearby libraries and cafes. If you’re looking for a blend of urban charm and affordability, Lazimpat is the place to be, with its lively streets and budget-friendly hostels.",
+      "And then there's Kirtipur, a cultural gem home to Tribhuvan University. Its peaceful setting and strong academic community make it perfect for those who want to focus on their studies. No matter your preferences, Kathmandu has something to offer every student. Dive in and explore your options today!"
+    ]
   },
   {
+    "id": 4,
     "title": "How to Save Money While Living in a Hostel",
-    "image": "img/blog3.jpg",
+    "image": "/img/blog1.jpeg",
     "summary": "Living in a hostel can be expensive. Here are some practical tips to manage your finances.",
-    "link": "#"
+    "link": "#",
+    "date": "2024-12-28",
+    "views": 1430,
+    "author": "Admin",
+    "hook": "Worried about your budget while staying in a hostel? Don’t stress—we’ve got tips to help!",
+    "content": [
+      "Hostel living can strain your budget, but with the right strategies, you can save money without sacrificing comfort. Small changes in your daily routine can lead to significant savings.",
+      "Start by cooking your own meals. Most hostels have shared kitchens, and preparing your food is much cheaper than dining out. Additionally, shop smart—buy in bulk and stick to local markets for fresh and affordable produce. Share expenses like groceries and utilities with your roommates to further cut costs.",
+      "Don’t forget to take advantage of hostel perks, such as free Wi-Fi, breakfast, and community events. And if you’re a student, always ask about discounts or seasonal offers. By being mindful of your spending, you can make hostel life both affordable and enjoyable."
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Why Thamel is a Must-Stay for Tourists in Kathmandu",
+    "image": "/img/blog2.jpg",
+    "summary": "Explore why Thamel remains the heart of tourism in Kathmandu and a hotspot for every traveler.",
+    "link": "#",
+    "date": "2024-12-27",
+    "views": 1870,
+    "author": "Admin",
+    "hook": "First time in Kathmandu? Thamel is the ultimate destination you can’t miss!",
+    "content": [
+      "Thamel is not just a neighborhood; it’s an experience. Known as the heartbeat of tourism in Kathmandu, Thamel offers everything a traveler could want—vibrant streets, cozy cafes, bustling markets, and easy access to top attractions.",
+      "Whether you're shopping for unique souvenirs, indulging in Nepali cuisine, or planning your trek to the Himalayas, Thamel has you covered. It’s also a melting pot of cultures, where travelers from around the world come together. The nightlife here is equally lively, with bars and live music venues offering an exciting way to unwind.",
+      "For convenience, most hostels and guesthouses in Thamel are budget-friendly and cater to a wide range of travelers. Staying here guarantees you'll be at the center of all the action, making it a must-visit destination for any trip to Kathmandu."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Hidden Gems: Alternative Areas to Stay in Kathmandu",
+    "image": "/img/blog3.jpg",
+    "summary": "Go beyond Thamel and discover Kathmandu's hidden gems for a unique and serene stay.",
+    "link": "#",
+    "date": "2024-12-26",
+    "views": 920,
+    "author": "Admin",
+    "hook": "Think Thamel is the only option? Let us surprise you with Kathmandu’s hidden gems!",
+    "content": [
+      "Thamel may be the most popular spot for tourists, but Kathmandu has so much more to offer. If you’re looking for a unique experience, consider staying in some of the city’s lesser-known but equally enchanting areas.",
+      "Take Patan, for example. Known for its rich history and stunning architecture, it offers a serene escape from the bustling city. Similarly, Naxal is perfect for travelers who want modern amenities combined with a quieter environment. For those with a taste for adventure, Boudha provides a spiritual retreat with breathtaking views of the iconic Boudhanath Stupa.",
+      "Exploring these hidden gems will give you a fresh perspective on Kathmandu and allow you to experience the city like a local. Venture beyond the ordinary and make your stay truly memorable!"
+    ]
   }
 ]
