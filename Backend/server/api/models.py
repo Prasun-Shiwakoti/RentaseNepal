@@ -18,6 +18,7 @@ class Hostel(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     approved = models.BooleanField(default=False)
+    rating = models.FloatField(default=0)
 
     # Accommodation Details (Price of Seater Rooms)
     single_seater_price = models.IntegerField( default=0)
