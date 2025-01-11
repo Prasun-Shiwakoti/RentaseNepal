@@ -1,21 +1,45 @@
 import React from 'react';
 import blogs from '../data/blogs.json';
+import BlogCard from "./BlogCard";
+import { Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
 const Blogs = () => {
   return (
     <div className="blogs-section">
       <h2>Our Latest Blogs</h2>
-      <div className="blogs-container">
+      <Swiper 
+        style={{
+          padding:"40px",
+      }}
+        className="blogs-container"
+        slidesPerView={3}
+        slidesPerGroup={3}
+        spaceBetween={28}
+        loop={true}
+        fadeEffect={true}
+        grabCursor={true}
+        pagination={{ clickable: true, dynamicBullets: true, }}
+        breakpoints={{
+            0: {slidesPerView: 1,},
+            1000: {slidesPerView: 2,},
+            1250: {slidesPerView: 3,},
+        }}
+        modules={[Pagination]}
+      >
         {blogs.map((blog, index) => (
-          <div className="blog-card" key={index}>
-            <img src={blog.image} alt={blog.title} />
-            <div className="blog-content">
-              <h3>{blog.title}</h3>
-              <p>{blog.summary}</p>
-              <a href={blog.link} className="read-more">Read More</a>
-            </div>
-          </div>
+          <SwiperSlide>
+          <BlogCard 
+          key={blog.id}
+          blog={blog}
+          />
+          </SwiperSlide>
+          
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 };
