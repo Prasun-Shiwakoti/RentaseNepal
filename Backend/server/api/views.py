@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Hostel
+from .models import Hostel, Blog
 from .serializers import HostelSerializer
 from django.db.models import Q
 from django.db.models import F
@@ -14,7 +14,7 @@ from rest_framework.decorators import action
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-from .serializers import UserSerializer, LoginSerializer, CustomUserSerializer
+from .serializers import UserSerializer, LoginSerializer, CustomUserSerializer, BlogSerializer
 
 import copy
 
@@ -226,8 +226,6 @@ class HostelViewSet(viewsets.ModelViewSet):
             "message": "Unauthorized.",
             "data": {},
         }, status=status.HTTP_401_UNAUTHORIZED)
-    
-
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -317,3 +315,124 @@ class UserViewSet(viewsets.ModelViewSet):
             "message": "Invalid input.",
             "data": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
+    
+class BlogsViewSet(viewsets.ModelViewSet):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+
+    # Override the list method for manual pagination
+    def list(self, request, *args, **kwargs):
+        limit = int(request.query_params.get('limit', 10))  # Default limit is 10
+        offset = int(request.query_params.get('offset', 0))  # Default offset is 0
+
+        # Get all blogs and apply pagination
+        blogs = Blog.objects.all()
+        paginated_blogs = blogs[offset:offset + limit]
+
+        # Serialize data
+        serializer = self.get_serializer(paginated_blogs, many=True)
+        serializer_data = copy.deepcopy(serializer.data)
+
+        response_data = {
+            'blogs': serializer_data,
+            'total_count': blogs.count(),
+            'has_more': offset + limit < blogs.count()
+        }
+
+        return Response(response_data, status=status.HTTP_200_OK)
+
+    # Override create method to ensure only authorized users can create
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
+            serializer = self.get_serializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({
+                    "status": True,
+                    "message": "Blog created successfully.",
+                    "data": serializer.data,
+                }, status=status.HTTP_201_CREATED)
+
+            return Response({
+                "status": False,
+                "message": "Failed to create blog.",
+                "data": serializer.errors,
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({
+            "status": False,
+            "message": "Unauthorized.",
+            "data": {},
+        }, status=status.HTTP_401_UNAUTHORIZED)
+
+    # Override update method to allow partial updates
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
+            partial = kwargs.pop('partial', False)  # Determines whether it's a partial update
+            instance = self.get_object()
+            serializer = self.get_serializer(instance, data=request.data, partial=partial)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({
+                    "status": True,
+                    "message": "Blog updated successfully.",
+                    "data": serializer.data,
+                }, status=status.HTTP_200_OK)
+
+            return Response({
+                "status": False,
+                "message": "Failed to update blog.",
+                "data": serializer.errors,
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({
+            "status": False,
+            "message": "Unauthorized.",
+            "data": {},
+        }, status=status.HTTP_401_UNAUTHORIZED)
+
+    # Override destroy method to restrict deletion to admins
+    def destroy(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
+            instance = self.get_object()
+            instance.delete()
+            return Response({
+                "status": True,
+                "message": "Blog deleted successfully.",
+                "data": {},
+            }, status=status.HTTP_204_NO_CONTENT)
+
+        return Response({
+            "status": False,
+            "message": "Unauthorized.",
+            "data": {},
+        }, status=status.HTTP_401_UNAUTHORIZED)
+
+    # Custom action to filter blogs based on title or content
+    @action(detail=False, methods=['get'], url_path='filter')
+    def filter_blogs(self, request):
+        query = request.query_params.get('query', None)
+
+        if not query:
+            return Response({
+                'error': 'Query parameter is required.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        blogs = Blog.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+
+        serializer = self.get_serializer(blogs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+
+
+
+

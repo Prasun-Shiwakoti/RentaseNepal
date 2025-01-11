@@ -53,10 +53,10 @@ class Hostel(models.Model):
         return f"{self.name} - {self.location}"
 
 
-class Blogs(models.Model):
+class Blog(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     link = models.URLField(null=True, blank=True)
 
     def __str__(self):

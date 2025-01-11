@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Hostel, CustomUsers
+from .models import Hostel, CustomUsers, Blog
 from django.contrib.auth.models import User
 
 class HostelSerializer(serializers.ModelSerializer):
@@ -15,7 +15,11 @@ class HostelSerializer(serializers.ModelSerializer):
     #     for field in exclude_fields:
     #         fields.pop(field, None)
     #     return fields
-    
+
+class BlogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = '__all__'     
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.CharField(write_only=True)
