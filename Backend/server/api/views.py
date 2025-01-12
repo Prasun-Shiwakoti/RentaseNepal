@@ -144,10 +144,12 @@ class HostelViewSet(viewsets.ModelViewSet):
 
 
         serializer_data = copy.deepcopy(serializer.data)
-        exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
-        for obj in serializer_data:
-            for field in exclude_fields:
-                obj.pop(field, None)
+
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+            exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
+            for obj in serializer_data:
+                for field in exclude_fields:
+                    obj.pop(field, None)
         # Prepare response data with pagination info
         response_data = {
             'hostels': serializer_data,
