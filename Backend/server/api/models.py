@@ -55,7 +55,8 @@ class Hostel(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    summary = models.CharField(max_length=1000, default="")
+    content = models.TextField(default="")
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     link = models.URLField(null=True, blank=True)
 

@@ -13,7 +13,7 @@ const BlogCard = ( {blog} ) => {
       <img src={blog.image} alt={blog.title} />
       <div className="blog-content">
         <h3>{blog.title}</h3>
-        <p>{blog.summary}</p>
+        <p>{blog.content}</p>
         <a href={blog.link} className="read-more">Read More</a>
       </div>
     </div>
