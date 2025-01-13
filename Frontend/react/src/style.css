@@ -1210,13 +1210,20 @@ color: #555;
   
   .hostel-form input,
   .hostel-form select,
-  .hostel-form button {
+  .hostel-form button,
+  .hostel-form textarea {
     width: 100%;
     padding: 10px;
     margin: 5px 0 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+  }
+
+  .hostel-form textarea{
+    height: 150px;
+    padding: 10px;
+    resize:none;
   }
 
   .amenities-grid {
@@ -1294,6 +1301,7 @@ color: #555;
     grid-template-columns: 1fr;
     gap: 10px;
     margin: 20px 0;
+    align-items: center;
   }
   
   .input-row {
@@ -1302,10 +1310,31 @@ color: #555;
     align-items: center;
   }
   
-  .input-row input {
+  .input-row input select {
     flex: 1;
     padding: 5px;
   }
+  
+  .fee-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .fee-item button{
+    max-width: 100px;
+    background: linear-gradient(135deg, #ff0000, #f96400);
+    margin:0;
+    width: auto;
+  }
+
+  .fee-item button:hover{
+    background: linear-gradient(135deg, #f96400, #ff0000);
+  }
+  
   
   /* .input-row button {
     padding: 5px 15px;
@@ -1321,13 +1350,6 @@ color: #555;
     background-color: #0056b3;
   } */
   
-  .fee-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
 
   .rules-container {
     display: flex;
@@ -1345,6 +1367,33 @@ color: #555;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+  }
+
+  .rules-item{
+    /* width: 60%; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 4px;
+  }
+
+  .rules-item span{
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+  }
+
+  .rules-item button{
+    max-width: 50px;
+    background: linear-gradient(135deg, #ff0000, #f96400);
+    margin:0;
+    width: auto;
+  }
+  .rules-item button:hover{
+    background: linear-gradient(135deg, #f96400, #ff0000);
   }
   
    /* blog page stylingg */
