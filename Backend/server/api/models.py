@@ -85,6 +85,13 @@ class Blog(models.Model):
     content = models.TextField(default="")
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     link = models.URLField(null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    views = models.IntegerField(default=0)
+    author = models.CharField(max_length=255, default="Anonymous")
+    hook = models.CharField(max_length=255, default="")
+
+
+
 
     def __str__(self):
         return self.title
