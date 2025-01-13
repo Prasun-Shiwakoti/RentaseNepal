@@ -8,6 +8,8 @@ const ListYourHostel = () => {
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
+    description: "",
+    arrivalTime: "",
     gender: "Boys",
     location: "",
     mapLocation: "",
@@ -18,6 +20,7 @@ const ListYourHostel = () => {
       hospitalOrPharmacy: "",
       shoppingMalls: "",
       cafesAndRestaurants: "",
+      schools: "",
     },
     profilePhoto: null,
     additionalPhotos: [],
@@ -76,6 +79,16 @@ const ListYourHostel = () => {
             name="contact"
             value={formData.contact}
             onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          Description:
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Enter a brief description of your hostel"
             required
           />
         </label>
@@ -158,11 +171,22 @@ const ListYourHostel = () => {
           }
         />
 
+
         <h3>Rules</h3>
         <RulesInput
           rules={formData.rules}
           setRules={(rules) => setFormData({ ...formData, rules })}
         />
+        <label>
+          Gate Closure Time: 
+          <input
+            type="time"
+            name="arrivalTime"
+            value={formData.arrivalTime}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
 
         <h3>Nearby Facilities</h3>
         <div className="nearby-facilities">
@@ -181,6 +205,15 @@ const ListYourHostel = () => {
               type="text"
               name="hospitalOrPharmacy"
               value={formData.nearbyFacilities.hospitalOrPharmacy}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Schools:
+            <input
+              type="text"
+              name="schools"
+              value={formData.nearbyFacilities.schools}
               onChange={handleInputChange}
             />
           </label>

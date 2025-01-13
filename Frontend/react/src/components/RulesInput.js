@@ -10,11 +10,23 @@ const RulesInput = ({ rules, setRules }) => {
     }
   };
 
+  const deleteRule = (indexToDelete) => {
+    setRules(rules.filter((_, index) => index !== indexToDelete));
+  };
+
   return (
     <div className="rules-container">
       <ul>
         {rules.map((rule, index) => (
-          <li key={index}>{rule}</li>
+          <li className="rules-item" key={index}><span>{rule}</span>
+            <button
+                type="button"
+                className="delete-button"
+                onClick={() => deleteRule(index)}
+                >
+                Delete
+            </button>  
+          </li>
         ))}
       </ul>
       <div className="rules-grid">

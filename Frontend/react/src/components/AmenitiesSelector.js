@@ -3,11 +3,21 @@ import React from "react";
 const allAmenities = [
   { name: "WiFi", emoji: "📶" },
   { name: "Air Conditioning", emoji: "❄️" },
-  { name: "Laundry", emoji: "🧺" },
+  { name: "Washing Machine", emoji: "🧺" },
+  { name: "Bathroom Cleaning", emoji: "🧽" },
+  { name: "Study Table", emoji: "🖥️" },
+  { name: "Book Rack", emoji: "📚" },
+  { name: "Wardrobe", emoji: "👗" },
+  { name: "Clothes Hanger", emoji: "👚" },
   { name: "Parking", emoji: "🚗" },
-  { name: "Gym", emoji: "🏋️" },
-  { name: "CCTV", emoji: "📹" },
-  { name: "Power Backup", emoji: "🔋" },
+  { name: "Mess", emoji: "🍽️" },
+  { name: "CCTV", emoji: "📷" },
+  { name: "Power Backup", emoji: "🔌" },
+  { name: "Geyser", emoji: "🚿" },
+  { name: "Heater", emoji: "🔥" },
+  { name: "Gym", emoji: "💪" },
+  { name: "Security Guard", emoji: "🛡️" },
+  { name: "Lift", emoji: "🛗" },
 ];
 
 const AmenitiesSelector = ({ amenities, setAmenities }) => {
@@ -28,6 +38,7 @@ const AmenitiesSelector = ({ amenities, setAmenities }) => {
           onClick={() => toggleAmenity(amenity.name)}
         >
           <span className="emoji">{amenity.emoji}</span>
+          <br/>
           <span className="name">{amenity.name}</span>
         </div>
       ))}
