@@ -3,13 +3,13 @@ import { useLocation } from 'react-router-dom';
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import HostelCard from './HostelCard';
-import allHostels from '../data/hostels.json';
 
 const SearchResults = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const locationQuery = queryParams.get('location') || '';
-  const instituteQuery = queryParams.get('institute') || '';
+  const lat = queryParams.get('lat') || '';
+  const lon = queryParams.get('lon') || '';
 
   const [priceRange, setPriceRange] = useState([0, 15000]);
   const [gender, setGender] = useState('');
@@ -17,7 +17,9 @@ const SearchResults = () => {
   const [sortBy, setSortBy] = useState('price');
   const [sortOrder, setSortOrder] = useState('asc');
   const [filteredHostels, setFilteredHostels] = useState([]);
-  
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const priceSliderRef = useRef(null);
   const sliderInstanceRef = useRef(null);
 
@@ -66,21 +68,53 @@ const SearchResults = () => {
     }
   }, [priceRange]);
 
+  const fetchFilteredHostels = async () => {
+    setLoading(true);
+    setError(null);
+
+    const payload = {
+      gender: gender, // 0: Female, 1: Male, 2: Any
+      max_price: priceRange[1],
+      min_price: priceRange[0],
+      location: locationQuery,
+      distance: {
+        latitude: parseFloat(lat),
+        longitude: parseFloat(lon)
+      }
+      // Additional filters can be added as required
+    };
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/hostels/filter/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw new Error('Failed to fetch hostels. Please try again.');
+      }
+
+      const data = await response.json();
+      setFilteredHostels(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchFilteredHostels();
+  }, [priceRange, gender, locationQuery, lat, lon]);
+
+
   // Memoized filter and sort function
   const filterAndSortHostels = useCallback(() => {
-    let result = allHostels.filter((hostel) => {
-      const matchesLocation = locationQuery
-        ? hostel.location.toLowerCase().includes(locationQuery.toLowerCase())
-        : true;
-      const matchesInstitute = instituteQuery
-        ? hostel.nearbyInstitutes.some((instituteId) =>
-            instituteId.toString().includes(instituteQuery.toLowerCase())
-          )
-        : true;
-      const matchesPrice = hostel.price >= priceRange[0] && hostel.price <= priceRange[1];
-      const matchesGender = gender ? hostel.gender.toLowerCase() === gender.toLowerCase() : true;
-      const matchesRating = hostel.rating >= minRating;
-      return matchesLocation && matchesInstitute && matchesPrice && matchesGender && matchesRating;
+    let result = filteredHostels.filter((hostel) => {
+      return hostel.rating >= minRating;
     });
 
     result = result.sort((a, b) => {
@@ -91,7 +125,7 @@ const SearchResults = () => {
     });
 
     return result;
-  }, [locationQuery, instituteQuery, priceRange, gender, minRating, sortBy, sortOrder]);
+  }, [minRating, sortBy, sortOrder]);
 
   // Apply filters when dependencies change
   useEffect(() => {
