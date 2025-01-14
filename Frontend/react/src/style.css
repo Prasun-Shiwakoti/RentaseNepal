@@ -173,10 +173,7 @@ header .upper-home .upperhome-box p {
     z-index: 1;
 }
 
-.home-search :focus {
-    box-shadow: 0 0 5px hsl(228, 66%, 53%);
-}
- 
+
 .home-search-input {
     outline: none;
     border:none;
@@ -185,6 +182,10 @@ header .upper-home .upperhome-box p {
     background-color: #fff;
     color: hsl(228, 15%, 50%);
     padding: 15px 20px;
+}
+
+.home-search-input:focus {
+    box-shadow: 0 0 5px hsl(228, 66%, 53%);
 }
 
 .home-search i {
