@@ -1,7 +1,8 @@
 import React from 'react';
 import HostelCard from './HostelCard';
 import '../style.css';
-import hostels from '../data/hostels.json';
+// import hostels from '../data/hostels.json';
+import {useState, useEffect} from 'react';
 
 import { Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,6 +12,42 @@ import 'swiper/css/navigation';
 
 
 const FeaturedHostels = () => {
+    const [featured, setFeatured]=useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchFeaturedHostels = async () => {
+        setLoading(true);
+        setError(null);
+    
+        // const payload = {};
+    
+        try {
+          const response = await fetch('http://127.0.0.1:8000/api/hostels/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // body: JSON.stringify(payload),
+          });
+          if (!response.ok) {
+              throw new Error('Failed to fetch hostels. Please try again.');
+            }
+            
+            const data = await response.json();
+            setFeatured(data.hostels);
+            // console.log(featured);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+    
+      useEffect(() => {
+        fetchFeaturedHostels();
+      }, []);
+
     return (
         <div className="featuredhostel-section">
             <h2>Featured Hostels</h2>
@@ -36,7 +73,7 @@ const FeaturedHostels = () => {
                     }}
                     modules={[Pagination, Navigation]}
                     >
-                    {hostels.filter(hostel => hostel.isFeatured).map((hostel, index) => (
+                    {featured.filter(hostel => !hostel.isFeatured).map((hostel, index) => (
                         <SwiperSlide>
                             <HostelCard
                                 key={index}
