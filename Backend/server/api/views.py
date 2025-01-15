@@ -14,7 +14,7 @@ from rest_framework.decorators import action
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-from .serializers import UserSerializer, LoginSerializer, CustomUserSerializer, BlogSerializer
+from .serializers import UserSerializer, LoginSerializer, CustomUserSerializer, BlogSerializer, HostelImage
 
 import copy
 
@@ -39,6 +39,21 @@ class HostelViewSet(viewsets.ModelViewSet):
             'wardrobe': request.data.get('wardrobe', 2),
             'clothes_hanger': request.data.get('clothes_hanger', 2),
             'smoking_and_beverages_usage': request.data.get('smoking_and_beverages_usage', 2),
+            'approved': request.data.get('approved', 2),
+            'isFeatured': request.data.get('isFeatured', 2),
+            'parking_space': request.data.get('parking_space', 2),
+            'mess': request.data.get('mess', 2),
+            'cctv': request.data.get('cctv', 2),
+            'generator': request.data.get('generator', 2),
+            'furniture': request.data.get('furniture', 2),
+            'geysers': request.data.get('geysers', 2),
+            'heater': request.data.get('heater', 2),
+            'cooler': request.data.get('cooler', 2),
+            'ac': request.data.get('ac', 2),
+            'gym': request.data.get('gym', 2),
+            'security_guard': request.data.get('security_guard', 2),
+            'lift': request.data.get('lift', 2),
+
         }
 
         arrival_time = request.data.get('arrival_time', '00:00')
@@ -157,8 +172,7 @@ class HostelViewSet(viewsets.ModelViewSet):
             'has_more': offset + limit < hostels.count() 
         }
 
-        return Response(response_data)
-        
+        return Response(response_data)      
     
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.custom_user.role == 'admin':
@@ -168,8 +182,24 @@ class HostelViewSet(viewsets.ModelViewSet):
                 # hostel_data['longitude'] = request.data.get('longitude', 0)
                 # hostel_data['latitude'] = request.data.get('latitude', 0)
 
+                cover_image = request.FILES.get('cover_image', None)
+                additional_images = request.FILES.getlist('additional_images', [])
+
                 # Create the Hostel object
                 obj = Hostel.objects.create(**serializer.data)
+                if obj:
+                    # Save the cover image
+                    if cover_image:
+                        obj.image = cover_image
+                        obj.save()
+                    
+                    # Save the additional images
+                    if additional_images:
+                        HostelImage.objects.bulk_create([
+                            HostelImage(hostel=hostel, image=image) 
+                            for image in additional_images
+                        ])
+
                 return Response({
                     "status": True,
                     "message": "Hostel created successfully.",
