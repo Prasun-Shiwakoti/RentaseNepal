@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CityCard from './CityCard';
 import topCitiesData from '../data/topcities.json';
 
 const TopCities = () => {
   const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
 
   const toggleCityRows = () => {
     setShowAll(!showAll);
   };
 
   const goToDetails = (city) => {
-    // Implement navigation logic here
     console.log(`Navigating to details of ${city}`);
+    navigate(`/search-results?location=${city}&lat=${0}&lon=${0}`);
   };
 
   return (
