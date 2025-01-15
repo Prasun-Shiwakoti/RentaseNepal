@@ -1,23 +1,24 @@
 import React from "react";
 
 const allAmenities = [
-  { name: "WiFi", emoji: "📶" },
-  { name: "Air Conditioning", emoji: "❄️" },
-  { name: "Washing Machine", emoji: "🧺" },
-  { name: "Bathroom Cleaning", emoji: "🧽" },
-  { name: "Study Table", emoji: "🖥️" },
-  { name: "Book Rack", emoji: "📚" },
-  { name: "Wardrobe", emoji: "👗" },
-  { name: "Clothes Hanger", emoji: "👚" },
-  { name: "Parking", emoji: "🚗" },
-  { name: "Mess", emoji: "🍽️" },
-  { name: "CCTV", emoji: "📷" },
-  { name: "Power Backup", emoji: "🔌" },
-  { name: "Geyser", emoji: "🚿" },
-  { name: "Heater", emoji: "🔥" },
-  { name: "Gym", emoji: "💪" },
-  { name: "Security Guard", emoji: "🛡️" },
-  { name: "Lift", emoji: "🛗" },
+  { value: "WiFi", name: "internet", emoji: "📶" },
+  { value: "Air Conditioning", name:"ac", emoji: "❄️" },
+  { value: "Washing Machine", name: "washing_machine", emoji: "🧺" },
+  { value: "Bathroom Cleaning", name: "bathroom_cleaning", emoji: "🧽" },
+  { value: "Study Table", name: "study_table", emoji: "🖥️" },
+  { value: "Book Rack", name: "books_rack", emoji: "📚" },
+  { value: "Wardrobe", name: "wardrobe", emoji: "👗" },
+  { value: "Clothes Hanger", name: "clothes_hanger", emoji: "👚" },
+  { value: "Parking", name: "parking_space", emoji: "🚗" },
+  { value: "Mess", name: "mess", emoji: "🍽️" },
+  { value: "CCTV", name: "cctv", emoji: "📷" },
+  { value: "Power Backup", name: "generator" ,emoji: "🔌" },
+  { value: "Geyser", name: "geysers" ,emoji: "🚿" },
+  { value: "Heater", name: "heater" ,emoji: "🔥" },
+  { value: "Gym", name: "gym" ,emoji: "💪" },
+  { value: "Security Guard", name: "security_guard", emoji: "🛡️" },
+  { value: "Lift", name: "lift" ,emoji: "🛗" },
+  { value: "Water Cooler", name: "cooler", emoji: "🚰" },
 ];
 
 const AmenitiesSelector = ({ amenities, setAmenities }) => {
@@ -39,7 +40,7 @@ const AmenitiesSelector = ({ amenities, setAmenities }) => {
         >
           <span className="emoji">{amenity.emoji}</span>
           <br/>
-          <span className="name">{amenity.name}</span>
+          <span className="name">{amenity.value}</span>
         </div>
       ))}
     </div>

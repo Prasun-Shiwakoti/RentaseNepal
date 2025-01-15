@@ -77,10 +77,10 @@ const SearchResults = () => {
       max_price: priceRange[1],
       min_price: priceRange[0],
       location: locationQuery,
-      distance: {
-        latitude: parseFloat(lat),
-        longitude: parseFloat(lon)
-      }
+      // distance: {
+      //   latitude: parseFloat(lat),
+      //   longitude: parseFloat(lon)
+      // }
       // Additional filters can be added as required
     };
 
@@ -199,11 +199,11 @@ const SearchResults = () => {
               key={hostel.id}
               id={hostel.id}
               image={hostel.image}
-              name={hostel.title}
+              name={hostel.name}
               isFeatured={hostel.isFeatured}
               rating={hostel.rating}
               location={hostel.location}
-              price={hostel.price}
+              price={hostel.admission_price}
               gender={hostel.gender}
             />
           ))
