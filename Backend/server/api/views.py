@@ -26,6 +26,7 @@ class HostelViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'], url_path='filter')
     def filter_hostels(self, request):
 
+
         gender = request.data.get('gender', 2)
         max_price = request.data.get('max_price', 1000000)
         min_price = request.data.get('min_price', 0)
@@ -39,9 +40,25 @@ class HostelViewSet(viewsets.ModelViewSet):
             'wardrobe': request.data.get('wardrobe', 2),
             'clothes_hanger': request.data.get('clothes_hanger', 2),
             'smoking_and_beverages_usage': request.data.get('smoking_and_beverages_usage', 2),
+            'approved': request.data.get('approved', 2),
+            'isFeatured': request.data.get('isFeatured', 2),
+            'parking_space': request.data.get('parking_space', 2),
+            'mess': request.data.get('mess', 2),
+            'cctv': request.data.get('cctv', 2),
+            'generator': request.data.get('generator', 2),
+            'furniture': request.data.get('furniture', 2),
+            'geysers': request.data.get('geysers', 2),
+            'heater': request.data.get('heater', 2),
+            'cooler': request.data.get('cooler', 2),
+            'ac': request.data.get('ac', 2),
+            'gym': request.data.get('gym', 2),
+            'security_guard': request.data.get('security_guard', 2),
+            'lift': request.data.get('lift', 2),
+
         }
 
         arrival_time = request.data.get('arrival_time', '00:00')
+        rating = request.data.get('rating', 0)  
         try:
             arrival_time = datetime.strptime(arrival_time, '%H:%M').time()
         except ValueError:
@@ -63,6 +80,9 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         # Apply arrival time filter
         hostels = hostels.filter(arrival_time__gte=arrival_time)
+
+        # Apply rating filter
+        hostels = hostels.filter(rating__gte=rating)
 
         # Apply location filter
         if location is not None:
@@ -180,7 +200,6 @@ class HostelViewSet(viewsets.ModelViewSet):
                 "message": "Failed to create hostel.",
                 "data": serializer.errors,
             }, status=status.HTTP_400_BAD_REQUEST)
-    
         return Response({
             "status": False,
             "message": "Unauthorized.",
