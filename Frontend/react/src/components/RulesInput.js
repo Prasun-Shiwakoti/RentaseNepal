@@ -5,7 +5,7 @@ const RulesInput = ({ rules, setRules }) => {
 
   const addRule = () => {
     if (currentRule.trim()) {
-      setRules([...rules, currentRule]);
+      setRules(rules+'\n'+currentRule);
       setCurrentRule("");
     }
   };
@@ -17,7 +17,7 @@ const RulesInput = ({ rules, setRules }) => {
   return (
     <div className="rules-container">
       <ul>
-        {rules.map((rule, index) => (
+        {rules.split('\n').map((rule, index) => (
           <li className="rules-item" key={index}><span>{rule}</span>
             <button
                 type="button"
