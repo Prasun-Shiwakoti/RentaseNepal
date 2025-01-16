@@ -26,7 +26,7 @@ const FeaturedHostels = () => {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/hostels/', {
+      const response = await fetch('http://127.0.0.1:8000/api/hostels/filter/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,8 +38,8 @@ const FeaturedHostels = () => {
       }
 
       const data = await response.json();
-      setFeatured(data.hostels);
-      // console.log(featured);
+      setFeatured(data || []);
+      console.log(data);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -94,7 +94,7 @@ const FeaturedHostels = () => {
                 isFeatured={hostel.isFeatured}
                 rating={hostel.rating}
                 location={hostel.location}
-                price={hostel.price}
+                price={hostel.admission_price}
                 gender={hostel.gender}
               />
             </SwiperSlide>

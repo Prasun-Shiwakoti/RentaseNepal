@@ -13,7 +13,7 @@ const TopCities = () => {
 
   const goToDetails = (city) => {
     console.log(`Navigating to details of ${city}`);
-    navigate(`/search-results?location=${city}&lat=${0}&lon=${0}`);
+    navigate(`/search-results?location=${city}`);
   };
 
   return (
