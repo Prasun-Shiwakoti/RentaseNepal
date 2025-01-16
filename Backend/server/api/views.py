@@ -14,7 +14,7 @@ from rest_framework.decorators import action
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-from .serializers import UserSerializer, LoginSerializer, CustomUserSerializer, BlogSerializer
+from .serializers import UserSerializer, LoginSerializer, CustomUserSerializer, BlogSerializer, HostelImage
 
 import copy
 
@@ -130,7 +130,7 @@ class HostelViewSet(viewsets.ModelViewSet):
                 return Response({'error': 'Invalid latitude or longitude'}, status=status.HTTP_400_BAD_REQUEST)
             
             # Haversine formula to calculate distance based on latitude and longitude
-            hostels = Hostel.objects.annotate(
+            hostels = hostels.annotate(
                 distance=earth_radius_km * ACos(
                     Cos(Radians(latitude)) * Cos(Radians(F('latitude'))) *
                     Cos(Radians(F('longitude')) - Radians(longitude)) +
@@ -150,7 +150,7 @@ class HostelViewSet(viewsets.ModelViewSet):
     
     # Override list function for manual pagination
     def list(self, request, *args, **kwargs):
-        limit = int(request.query_params.get('limit', 10)) 
+        limit = int(request.query_params.get('limit', 20)) 
         offset = int(request.query_params.get('offset', 0))  
 
         # Get all hostels
@@ -167,6 +167,7 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
             exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
+            # exclude_fields = []
             for obj in serializer_data:
                 for field in exclude_fields:
                     obj.pop(field, None)
@@ -179,7 +180,6 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         return Response(response_data)
         
-    
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.custom_user.role == 'admin':
             serializer = self.get_serializer(data=request.data)
@@ -190,6 +190,18 @@ class HostelViewSet(viewsets.ModelViewSet):
 
                 # Create the Hostel object
                 obj = Hostel.objects.create(**serializer.data)
+                obj.image = request.FILES.get('image')
+                obj.save()
+                
+                additional_images = request.FILES.getlist('additional_images', [])
+                additional_images = request.FILES.getlist('image', [])                
+
+                if additional_images:
+                    HostelImage.objects.bulk_create([
+                        HostelImage(hostel=obj, image=image) for image in additional_images
+                    ])
+
+                print(obj.additional_images.all())
                 return Response({
                     "status": True,
                     "message": "Hostel created successfully.",

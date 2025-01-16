@@ -1,20 +1,31 @@
 from rest_framework import serializers
-from .models import Hostel, CustomUsers, Blog
+from .models import Hostel, CustomUsers, Blog, HostelImage
 from django.contrib.auth.models import User
 
+class HostelImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HostelImage
+        fields = ['id', 'image']  
+
+    
 class HostelSerializer(serializers.ModelSerializer):
+    additional_image = HostelImageSerializer(source='additional_images', many=True, read_only=True)
+    
     class Meta:
         model = Hostel
-        fields = '__all__'  
+        fields = '__all__'  # Includes all fields defined in your `Hostel` model
+        # extra_fields = ['additional_image']  # Additional fields not in the model
 
-    # def get_fields(self):
-    #     fields = super().get_fields() 
+    # def to_representation(self, instance):
+    #     """
+    #     Add extra fields to the representation dynamically.
+    #     """
+    #     representation = super().to_representation(instance)
+    #     if hasattr(self.Meta, 'extra_fields'):
+    #         for field in self.Meta.extra_fields:
+    #             representation[field] = self.fields[field].to_representation(getattr(instance, field))
+    #     return representation  
 
-    #     # Exculde specific fields from the serializer
-    #     exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
-    #     for field in exclude_fields:
-    #         fields.pop(field, None)
-    #     return fields
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
