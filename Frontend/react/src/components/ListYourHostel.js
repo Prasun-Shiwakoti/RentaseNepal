@@ -27,10 +27,22 @@ const ListYourHostel = () => {
     additionalPhotos: [],
     feeStructure: {},
     messMenu: [],
-    rules: "",
-    latitude: 0,
-    longitude: 0,
+    rules: [],
+    // latitude: 0,
+    // longitude: 0,  
   });
+
+  const extractCoordinates = (url) => {
+    const match = url.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (match) {
+      const latitude = match[1];
+      const longitude = match[2];
+      return { latitude, longitude };
+    } else {
+      alert("Invalid Map Link");
+      return null;
+    }
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,87 +64,11 @@ const ListYourHostel = () => {
     setFormData({ ...formData, [key]: file });
   };
 
-  // JSON format wala handle Submit
-  // const handleSubmit = async () => {
-  //   console.log(formData);
-  //   const amenityFields = {
-  //     internet: formData.amenities.includes("internet"),
-  //     washing_machine: formData.amenities.includes("washing_machine"),
-  //     bathroom_cleaning: formData.amenities.includes("bathroom_cleaning"),
-  //     study_table: formData.amenities.includes("study_table"),
-  //     books_rack: formData.amenities.includes("books_rack"),
-  //     wardrobe: formData.amenities.includes("wardrobe"),
-  //     clothes_hanger: formData.amenities.includes("clothes_hanger"),
-  //     smoking_and_beverages_usage: formData.amenities.includes("smoking_and_beverages_usage"),
-  //     parking_space: formData.amenities.includes("parking_space"),
-  //     mess: formData.amenities.includes("mess"),
-  //     cctv: formData.amenities.includes("cctv"),
-  //     generator: formData.amenities.includes("generator"),
-  //     furniture: formData.amenities.includes("furniture"),
-  //     geysers: formData.amenities.includes("geysers"),
-  //     heater: formData.amenities.includes("heater"),
-  //     cooler: formData.amenities.includes("cooler"),
-  //     ac: formData.amenities.includes("ac"),
-  //     gym: formData.amenities.includes("gym"),
-  //     security_guard: formData.amenities.includes("security_guard"),
-  //     lift: formData.amenities.includes("lift"),
-  //   };
   
-  //   // Combine profile and additional photos
-  //   const images = [
-  //     formData.profilePhoto,
-  //     ...formData.additionalPhotos,
-  //   ];
-
-  //   const transformedData = {
-  //     name: formData.name,
-  //     owner_name: formData.owner_name,
-  //     contact_information: formData.contact,
-  //     location: formData.location,
-  //     gender: formData.gender === "Boys" ? 1 : formData.gender === "Girls" ? 2 : 0,
-  //     arrival_time: formData.arrivalTime,
-  //     transportation_bus_stations: formData.nearbyFacilities.transportation,
-  //     nearby_hospitals_pharmacy: formData.nearbyFacilities.hospitalOrPharmacy,
-  //     nearby_schools: formData.nearbyFacilities.schools,
-  //     nearby_shopping_malls: formData.nearbyFacilities.shoppingMalls,
-  //     nearby_cafes_and_restaurants: formData.nearbyFacilities.cafesAndRestaurants,
-  //     description: formData.description,
-  //     rules: formData.rules,
-  //     feeStructure: formData.feeStructure,
-  //     messMenu: formData.messMenu,
-  //     amenities: formData.amenities,
-  //     mapLocation: formData.mapLocation,
-  //     latitude: formData.latitude,
-  //     longitude: formData.longitude,
-  //     image: images,
-  //     ...amenityFields,
-  //   };
-  //   console.log(transformedData);
-  //   try {
-  //     const response = await fetch("http://127.0.0.1:8000/api/hostels/", {
-  //       method: "POST",
-  //       headers: {
-  //         "Authorization": "token fdc19eacbd64d055f80b9486b4b4d1fc443f67cb",
-  //       },
-  //       body: transformedData,
-  //     });
-
-  //     if (response.status === 201) {
-  //       const data = await response.json();
-  //       alert("Hostel created successfully!");
-  //       console.log("Response Data:", data);
-  //     } else {
-  //       const errorData = await response.json();
-  //       alert("Failed to create hostel: " + errorData.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error submitting form data:", error);
-  //     alert("An error occurred. Please try again.");
-  //   }
-  // };
 
   const handleSubmit = async () => {
-    // console.log(formData);
+    const coordinates= extractCoordinates(formData.mapLocation) || {latitude:0, longitude:0};
+    // console.log(formData.amenities);
     const formDataToSend = new FormData();
   
     // Add text fields
@@ -140,6 +76,8 @@ const ListYourHostel = () => {
     formDataToSend.append("owner_name", formData.owner_name);
     formDataToSend.append("contact_information", formData.contact);
     formDataToSend.append("location", formData.location);
+    formDataToSend.append("latitude", coordinates.latitude);
+    formDataToSend.append("longitude", coordinates.longitude);
     formDataToSend.append(
       "gender",
       formData.gender === "Boys" ? 1 : formData.gender === "Girls" ? 2 : 0
@@ -163,7 +101,14 @@ const ListYourHostel = () => {
       formData.nearbyFacilities.cafesAndRestaurants
     );
     formDataToSend.append("description", formData.description);
-    formDataToSend.append("rules", formData.rules);
+
+    for (const [key, value] of Object.entries(formData.feeStructure)) {
+      formDataToSend.append(key, value);
+    }
+
+    formDataToSend.append("rules", formData.rules.join('\n'));
+
+    formDataToSend.append("food_menu",JSON.stringify(formData.messMenu));
   
     // Convert amenities to individual boolean fields
     const amenitiesList = [
@@ -203,6 +148,8 @@ const ListYourHostel = () => {
     for (let [key, value] of formDataToSend.entries()) {
       console.log(key, value);
     }
+    // console.log(formData.messMenu);
+
     // Send request
     try {
       const response = await fetch("http://127.0.0.1:8000/api/hostels/", {
