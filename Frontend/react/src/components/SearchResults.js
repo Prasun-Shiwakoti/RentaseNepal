@@ -12,11 +12,12 @@ const SearchResults = () => {
   const lon = queryParams.get('lon') || '';
 
   const [priceRange, setPriceRange] = useState([0, 15000]);
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState(2);
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState('price');
   const [sortOrder, setSortOrder] = useState('asc');
   const [filteredHostels, setFilteredHostels] = useState([]);
+  const [unfilteredHostels, setUnfilteredHostels] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -53,7 +54,7 @@ const SearchResults = () => {
         sliderInstanceRef.current = null;
       }
     };
-  },[]); // Empty dependency array since we only want to initialize once
+  }); // Empty dependency array since we only want to initialize once
 
   // Update slider values when priceRange changes from outside the slider
   useEffect(() => {
@@ -68,21 +69,27 @@ const SearchResults = () => {
     }
   }, [priceRange]);
 
-  const fetchFilteredHostels = async () => {
+  const fetchFilteredHostels = useCallback(async () => {
     setLoading(true);
     setError(null);
 
-    const payload = {
-      gender: gender, // 0: Female, 1: Male, 2: Any
+    const payload = locationQuery?{
+      gender: parseInt(gender), // 0: Female, 1: Male, 2: Any
       max_price: priceRange[1],
       min_price: priceRange[0],
       location: locationQuery,
-      // distance: {
-      //   latitude: parseFloat(lat),
-      //   longitude: parseFloat(lon)
-      // }
+      // Additional filters can be added as required
+    }:{
+      gender: parseInt(gender), // 0: Female, 1: Male, 2: Any
+      max_price: priceRange[1],
+      min_price: priceRange[0],
+      distance: {
+        latitude: parseFloat(lat),
+        longitude: parseFloat(lon)
+      }
       // Additional filters can be added as required
     };
+    console.log(JSON.stringify(payload));
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/hostels/filter/', {
@@ -96,49 +103,57 @@ const SearchResults = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch hostels. Please try again.');
       }
-
       const data = await response.json();
+      console.log(data);
       setFilteredHostels(data);
+      setUnfilteredHostels(data);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  };
+  },[priceRange, gender, locationQuery, lat, lon] );
 
   useEffect(() => {
     fetchFilteredHostels();
-  }, [priceRange, gender, locationQuery, lat, lon]);
+  }, [fetchFilteredHostels]);
 
 
   // Memoized filter and sort function
   const filterAndSortHostels = useCallback(() => {
-    let result = filteredHostels.filter((hostel) => {
+    let result = unfilteredHostels.filter((hostel) => {
       return hostel.rating >= minRating;
     });
-
+  
     result = result.sort((a, b) => {
       if (sortBy === 'price') {
-        return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+        return sortOrder === 'asc' ? a.admission_price - b.admission_price : b.admission_price - a.admission_price;
       }
       return sortOrder === 'asc' ? a.rating - b.rating : b.rating - a.rating;
     });
-
+  
     return result;
-  }, [minRating, sortBy, sortOrder]);
-
-  // Apply filters when dependencies change
+  }, [unfilteredHostels, minRating, sortBy, sortOrder]);
+  
   useEffect(() => {
+    console.log(minRating);
     setFilteredHostels(filterAndSortHostels());
-  }, [filterAndSortHostels]);
+  }, [minRating, sortBy, sortOrder, filterAndSortHostels]);
 
   const resetFilters = () => {
     setPriceRange([0, 15000]);
-    setGender('');
+    setGender(2);
     setMinRating(0);
     setSortBy('price');
     setSortOrder('asc');
   };
+
+  if(error){
+    return <div className="search-results">{error}</div>;
+  }
+  if(loading){
+    return <div className="search-results">Loading Featured Hostels...</div>;
+  }
 
   return (
     <>
@@ -157,9 +172,9 @@ const SearchResults = () => {
           <div className="filter-option">
             <label>Gender:</label>
             <select onChange={(e) => setGender(e.target.value)} value={gender}>
-              <option value="">All</option>
-              <option value="Boys">Boys</option>
-              <option value="Girls">Girls</option>
+              <option value={2}>All</option>
+              <option value={1}>Boys</option>
+              <option value={0}>Girls</option>
               {/* <option value="Co-ed">Co-ed</option> */}
             </select>
           </div>

@@ -9,39 +9,48 @@ const SearchBar = () => {
   const navigate = useNavigate();
 
   // Function to handle search
-  const handleSearch = (e) => {
+  const handleSearchLocation = (e) => {
+    e.preventDefault();
+    // Redirect to the search results page with the query params
+    if (location) {
+      setInstitute({lat:0, lon:0});
+      navigate(`/search-results?location=${location}`);
+    }
+    else {
+      alert("Search Field Empty");
+    }
+  };
+  const handleSearchInstitute = (e) => {
     e.preventDefault();
 
     // Redirect to the search results page with the query params
-    if (location || (institute.lat !== 0 || institute.lon !== 0)) {
-      navigate(`/search-results?location=${location}&lat=${institute.lat}&lon=${institute.lon}`);
+    if (institute.lat !== 0 || institute.lon !== 0) {
+      setLocation('');
+      navigate(`/search-results?lat=${institute.lat}&lon=${institute.lon}`);
     }
     else {
-      // const search_bar = document.getElementsByClassName("home-search")[0];
-      // search_bar.style.boxShadow = "0 10px 30px #ff0000";
-      // search_bar.style.border = "4px solid #ff0000";
       alert("Search Field Empty");
     }
   };
 
-  const searchStyles={
-    control:(provided, state) => ({
+  const searchStyles = {
+    control: (provided, state) => ({
       ...provided,
       outline: "none",
-      border:"none",
+      border: "none",
       borderRadius: "20px",
       width: "280px",
       backgroundColor: "#fff",
       color: "hsl(228, 15%, 50%)",
       padding: "15px 20px",
       fontSize: "13px",
-      boxShadow: state.isFocused ? "0 0 5px hsl(228, 66%, 53%)": "none",
+      boxShadow: state.isFocused ? "0 0 5px hsl(228, 66%, 53%)" : "none",
     }),
     menuList: (provided) => ({
       ...provided,
-      maxHeight: "150px", 
+      maxHeight: "150px",
       overflowY: "auto",
-      fontSize:"13px",
+      fontSize: "13px",
     }),
 
   }
@@ -55,33 +64,31 @@ const SearchBar = () => {
     { label: 'Thapathali Campus', value: { lat: 27.688, lon: 85.318 } },
   ];
   return (
-    <form action="" className="home-search" onSubmit={handleSearch}>
-      <i className="bi bi-geo-alt-fill" />
-      <input
-        id="search_location"
-        type="search"
-        placeholder="Enter Location"
-        className="home-search-input"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-      />
-      <i className="bi bi-buildings-fill"></i>
-      {/* <input
-        id="search_institute"
-        type="search"
-        placeholder="Enter Nearby Institute"
-        className="home-search-input"
-        value={institute}
-        onChange={(e) => setInstitute(e.target.value)}
-      /> */}
-      <Select 
-        placeholder="Select Nearby Institute" 
-        styles={searchStyles}
-        options={institutes}
-        onChange={(selectedOption) => setInstitute(selectedOption?.value)}
-      />
-      <button type="submit" className="button">Search</button>
-    </form>
+    <div className="search_bar_results">
+      <form action="" className="home-search" onSubmit={handleSearchLocation}>
+        <i className="bi bi-geo-alt-fill" />
+        <input
+          id="search_location"
+          type="search"
+          placeholder="Enter Location"
+          className="home-search-input"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <button type="submit" className="button">Search</button>
+      </form>
+      <form action="" className="home-search" onSubmit={handleSearchInstitute}>
+        <i className="bi bi-buildings-fill"></i>
+        <Select
+          placeholder="Select Nearby Institute"
+          styles={searchStyles}
+          options={institutes}
+          value={institutes.find((option) => option.value.lat === institute.lat && option.value.lon === institute.lon) || null}
+          onChange={(selectedOption) => setInstitute(selectedOption?.value)}
+        />
+        <button type="submit" className="button">Search</button>
+      </form>
+    </div>
   );
 };
 

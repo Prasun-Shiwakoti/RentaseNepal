@@ -8,7 +8,7 @@ const HostelCard = ({ id, image, name, isFeatured, rating, location, price, gend
   };
   return (
     <div className="card" onClick={handleCardClick}>
-      {!isFeatured && <div className="ribbon">Featured</div>}
+      {isFeatured && <div className="ribbon">Featured</div>}
       <img src={image} alt={name} />
       <div className="card-content">
         <div className="card-title">{name}</div>
