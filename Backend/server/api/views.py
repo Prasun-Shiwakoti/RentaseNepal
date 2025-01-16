@@ -194,7 +194,6 @@ class HostelViewSet(viewsets.ModelViewSet):
                 obj.save()
                 
                 additional_images = request.FILES.getlist('additional_images', [])
-                additional_images = request.FILES.getlist('image', [])                
 
                 if additional_images:
                     HostelImage.objects.bulk_create([
