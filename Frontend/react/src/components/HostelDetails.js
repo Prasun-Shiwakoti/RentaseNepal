@@ -31,40 +31,34 @@ const HostelDetails = () => {
     { value: "Water Cooler", name: "cooler", emoji: "🚰" },
   ];
 
+  
   const fetchHostel = async () => {
     setLoading(true);
     setError(null);
 
-    const payload = {
-      // id: parseInt(id),
-    };
-
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/hostels/filter/', {
-        method: 'POST',
+      const response = await fetch(`http://127.0.0.1:8000/api/hostels/${id}/`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
       });
       if (!response.ok) {
         throw new Error('Failed to fetch hostels. Please try again.');
       }
 
       const data = await response.json();
-      const foundHostel = data.find((hostel) => hostel.id === parseInt(id));
-      if (!foundHostel) {
+      if (!data) {
         throw new Error('Hostel not found');
       }
-      setHostel(foundHostel);
+      setHostel(data);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
-      // hostel.additional_image.unshift(hostel.image);
     }
   };
-
+  
   useEffect(() => {
     fetchHostel();
   }, [id]);
@@ -105,7 +99,7 @@ const HostelDetails = () => {
     extraGallery.style.display = extraGallery.style.display === "grid" ? "none" : "grid";
   };
 
-  const addToWishlist = () => {
+  const enquire = () => {
     console.log(`${hostel.name} added to wishlist!`);
   };
 
@@ -118,9 +112,12 @@ const HostelDetails = () => {
           <div className="left-section">
             {/* Gallery */}
             <div className="hosteldetail-gallery">
+              <div className="hosteldetail-gallery-item">
+                <img src={hostel.image} alt='profile image' />
+              </div>
               {hostel.additional_image.slice(0, 3).map((photo, index) => (
                 <div key={index} className="hosteldetail-gallery-item">
-                  <img src={photo} alt={`Room Image ${index + 1}`} />
+                  <img src={photo} alt={`Room ${index + 1}`} />
                 </div>
               ))}
 
@@ -133,7 +130,7 @@ const HostelDetails = () => {
             {/* Extra Gallery */}
             <div className="hosteldetail-extra-gallery" id="extraGallery">
               {hostel.additional_image.slice(4).map((photo, index) => (
-                <img key={index} src={photo} alt={`Extra Image ${index + 1}`} />
+                <img key={index} src={photo} alt={`Extra ${index + 1}`} />
               ))}
             </div>
 
@@ -142,8 +139,8 @@ const HostelDetails = () => {
               <p>
                 <i className="bi bi-geo-alt-fill"></i> {hostel.location}
               </p>
-              <button className="toggle-button" onClick={addToWishlist}>
-                Add to Wishlist <i className="bi bi-suit-heart"></i>
+              <button className="toggle-button" onClick={enquire}>
+                Enquire now <i className="bi bi-suit-heart"></i>
               </button>
             </div>
 
@@ -217,8 +214,8 @@ const HostelDetails = () => {
           {/* Right Section */}
           <div className="right-section">
             {/* Map */}
-            <div className="map-box">
-              <h2>Location</h2>
+            <div className="map-box hosteldetail-info">
+              <div className="hosteldetail-title">Location</div>
               <iframe
                 // src={hostel.mapLocation}
                 src={`https://maps.google.com/?q=${hostel.longitude},${hostel.latitude}`}
@@ -235,11 +232,11 @@ const HostelDetails = () => {
             </button>
 
             {/* Mess Menu */}
-            <div className="mess-menu">
-              <h2>Mess Menu</h2>
+            <div className="mess-menu hosteldetail-info">
+              <div className="hosteldetail-title">Mess Menu</div>
               <table>
                 <thead>
-                  <tr>
+                  <tr>  
                     <th>Day</th>
                     <th>Breakfast</th>
                     <th>Lunch</th>
