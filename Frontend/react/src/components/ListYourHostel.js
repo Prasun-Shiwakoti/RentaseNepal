@@ -142,7 +142,7 @@ const ListYourHostel = () => {
       formDataToSend.append("image", formData.profilePhoto); // Profile photo as the first image
     }
     formData.additionalPhotos.forEach((photo, index) => {
-      formDataToSend.append("image", photo); // Additional images
+      formDataToSend.append("additional_images", photo); // Additional images
     });
     
     for (let [key, value] of formDataToSend.entries()) {
