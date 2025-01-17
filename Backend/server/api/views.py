@@ -138,14 +138,17 @@ class HostelViewSet(viewsets.ModelViewSet):
                 )
             ).filter(distance__lte=max_distance_km)
 
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+            hostels = hostels.exclude(approved=False)
 
         # Serialize and return the filtered data
         serializer = self.get_serializer(hostels, many=True)
         serializer_data = copy.deepcopy(serializer.data)
-        exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
-        for obj in serializer_data:
-            for field in exclude_fields:
-                obj.pop(field, None)
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+            exclude_fields = ['contact_information', 'longitude', 'latitude', 'name']
+            for obj in serializer_data:
+                for field in exclude_fields:
+                    obj.pop(field, None)
         return Response(serializer_data, status=status.HTTP_200_OK)
     
     # Override list function for manual pagination
@@ -158,6 +161,8 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         # Apply manual pagination
         paginated_hostels = hostels[offset:offset + limit]
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+            paginated_hostels = paginated_hostels.exclude(approved=False)
 
         # Serialize the data
         serializer = self.get_serializer(paginated_hostels, many=True)
@@ -166,7 +171,7 @@ class HostelViewSet(viewsets.ModelViewSet):
         serializer_data = copy.deepcopy(serializer.data)
 
         if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
-            exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
+            exclude_fields = ['contact_information', 'longitude', 'latitude']
             # exclude_fields = []
             for obj in serializer_data:
                 for field in exclude_fields:
@@ -200,7 +205,6 @@ class HostelViewSet(viewsets.ModelViewSet):
                         HostelImage(hostel=obj, image=image) for image in additional_images
                     ])
 
-                print(obj.additional_images.all())
                 return Response({
                     "status": True,
                     "message": "Hostel created successfully.",
@@ -272,7 +276,6 @@ class UserViewSet(viewsets.ModelViewSet):
                 # Create the User object
                 user = user_serializer.save()
                 
-                print("User created successfully.", user)
                 # Create the CustomUsers object
                 custom_user_data = {
                     "name": user_serializer.validated_data.get("name"),
@@ -283,12 +286,10 @@ class UserViewSet(viewsets.ModelViewSet):
                 if custom_user_serializer.is_valid():
                     custom_user_serializer.save()
 
-                    print("CustomUser created successfully.", custom_user_serializer.data)
 
                     # Create token for authentication
                     token, _ = Token.objects.get_or_create(user=user)
 
-                    print("Token created successfully.", token)
                     return Response({
                         "status": True,
                         "message": "User registered successfully.",
