@@ -90,7 +90,7 @@ const FeaturedHostels = () => {
                 key={index}
                 id={hostel.id}
                 image={hostel.image}
-                name={hostel.name}
+                // name={hostel.name}
                 isFeatured={hostel.isFeatured}
                 rating={hostel.rating}
                 location={hostel.location}

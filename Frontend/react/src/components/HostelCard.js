@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const HostelCard = ({ id, image, name, isFeatured, rating, location, price, gender }) => {
+const HostelCard = ({ id, image, /*name,*/ isFeatured, rating, location, price, gender }) => {
+  const name=`Hostel ${parseInt(1000+id)}`;
   const navigate = useNavigate();
   const handleCardClick = () => {
     navigate(`/hostel/${id}`);
