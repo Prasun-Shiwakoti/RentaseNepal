@@ -115,22 +115,22 @@ const HostelDetails = () => {
               <div className="hosteldetail-gallery-item">
                 <img src={hostel.image} alt='profile image' />
               </div>
-              {hostel.additional_image.slice(0, 3).map((photo, index) => (
+              {hostel.additional_image.slice(0, 2).map((photo, index) => (
                 <div key={index} className="hosteldetail-gallery-item">
-                  <img src={photo} alt={`Room ${index + 1}`} />
+                  <img src={photo.image} alt={`Room ${index + 1}`} />
                 </div>
               ))}
 
               <div className="hosteldetail-gallery-item additional-images" onClick={showMorePhotos}>
-                <img src={hostel.additional_image[3]} alt="More Images" className="main-photo" />
-                <div className="main-photo-overlay">+{hostel.additional_image.length - 3}</div>
+                <img src={hostel.additional_image[2].image} alt="More Images" className="main-photo" />
+                <div className="main-photo-overlay">+{hostel.additional_image.length - 2}</div>
               </div>
             </div>
 
             {/* Extra Gallery */}
             <div className="hosteldetail-extra-gallery" id="extraGallery">
-              {hostel.additional_image.slice(4).map((photo, index) => (
-                <img key={index} src={photo} alt={`Extra ${index + 1}`} />
+              {hostel.additional_image.slice(3).map((photo, index) => (
+                <img key={index} src={photo.image} alt={`Extra ${index + 1}`} />
               ))}
             </div>
 
@@ -173,7 +173,7 @@ const HostelDetails = () => {
               <div className="hosteldetail-info">
                 <div className="hosteldetail-title">Nearby Facilities</div>
                 <li>
-                  <i class="bi bi-bus-front"></i>
+                  <i className="bi bi-bus-front"></i>
                   Transportation/Bus stations: {hostel.transportation_bus_stations}
                 </li>
                 <li>
@@ -181,15 +181,15 @@ const HostelDetails = () => {
                   Nearby hospital or pharmacy: {hostel.nearby_hospitals_pharmacy}
                 </li>
                 <li>
-                  <i class="bi bi-book-half"></i>
+                  <i className="bi bi-book-half"></i>
                   Nearby Schools: {hostel.nearby_schools}
                 </li>
                 <li>
-                  <i class="bi bi-bag"></i>
+                  <i className="bi bi-bag"></i>
                   Nearby shopping malls: {hostel.nearby_shopping_malls}
                 </li>
                 <li>
-                  <i class="bi bi-cup-hot"></i>
+                  <i className="bi bi-cup-hot"></i>
                   Nearby Cafes and Restaurants: {hostel.nearby_cafes_and_restaurants}
                 </li>
               </div>
@@ -198,11 +198,11 @@ const HostelDetails = () => {
               <div className="hosteldetail-info">
                 <div className="hosteldetail-title">Rules</div>
                 <div className="rule">
-                  {hostel.rules.split('\n').map((rule, index) => (
+                  {hostel.rules && hostel.rules.split('\n').map((rule, index) => (
                     <div key={index} className="rule-icon-box">
-                      {/* <p>
+                      <p>
                         <i className={rule.icon}></i>
-                      </p> */}
+                      </p>
                       <p>{rule}</p>
                     </div>
                   ))}
