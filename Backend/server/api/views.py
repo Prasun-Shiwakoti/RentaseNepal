@@ -32,6 +32,7 @@ class HostelViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'], url_path='filter')
     def filter_hostels(self, request):
 
+
         gender = request.data.get('gender', 2)
         max_price = request.data.get('max_price', 1000000)
         min_price = request.data.get('min_price', 0)
@@ -60,9 +61,25 @@ class HostelViewSet(viewsets.ModelViewSet):
             'security_guard': request.data.get('security_guard', 2),
             'lift': request.data.get('lift', 2),
 
+            'approved': request.data.get('approved', 2),
+            'isFeatured': request.data.get('isFeatured', 2),
+            'parking_space': request.data.get('parking_space', 2),
+            'mess': request.data.get('mess', 2),
+            'cctv': request.data.get('cctv', 2),
+            'generator': request.data.get('generator', 2),
+            'furniture': request.data.get('furniture', 2),
+            'geysers': request.data.get('geysers', 2),
+            'heater': request.data.get('heater', 2),
+            'cooler': request.data.get('cooler', 2),
+            'ac': request.data.get('ac', 2),
+            'gym': request.data.get('gym', 2),
+            'security_guard': request.data.get('security_guard', 2),
+            'lift': request.data.get('lift', 2),
+
         }
 
         arrival_time = request.data.get('arrival_time', '00:00')
+        rating = request.data.get('rating', 0)  
         try:
             arrival_time = datetime.strptime(arrival_time, '%H:%M').time()
         except ValueError:
@@ -84,6 +101,9 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         # Apply arrival time filter
         hostels = hostels.filter(arrival_time__gte=arrival_time)
+
+        # Apply rating filter
+        hostels = hostels.filter(rating__gte=rating)
 
         # Apply location filter
         if location is not None:
@@ -131,7 +151,7 @@ class HostelViewSet(viewsets.ModelViewSet):
                 return Response({'error': 'Invalid latitude or longitude'}, status=status.HTTP_400_BAD_REQUEST)
             
             # Haversine formula to calculate distance based on latitude and longitude
-            hostels = Hostel.objects.annotate(
+            hostels = hostels.annotate(
                 distance=earth_radius_km * ACos(
                     Cos(Radians(latitude)) * Cos(Radians(F('latitude'))) *
                     Cos(Radians(F('longitude')) - Radians(longitude)) +
@@ -139,19 +159,22 @@ class HostelViewSet(viewsets.ModelViewSet):
                 )
             ).filter(distance__lte=max_distance_km)
 
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+            hostels = hostels.exclude(approved=False)
 
         # Serialize and return the filtered data
         serializer = self.get_serializer(hostels, many=True)
         serializer_data = copy.deepcopy(serializer.data)
-        exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
-        for obj in serializer_data:
-            for field in exclude_fields:
-                obj.pop(field, None)
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+            exclude_fields = ['contact_information', 'longitude', 'latitude', 'name']
+            for obj in serializer_data:
+                for field in exclude_fields:
+                    obj.pop(field, None)
         return Response(serializer_data, status=status.HTTP_200_OK)
     
     # Override list function for manual pagination
     def list(self, request, *args, **kwargs):
-        limit = int(request.query_params.get('limit', 10)) 
+        limit = int(request.query_params.get('limit', 20)) 
         offset = int(request.query_params.get('offset', 0))  
 
         # Get all hostels
@@ -159,6 +182,8 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         # Apply manual pagination
         paginated_hostels = hostels[offset:offset + limit]
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+            paginated_hostels = paginated_hostels.exclude(approved=False)
 
         # Serialize the data
         serializer = self.get_serializer(paginated_hostels, many=True)
@@ -224,7 +249,6 @@ class HostelViewSet(viewsets.ModelViewSet):
                 "message": "Failed to create hostel.",
                 "data": serializer.errors,
             }, status=status.HTTP_400_BAD_REQUEST)
-    
         return Response({
             "status": False,
             "message": "Unauthorized.",

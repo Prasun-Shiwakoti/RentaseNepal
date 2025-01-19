@@ -1,14 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const HostelCard = ({ id, image, name, isFeatured, rating, location, price, gender }) => {
+const HostelCard = ({ id, image, /*name,*/ isFeatured, rating, location, price, gender }) => {
+  const name=`Hostel ${parseInt(1000+id)}`;
   const navigate = useNavigate();
   const handleCardClick = () => {
     navigate(`/hostel/${id}`);
   };
   return (
     <div className="card" onClick={handleCardClick}>
-      {!isFeatured && <div className="ribbon">Featured</div>}
+      {isFeatured && <div className="ribbon">Featured</div>}
       <img src={image} alt={name} />
       <div className="card-content">
         <div className="card-title">{name}</div>
@@ -18,7 +19,7 @@ const HostelCard = ({ id, image, name, isFeatured, rating, location, price, gend
         <div className="card-location">
           <i className="bi bi-geo-alt-fill"></i> {location}
         </div>
-        {/* <div className="card-price">Rs. {price}</div> */}
+        <div className="card-price">Rs. {price}</div>
         <div className="card-gender">
           {gender === 0 ? 'Girls Hostel' : 'Boys Hostel'}
         </div>

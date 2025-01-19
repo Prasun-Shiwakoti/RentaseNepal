@@ -5,11 +5,11 @@ const FeeStructure = ({ feeStructure, setFeeStructure }) => {
   const [amount, setAmount] = useState("");
 
   const feeOptions = [
-    "Admission Fee",
-    "Single Seater",
-    "Two Seater",
-    "Three Seater",
-    "Four Seater",
+    {value: "Admission Fee", name: "admission_price"},
+    {value: "Single Seater", name: "single_seater_price"},
+    {value: "Two Seater", name: "two_seater_price"},
+    {value: "Three Seater", name: "three_seater_price"},
+    {value: "Four Seater", name: "four_seater_price"},
   ];
 
   const handleAddFee = () => {
@@ -42,8 +42,8 @@ const FeeStructure = ({ feeStructure, setFeeStructure }) => {
         >
           <option value="">Select Fee Type</option>
           {feeOptions.map((feeType, index) => (
-            <option key={index} value={feeType}>
-              {feeType}
+            <option key={index} value={feeType.name}>
+              {feeType.value}
             </option>
           ))}
         </select>

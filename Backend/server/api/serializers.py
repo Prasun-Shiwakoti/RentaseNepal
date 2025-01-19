@@ -1,7 +1,14 @@
 from rest_framework import serializers
 from .models import Hostel, CustomUsers, Blog, HostelImage
+from .models import Hostel, CustomUsers, Blog, HostelImage
 from django.contrib.auth.models import User
 
+class HostelImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HostelImage
+        fields = ['id', 'image']  
+
+    
 class HostelSerializer(serializers.ModelSerializer):
 
     class Meta:
