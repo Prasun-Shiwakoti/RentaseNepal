@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import axios from 'axios';
-import blogs from '../data/blogs.json';
+// import blogs from '../data/blogs.json';
 import BlogCard from "./BlogCard";
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';

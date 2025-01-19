@@ -2,7 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
+class CustomUsers(models.Model):
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('renter', 'Renter'),
+        ('user', 'Normal User'),
+    ]
+
+    name = models.CharField(max_length=100)
+    stats = models.JSONField(default=dict, null=True, blank=True)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='normal')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='custom_user')
+    
+    def __str__(self):
+        return f"{self.name} ({self.role})"
+
 class Hostel(models.Model):
     GENDER_CHOICES = [
         (0, 'Female'),
@@ -11,6 +25,7 @@ class Hostel(models.Model):
     ]
 
     # Basic Information
+    user = models.ForeignKey(CustomUsers, on_delete=models.CASCADE, related_name='hostels')
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     owner_name = models.CharField(max_length=255)
@@ -80,6 +95,7 @@ class HostelImage(models.Model):
         return f"{self.hostel.name}"
 
 class Blog(models.Model):
+    author = models.ForeignKey(CustomUsers, on_delete=models.CASCADE, related_name='blogs')
     title = models.CharField(max_length=255)
     summary = models.CharField(max_length=300, default="")
     content = models.TextField(default="")
@@ -87,7 +103,7 @@ class Blog(models.Model):
     link = models.URLField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
-    author = models.CharField(max_length=255, default="Anonymous")
+    # author = models.CharField(max_length=255)
     hook = models.CharField(max_length=255, default="")
 
 
@@ -97,17 +113,3 @@ class Blog(models.Model):
         return self.title
     
 
-class CustomUsers(models.Model):
-    ROLE_CHOICES = [
-        ('admin', 'Admin'),
-        ('staff', 'Staff'),
-        ('normal', 'Normal User'),
-    ]
-
-    name = models.CharField(max_length=100)
-    stats = models.JSONField(default=dict, null=True, blank=True)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='normal')
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='custom_user')
-    
-    def __str__(self):
-        return f"{self.name} ({self.role})"

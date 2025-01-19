@@ -1,15 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import blogs from "../data/blogs.json";
+// import blogs from "../data/blogs.json";
 import { Link } from 'react-router-dom';
 
-const Blog = () => {
+const Blog = () => {  
+  const [blogs, setBlogs] = useState([]); // State to store blogs
+  const [isLoading, setIsLoading] = useState(true); // State to show loading indicator
+  const [error, setError] = useState(null); // State to handle errors
   const { id } = useParams();
+
+  useEffect(() => {
+
+    // Fetch blogs from the Django backend
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/blogs/'); // Update with your backend URL
+        setBlogs(response.data.blogs); // Set blogs data
+        console.log(response.data.blogs);
+        setIsLoading(false); // Loading done
+      } catch (err) {
+        console.error("Error fetching blogs:", err);
+        setError("Failed to load blogs. Please try again later.");
+        setIsLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading blogs...</div>; // Loading indicator
+  }
+
+  if (error) {
+    return <div>{error}</div>; // Error message
+  }
+
+  
 
   const blog = blogs.find(blog => blog.id === Number(id));
 
+  const formattedDate = new Date(blog.date).toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+
   const mostViewedBlogs = blogs.filter(blog => blog.id !== Number(id)).sort((a, b) => b.views - a.views).slice(0,5);
 
+
+  // console.log(mostViewedBlogs);
   return (
     <div className="blog-body">
         <div className="blogmain-container">
@@ -18,7 +62,7 @@ const Blog = () => {
             <h2>{blog.title}</h2>
 
             <div className="blog-meta">
-              <span className="date">{blog.date}</span>
+              <span className="date">{formattedDate}</span>
               <span className="views">
                 <i className="bi bi-eye-fill"></i> {blog.views} Views
               </span>
@@ -31,7 +75,7 @@ const Blog = () => {
               {/* {blog.hooks.map((hook, index) => (
                 <p key={`hook-${index}`}>{hook}</p>
               ))} */}
-              {blog.content.map((paragraph, index) => (
+              {blog.content.split('\n').map((paragraph, index) => (
                 <p key={`content-${index}`}>{paragraph}</p>
               ))}
             </div>

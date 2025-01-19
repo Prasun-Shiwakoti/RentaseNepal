@@ -1,21 +1,27 @@
-from rest_framework import viewsets
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework import status
-from .models import Hostel, Blog
-from .serializers import HostelSerializer
-from django.db.models import Q
-from django.db.models import F
-from django.db.models.functions import ACos, Cos, Radians, Sin
-from datetime import datetime
+# Django and Django REST Framework imports
 from rest_framework import viewsets, status
-from rest_framework.response import Response
 from rest_framework.decorators import action
-from django.contrib.auth.models import User
+from rest_framework.response import Response
+from django.db.models import Q, F
+from django.db.models.functions import ACos, Cos, Radians, Sin
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from .serializers import UserSerializer, LoginSerializer, CustomUserSerializer, BlogSerializer, HostelImage
 
+
+# Local models and serializers
+from .models import Hostel, Blog
+from .serializers import (
+    HostelSerializer,
+    UserSerializer,
+    LoginSerializer,
+    CustomUserSerializer,
+    BlogSerializer,
+    HostelImage
+)
+
+# Python standard library imports
+from datetime import datetime
 import copy
 
 class HostelViewSet(viewsets.ModelViewSet):
@@ -160,12 +166,12 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         serializer_data = copy.deepcopy(serializer.data)
 
-        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+        if not getattr(request.user.custom_user, 'role', None) == 'admin':
             exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
             for obj in serializer_data:
                 for field in exclude_fields:
                     obj.pop(field, None)
-        # Prepare response data with pagination info
+
         response_data = {
             'hostels': serializer_data,
             'total_count': hostels.count(),  
@@ -175,18 +181,25 @@ class HostelViewSet(viewsets.ModelViewSet):
         return Response(response_data)      
     
     def create(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
-            serializer = self.get_serializer(data=request.data)
-            if serializer.is_valid():
-                # hostel_data = copy.deepcopy(serializer.data)
-                # hostel_data['longitude'] = request.data.get('longitude', 0)
-                # hostel_data['latitude'] = request.data.get('latitude', 0)
+        if request.user.is_authenticated and request.user.custom_user.role != 'user':
+            data = request.data.copy()
+            
+            if (request.user.custom_user.role == 'renter') :
+                data.update({'approved': 0, 'isFeatured': 0, 'rating': 0})
 
+            
+            data['user'] = request.user.custom_user.id
+            
+            serializer = self.get_serializer(data=data)
+            if serializer.is_valid():
+                serializer_data = serializer.data.copy()
+                serializer_data['user'] = request.user.custom_user
+                
                 cover_image = request.FILES.get('cover_image', None)
                 additional_images = request.FILES.getlist('additional_images', [])
 
                 # Create the Hostel object
-                obj = Hostel.objects.create(**serializer.data)
+                obj = Hostel.objects.create(**serializer_data)
                 if obj:
                     # Save the cover image
                     if cover_image:
@@ -205,6 +218,7 @@ class HostelViewSet(viewsets.ModelViewSet):
                     "message": "Hostel created successfully.",
                     "data": serializer.data,
                 }, status=status.HTTP_201_CREATED)
+            
             return Response({
                 "status": False,
                 "message": "Failed to create hostel.",
@@ -219,22 +233,34 @@ class HostelViewSet(viewsets.ModelViewSet):
 
     # Override the `update` method
     def update(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
-            partial = kwargs.pop('partial', False)  # Determines whether it's a partial update
+        if request.user.is_authenticated:
             instance = self.get_object()
-            serializer = self.get_serializer(instance, data=request.data, partial=partial)
-            if serializer.is_valid():
-                serializer.save()
+
+            if (request.user.custom_user == instance.user or request.user.custom_user.role == 'admin'):
+                data = request.data
+                
+                if request.user.custom_user.role != 'admin':
+                    data.update({'approved': 0})
+                    data.pop('isFeatured', None)
+                    data.pop('rating', None)
+
+                partial = kwargs.pop('partial', False)  # Determines whether it's a partial update
+
+                serializer = self.get_serializer(instance, data=data, partial=partial)
+
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response({
+                        "status": True,
+                        "message": "Hostel updated successfully.",
+                        "data": serializer.data,
+                    }, status=status.HTTP_200_OK)
+                
                 return Response({
-                    "status": True,
-                    "message": "Hostel updated successfully.",
-                    "data": serializer.data,
-                }, status=status.HTTP_200_OK)
-            return Response({
-                "status": False,
-                "message": "Failed to update hostel.",
-                "data": serializer.errors,
-            }, status=status.HTTP_400_BAD_REQUEST)
+                    "status": False,
+                    "message": "Failed to update hostel.",
+                    "data": serializer.errors,
+                }, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({
             "status": False,
@@ -244,14 +270,15 @@ class HostelViewSet(viewsets.ModelViewSet):
 
     # Override the `destroy` method
     def destroy(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
+        if request.user.is_authenticated:
             instance = self.get_object()
-            instance.delete()
-            return Response({
-                "status": True,
-                "message": "Hostel deleted successfully.",
-                "data": {},
-            }, status=status.HTTP_204_NO_CONTENT)
+            if request.user.custom_user == instance.user or request.user.custom_user.role == 'admin':
+                instance.delete()
+                return Response({
+                    "status": True,
+                    "message": "Hostel deleted successfully.",
+                    "data": {},
+                }, status=status.HTTP_204_NO_CONTENT)
 
         return Response({
             "status": False,
@@ -264,61 +291,62 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def create(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
-            """Register a new user and their corresponding CustomUsers object."""
-            request.data['role'] = 'admin'
-            user_serializer = self.get_serializer(data=request.data)
-            if user_serializer.is_valid():
-                # Create the User object
-                user = user_serializer.save()
-                
-                print("User created successfully.", user)
-                # Create the CustomUsers object
-                custom_user_data = {
-                    "name": user_serializer.validated_data.get("name"),
-                    "role": user_serializer.validated_data.get("role", "normal"),  # Default role is 'normal'
-                    "user": user.id, 
-                }
-                custom_user_serializer = CustomUserSerializer(data=custom_user_data)
-                if custom_user_serializer.is_valid():
-                    custom_user_serializer.save()
+        if request.data.get('role', 'user') == "admin":
+            return Response({
+                "status": False,
+                "message": "Unauthorized.",
+                "data": {},
+            }, status=status.HTTP_401_UNAUTHORIZED)
+        
+        user_credentials = {
+            "username": request.data.get("username"),
+            "email": request.data.get("email"),
+            "password": request.data.get("password"),
+        }
+        user_serializer = self.get_serializer(data=user_credentials)
+        if user_serializer.is_valid():
+            # Create the User object
+            user = user_serializer.save()
+            
+            # Create the CustomUsers object
+            custom_user_data = {
+                "name": request.data.get("name"),
+                "role": request.data.get("role", "user"),  # Default role is 'user'
+                "user": user.id, 
+            }
 
-                    print("CustomUser created successfully.", custom_user_serializer.data)
+            custom_user_serializer = CustomUserSerializer(data=custom_user_data)
+            if custom_user_serializer.is_valid():
+                custom_user_serializer.save()
 
-                    # Create token for authentication
-                    token, _ = Token.objects.get_or_create(user=user)
+                # Create token for authentication
+                token, _ = Token.objects.get_or_create(user=user)
 
-                    print("Token created successfully.", token)
-                    return Response({
-                        "status": True,
-                        "message": "User registered successfully.",
-                        "data": {
-                            "username": user.username,
-                            "email": user.email,
-                            "role": custom_user_serializer.data["role"],
-                            "token": str(token),
-                        }
-                    }, status=status.HTTP_201_CREATED)
-                
-                # Rollback User creation if CustomUsers creation fails
-                user.delete()
                 return Response({
-                    "status": False,
-                    "message": "Registration failed.",
-                    "data": custom_user_serializer.errors
-                }, status=status.HTTP_400_BAD_REQUEST)
-
+                    "status": True,
+                    "message": "User registered successfully.",
+                    "data": {
+                        "username": user.username,
+                        "email": user.email,
+                        "role": custom_user_serializer.data["role"],
+                        "token": str(token),
+                    }
+                }, status=status.HTTP_201_CREATED)
+            
+            # Rollback User creation if CustomUsers creation fails
+            user.delete()
             return Response({
                 "status": False,
                 "message": "Registration failed.",
-                "data": user_serializer.errors
+                "data": custom_user_serializer.errors
             }, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({
             "status": False,
-            "message": "Unauthorized.",
-            "data": {},
-        }, status=status.HTTP_401_UNAUTHORIZED)
+            "message": "Registration failed.",
+            "data": user_serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
+
         
     @action(detail=False, methods=['post'])
     def login(self, request):
@@ -375,7 +403,8 @@ class BlogsViewSet(viewsets.ModelViewSet):
 
     # Override create method to ensure only authorized users can create
     def create(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
+        if request.user.is_authenticated:
+            request.data['author'] = request.user.id
             serializer = self.get_serializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
