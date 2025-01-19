@@ -250,7 +250,7 @@ const AdminPage = ({ setIsAdminLoggedIn }) => {
             <thead>
               <tr>
                 <th>Blog Title</th>
-                <th>Edit</th>
+                {/* <th>Edit</th> */}
                 <th>Delete</th>
               </tr>
             </thead>
@@ -262,9 +262,9 @@ const AdminPage = ({ setIsAdminLoggedIn }) => {
                       {blog.title}
                     </Link>
                   </td>
-                  <td>
+                  {/* <td>
                     <button onClick={() => navigate(`/edit-blog/${blog.id}`)}>Edit</button>
-                  </td>
+                  </td> */}
                   <td>
                     <button onClick={() => deleteBlog(blog.id)}>Delete</button>
                   </td>
