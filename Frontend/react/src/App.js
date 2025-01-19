@@ -16,6 +16,7 @@ import ScrollToTop from './components/ScrollToTop';
 import HostelDetails from './components/HostelDetails';
 import ListYourHostel from './components/ListYourHostel';
 import BlogDetail from './components/BlogDetail';
+import AddBlog from './components/AddBlog';
 
 export const scrollToSection = (elementRef) => {
   window.scrollTo({
@@ -85,13 +86,19 @@ const App = () => {
           <Route path="/admin" element={
             <>
               <Nav isAdminLoggedIn={isAdminLoggedIn} />
-              <AdminPage />
+              <AdminPage setIsAdminLoggedIn={setIsAdminLoggedIn}/>
             </>
           } />
           <Route path="/list-your-hostel" element={
             <>
               <Nav isAdminLoggedIn={isAdminLoggedIn}/>
               <ListYourHostel />
+            </>
+          } />
+          <Route path="/add-blog" element={
+            <>
+              <Nav isAdminLoggedIn={isAdminLoggedIn}/>
+              <AddBlog />
             </>
           } />
         </Routes>

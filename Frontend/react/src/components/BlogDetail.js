@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Blog = () => {  
   const [blogs, setBlogs] = useState([]); // State to store blogs
+  const [blog, setBlog] = useState(null);
   const [isLoading, setIsLoading] = useState(true); // State to show loading indicator
   const [error, setError] = useState(null); // State to handle errors
   const { id } = useParams();
@@ -16,8 +17,10 @@ const Blog = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/blogs/'); // Update with your backend URL
+        const responseBlog = await axios.get(`http://127.0.0.1:8000/api/blogs/${id}/`);
         setBlogs(response.data.blogs); // Set blogs data
-        console.log(response.data.blogs);
+        setBlog(responseBlog.data);
+        // console.log(response.data.blogs);
         setIsLoading(false); // Loading done
       } catch (err) {
         console.error("Error fetching blogs:", err);
@@ -39,7 +42,7 @@ const Blog = () => {
 
   
 
-  const blog = blogs.find(blog => blog.id === Number(id));
+  // const blog = blogs.find(blog => blog.id === Number(id));
 
   const formattedDate = new Date(blog.date).toLocaleString('en-US', {
     year: 'numeric',

@@ -28,6 +28,7 @@ const ListYourHostel = () => {
     feeStructure: {},
     messMenu: [],
     rules: [],
+    role: "",
     // latitude: 0,
     // longitude: 0,  
   });
@@ -39,8 +40,7 @@ const ListYourHostel = () => {
       const longitude = match[2];
       return { latitude, longitude };
     } else {
-      alert("Invalid Map Link");
-      return null;
+      throw new Error("Invalid Map Link");
     }
   }
 
@@ -67,91 +67,101 @@ const ListYourHostel = () => {
   
 
   const handleSubmit = async () => {
-    const coordinates= extractCoordinates(formData.mapLocation) || {latitude:0, longitude:0};
-    // console.log(formData.amenities);
-    const formDataToSend = new FormData();
-  
-    // Add text fields
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("owner_name", formData.owner_name);
-    formDataToSend.append("contact_information", formData.contact);
-    formDataToSend.append("location", formData.location);
-    formDataToSend.append("latitude", coordinates.latitude);
-    formDataToSend.append("longitude", coordinates.longitude);
-    formDataToSend.append(
-      "gender",
-      formData.gender === "Boys" ? 1 : formData.gender === "Girls" ? 2 : 0
-    );
-    formDataToSend.append("arrival_time", formData.arrivalTime);
-    formDataToSend.append(
-      "transportation_bus_stations",
-      formData.nearbyFacilities.transportation
-    );
-    formDataToSend.append(
-      "nearby_hospitals_pharmacy",
-      formData.nearbyFacilities.hospitalOrPharmacy
-    );
-    formDataToSend.append("nearby_schools", formData.nearbyFacilities.schools);
-    formDataToSend.append(
-      "nearby_shopping_malls",
-      formData.nearbyFacilities.shoppingMalls
-    );
-    formDataToSend.append(
-      "nearby_cafes_and_restaurants",
-      formData.nearbyFacilities.cafesAndRestaurants
-    );
-    formDataToSend.append("description", formData.description);
+    try{
+      if (!formData.profilePhoto) {
+        throw new Error("Upload Profile photo");
+      }
+      if (formData.additionalPhotos.length < 3) {
+        throw new Error("Upload at least 3 additional photos");
+      }
 
-    for (const [key, value] of Object.entries(formData.feeStructure)) {
-      formDataToSend.append(key, value);
-    }
-
-    formDataToSend.append("rules", formData.rules.join('\n'));
-
-    formDataToSend.append("food_menu",JSON.stringify(formData.messMenu));
-  
-    // Convert amenities to individual boolean fields
-    const amenitiesList = [
-      "internet",
-      "washing_machine",
-      "bathroom_cleaning",
-      "study_table",
-      "books_rack",
-      "wardrobe",
-      "clothes_hanger",
-      "smoking_and_beverages_usage",
-      "parking_space",
-      "mess",
-      "cctv",
-      "generator",
-      "furniture",
-      "geysers",
-      "heater",
-      "cooler",
-      "ac",
-      "gym",
-      "security_guard",
-      "lift",
-    ];
-    amenitiesList.forEach((amenity) => {
-      formDataToSend.append(amenity, formData.amenities.includes(amenity));
-    });
-  
-    // Add files
-    if (formData.profilePhoto) {
-      formDataToSend.append("image", formData.profilePhoto); // Profile photo as the first image
-    }
-    formData.additionalPhotos.forEach((photo, index) => {
-      formDataToSend.append("additional_images", photo); // Additional images
-    });
+      const coordinates= extractCoordinates(formData.mapLocation) || {latitude:0, longitude:0};
+      // console.log(formData.amenities);
+      const formDataToSend = new FormData();
     
-    for (let [key, value] of formDataToSend.entries()) {
-      console.log(key, value);
-    }
-    // console.log(formData.messMenu);
+      // Add text fields
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("owner_name", formData.owner_name);
+      formDataToSend.append("contact_information", formData.contact);
+      formDataToSend.append("location", formData.location);
+      formDataToSend.append("latitude", coordinates.latitude);
+      formDataToSend.append("longitude", coordinates.longitude);
+      formDataToSend.append(
+        "gender",
+        formData.gender === "Boys" ? 1 : formData.gender === "Girls" ? 2 : 0
+      );
+      formDataToSend.append("arrival_time", formData.arrivalTime);
+      formDataToSend.append(
+        "transportation_bus_stations",
+        formData.nearbyFacilities.transportation
+      );
+      formDataToSend.append(
+        "nearby_hospitals_pharmacy",
+        formData.nearbyFacilities.hospitalOrPharmacy
+      );
+      formDataToSend.append("nearby_schools", formData.nearbyFacilities.schools);
+      formDataToSend.append(
+        "nearby_shopping_malls",
+        formData.nearbyFacilities.shoppingMalls
+      );
+      formDataToSend.append(
+        "nearby_cafes_and_restaurants",
+        formData.nearbyFacilities.cafesAndRestaurants
+      );
+      formDataToSend.append("description", formData.description);
+  
+      for (const [key, value] of Object.entries(formData.feeStructure)) {
+        formDataToSend.append(key, value);
+      }
+  
+      formDataToSend.append("rules", formData.rules.join('\n'));
+  
+      formDataToSend.append("food_menu",JSON.stringify(formData.messMenu));
+    
+      // Convert amenities to individual boolean fields
+      const amenitiesList = [
+        "internet",
+        "washing_machine",
+        "bathroom_cleaning",
+        "study_table",
+        "books_rack",
+        "wardrobe",
+        "clothes_hanger",
+        "smoking_and_beverages_usage",
+        "parking_space",
+        "mess",
+        "cctv",
+        "generator",
+        "furniture",
+        "geysers",
+        "heater",
+        "cooler",
+        "ac",
+        "gym",
+        "security_guard",
+        "lift",
+      ];
+      amenitiesList.forEach((amenity) => {
+        formDataToSend.append(amenity, formData.amenities.includes(amenity));
+      });
+    
+      // Add files
+      if (formData.profilePhoto) {
+        formDataToSend.append("image", formData.profilePhoto); // Profile photo as the first image
+      }
+      formData.additionalPhotos.forEach((photo, index) => {
+        formDataToSend.append("additional_images", photo); // Additional images
+      });
+      
+      formDataToSend.append("role", formData.role);
+      
+      // for (let [key, value] of formDataToSend.entries()) {
+      //   console.log(key, value);
+      // }
+      // console.log(formData.messMenu);
+  
+      // Send request
 
-    // Send request
-    try {
       const response = await fetch("http://127.0.0.1:8000/api/hostels/", {
         method: "POST",
         headers: {
@@ -162,15 +172,14 @@ const ListYourHostel = () => {
   
       if (response.status === 201) {
         const data = await response.json();
-        alert("Hostel created successfully!");
+        alert("Request sent to admin! Pending Approval...");
         console.log("Response Data:", data);
       } else {
         const errorData = await response.json();
         alert("Failed to create hostel: " + errorData.message);
       }
     } catch (error) {
-      console.error("Error submitting form data:", error);
-      alert("An error occurred. Please try again.");
+      alert("Error submitting form data : " + error.message);
     }
   };
 
@@ -258,11 +267,12 @@ return (
           type="file"
           accept="image/*"
           onChange={(e) => handleFileChange(e, "profilePhoto")}
+          required
         />
       </label>
 
       <label>
-        Additional Photos:
+        Additional Photos (Minimum 3):
         <input
           type="file"
           accept="image/*"
@@ -270,6 +280,7 @@ return (
           onChange={(e) =>
             setFormData({ ...formData, additionalPhotos: [...e.target.files] })
           }
+          required
         />
       </label>
 
@@ -363,8 +374,34 @@ return (
         </label>
       </div>
 
+      <h3>Register as: </h3>
+      <div className="create-role">
+      <label>
+          <input
+            type="radio"
+            name="role"
+            value="user"
+            checked={formData.role === "user"}
+            onChange={handleInputChange}
+            required
+          />
+          User
+      </label>
+      <label>
+          <input
+            type="radio"
+            name="role"
+            value="renter"
+            checked={formData.role === "renter"}
+            onChange={handleInputChange}
+            required
+          />
+          Renter
+        </label>
+      </div>
+
       <button type="button" className="submit-button" onClick={handleSubmit}>
-        Save Hostel Data
+        Register Your Hostel
       </button>
     </form>
   </div>

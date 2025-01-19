@@ -92,7 +92,7 @@ nav .nav-list li a:hover {
 nav .nav-list .login_section {
     display: flex;
     align-items: center;
-    margin-left: 31px;
+    margin: 31px;
 
 }
 
@@ -1403,6 +1403,15 @@ color: #555;
     background: linear-gradient(135deg, #f96400, #ff0000);
   }
   
+  .create-role,
+  .create-role label{
+    width: fit-content;
+    display: flex;
+  }
+
+  .create-role{
+    gap:40px;
+  }
    /* blog page stylingg */
 
 
@@ -1624,3 +1633,60 @@ color: #555;
     background-color: #5851db;
     color: #fff;
 }
+
+
+/* Add Blog Section */
+.add-blog {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-blog h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .add-blog form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .add-blog label {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .add-blog input,
+  .add-blog textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .add-blog input:focus,
+  .add-blog textarea:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .add-blog textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .add-blog p {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+  }
+  
