@@ -32,7 +32,6 @@ class HostelViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'], url_path='filter')
     def filter_hostels(self, request):
 
-
         gender = request.data.get('gender', 2)
         max_price = request.data.get('max_price', 1000000)
         min_price = request.data.get('min_price', 0)
@@ -165,11 +164,15 @@ class HostelViewSet(viewsets.ModelViewSet):
         # Serialize and return the filtered data
         serializer = self.get_serializer(hostels, many=True)
         serializer_data = copy.deepcopy(serializer.data)
+        
         if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
+        
             exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
+        
             for obj in serializer_data:
                 for field in exclude_fields:
                     obj.pop(field, None)
+        
         return Response(serializer_data, status=status.HTTP_200_OK)
     
     def retrieve(self, request, *args, **kwargs):
@@ -475,9 +478,16 @@ class BlogsViewSet(viewsets.ModelViewSet):
     # Override create method to ensure only authorized users can create
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            request.data['author'] = request.user.id
-            serializer = self.get_serializer(data=request.data)
+            data = request.data.copy()
+
+            data['author'] = request.user.id
+            data['views'] = 0
+            data.pop('date', None)
+
+            serializer = self.get_serializer(data=data)
             if serializer.is_valid():
+                image = request.FILES.get('image', None)
+                serializer.validated_data['image'] = image
                 serializer.save()
                 return Response({
                     "status": True,
@@ -504,9 +514,12 @@ class BlogsViewSet(viewsets.ModelViewSet):
 
             if (request.user.custom_user == instance.author or request.user.custom_user.role == 'admin'):
                 data = request.data
+                if request.user.custom_user.role != 'admin':
+                    data.pop('views', None)
+                    data.pop('date', None)
             
                 partial = kwargs.pop('partial', False)  # Determines whether it's a partial update
-                serializer = self.get_serializer(instance, data=request.data, partial=partial)
+                serializer = self.get_serializer(instance, data=data, partial=partial)
                 if serializer.is_valid():
                     serializer.save()
                     return Response({
@@ -556,7 +569,13 @@ class BlogsViewSet(viewsets.ModelViewSet):
             }, status=status.HTTP_400_BAD_REQUEST)
 
         blogs = Blog.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
+            Q(title__icontains=query) | 
+            Q(content__icontains=query) | 
+            Q(hook__icontains=query) | 
+            Q(summary__icontains=query) |
+            Q(link__icontains=query) |
+            Q(author__name__icontains=query)
+
         )
 
         serializer = self.get_serializer(blogs, many=True)
