@@ -57,7 +57,7 @@ const FeeStructure = ({ feeStructure, setFeeStructure }) => {
       </div>
       {Object.entries(feeStructure).map(([key, value]) => (
         <div key={key} className="fee-item">
-          <span>{key}</span>
+          <span>{feeOptions.find(item => item.name === key)?.value}</span>
           <span>Rs.{value}</span>
           <button
             type="button"

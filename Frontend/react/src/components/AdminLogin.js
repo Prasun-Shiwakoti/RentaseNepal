@@ -8,30 +8,22 @@ const AdminLogin = ({ setIsAdminLoggedIn }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   const response = await fetch('/api/admin/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(credentials),
-    //   });
-    //   const data = await response.json();
-    //   if (response.ok) {
-    //     localStorage.setItem('adminToken', data.token); // Save token
-    //     setIsAdminLoggedIn(true);
-    //     navigate('/admin');
-    //   } else {
-    //     setError(data.message || 'Login failed');
-    //   }
-    // } catch (err) {
-    //   setError('Something went wrong. Please try again.');
-    // }
-
-    if (credentials.username === "admin" && credentials.password === "admin") {
-      setIsAdminLoggedIn(true);
-      navigate('/admin');
-    }
-    else {
-      setError('Invalid Credentials');
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/users/login/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem('adminToken', data.token); // Save token
+        setIsAdminLoggedIn(true);
+        navigate('/admin');
+      } else {
+        setError(data.message || 'Login failed');
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
     }
   };
 
