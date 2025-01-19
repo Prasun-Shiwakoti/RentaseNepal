@@ -166,11 +166,36 @@ class HostelViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(hostels, many=True)
         serializer_data = copy.deepcopy(serializer.data)
         if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
-            exclude_fields = ['contact_information', 'longitude', 'latitude', 'name']
+            exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
             for obj in serializer_data:
                 for field in exclude_fields:
                     obj.pop(field, None)
         return Response(serializer_data, status=status.HTTP_200_OK)
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        # Serialize the instance data
+        serializer = self.get_serializer(instance)
+
+        # Get the serialized data
+        data = serializer.data
+        if getattr(request.user,'custom_user.role', None) != 'admin':
+            if instance.approved == False:
+                return Response({
+                    "status": False,
+                    "message": "No Hostel matches the given query.",
+                    "data": {},
+                }, status=status.HTTP_404_NOT_FOUND)
+            
+            exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
+
+            for field in exclude_fields:
+                if field in data:
+                    data.pop(field)
+
+        # Return the modified response
+        return Response(data)
     
     # Override list function for manual pagination
     def list(self, request, *args, **kwargs):
@@ -192,7 +217,7 @@ class HostelViewSet(viewsets.ModelViewSet):
         serializer_data = copy.deepcopy(serializer.data)
 
         if not getattr(request.user.custom_user, 'role', None) == 'admin':
-            exclude_fields = ['single_seater_price', 'two_seater_price', 'three_seater_price', 'four_seater_price', 'contact_information', 'longitude', 'latitude']
+            exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
             for obj in serializer_data:
                 for field in exclude_fields:
                     obj.pop(field, None)
@@ -314,6 +339,29 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def list(self, request, *args, **kwargs):
+
+        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):  
+            return Response({
+                "status": False,
+                "message": "Unauthorized",
+                "data": {}
+            }, status=status.HTTP_403_FORBIDDEN)
+        
+        return super().list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        # Allow access only if the logged-in user is accessing their own record or if the user is an admin.
+        user_instance = self.get_object()
+        if request.user != user_instance and not request.user.custom_user.role == 'admin':
+            return Response({
+                "status": False,
+                "message": "Unauthorized",
+                "data": {}
+            }, status=status.HTTP_403_FORBIDDEN)
+        
+        return super().retrieve(request, *args, **kwargs)
+
     def create(self, request, *args, **kwargs):
         if request.data.get('role', 'user') == "admin":
             return Response({
@@ -370,7 +418,6 @@ class UserViewSet(viewsets.ModelViewSet):
             "message": "Registration failed.",
             "data": user_serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-
         
     @action(detail=False, methods=['post'])
     def login(self, request):
@@ -452,23 +499,27 @@ class BlogsViewSet(viewsets.ModelViewSet):
 
     # Override update method to allow partial updates
     def update(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
-            partial = kwargs.pop('partial', False)  # Determines whether it's a partial update
+        if request.user.is_authenticated:
             instance = self.get_object()
-            serializer = self.get_serializer(instance, data=request.data, partial=partial)
-            if serializer.is_valid():
-                serializer.save()
-                return Response({
-                    "status": True,
-                    "message": "Blog updated successfully.",
-                    "data": serializer.data,
-                }, status=status.HTTP_200_OK)
 
-            return Response({
-                "status": False,
-                "message": "Failed to update blog.",
-                "data": serializer.errors,
-            }, status=status.HTTP_400_BAD_REQUEST)
+            if (request.user.custom_user == instance.author or request.user.custom_user.role == 'admin'):
+                data = request.data
+            
+                partial = kwargs.pop('partial', False)  # Determines whether it's a partial update
+                serializer = self.get_serializer(instance, data=request.data, partial=partial)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response({
+                        "status": True,
+                        "message": "Blog updated successfully.",
+                        "data": serializer.data,
+                    }, status=status.HTTP_200_OK)
+
+                return Response({
+                    "status": False,
+                    "message": "Failed to update blog.",
+                    "data": serializer.errors,
+                }, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({
             "status": False,
@@ -478,14 +529,15 @@ class BlogsViewSet(viewsets.ModelViewSet):
 
     # Override destroy method to restrict deletion to admins
     def destroy(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role == 'admin':
+        if request.user.is_authenticated:
             instance = self.get_object()
-            instance.delete()
-            return Response({
-                "status": True,
-                "message": "Blog deleted successfully.",
-                "data": {},
-            }, status=status.HTTP_204_NO_CONTENT)
+            if request.user.custom_user == instance.author or request.user.custom_user.role == 'admin':
+                instance.delete()
+                return Response({
+                    "status": True,
+                    "message": "Hostel deleted successfully.",
+                    "data": {},
+                }, status=status.HTTP_204_NO_CONTENT)
 
         return Response({
             "status": False,
