@@ -184,12 +184,12 @@ class HostelViewSet(viewsets.ModelViewSet):
         # Get the serialized data
         data = serializer.data
         if getattr(request.user,'custom_user.role', None) != 'admin':
-            if instance.approved == False:
-                return Response({
-                    "status": False,
-                    "message": "No Hostel matches the given query.",
-                    "data": {},
-                }, status=status.HTTP_404_NOT_FOUND)
+            # if (instance.approved == False or True):
+            #     return Response({
+            #         "status": False,
+            #         "message": "No Hostel matches the given query.",
+            #         "data": {},
+            #     }, status=status.HTTP_404_NOT_FOUND)
             
             exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
 
@@ -262,7 +262,7 @@ class HostelViewSet(viewsets.ModelViewSet):
                     # Save the additional images
                     if additional_images:
                         HostelImage.objects.bulk_create([
-                            HostelImage(hostel=hostel, image=image) 
+                            HostelImage(hostel=obj, image=image) 
                             for image in additional_images
                         ])
 
