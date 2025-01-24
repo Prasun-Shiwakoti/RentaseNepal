@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const AdminLogin = ({ setIsAdminLoggedIn }) => {
+const AdminLogin = ({ setIsLoggedIn, setUserRole }) => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -15,10 +15,18 @@ const AdminLogin = ({ setIsAdminLoggedIn }) => {
         body: JSON.stringify(credentials),
       });
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
-        localStorage.setItem('adminToken', data.token); // Save token
-        setIsAdminLoggedIn(true);
-        navigate('/admin');
+        // const role=data.data.role;
+        const role='user';
+
+        if(role === 'admin')
+          localStorage.setItem('admin-token', data.data.token); // Save token
+        else
+          localStorage.setItem('user-token', data.data.token);
+        setIsLoggedIn(true);
+        setUserRole(role);
+        navigate(role === 'admin'? '/admin': '/user');
       } else {
         setError(data.message || 'Login failed');
       }
@@ -30,7 +38,7 @@ const AdminLogin = ({ setIsAdminLoggedIn }) => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2>Admin Login</h2>
+        <h2>Admin/User Login</h2>
 
         {error && <div className="error">{error}</div>}
         <form onSubmit={handleSubmit}>
@@ -59,6 +67,11 @@ const AdminLogin = ({ setIsAdminLoggedIn }) => {
           </div>
           <button type="submit" className="login-button">Log In</button>
         </form>
+
+        <div className="create-account">
+          <p>Don't have an account? <a href="/register">Create New Account</a></p>
+        </div>
+
       </div>
     </div>
   );

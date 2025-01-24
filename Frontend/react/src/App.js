@@ -17,6 +17,8 @@ import HostelDetails from './components/HostelDetails';
 import ListYourHostel from './components/ListYourHostel';
 import BlogDetail from './components/BlogDetail';
 import AddBlog from './components/AddBlog';
+import Register from './components/Register';
+import UserPage from './components/UserPage'
 
 export const scrollToSection = (elementRef) => {
   window.scrollTo({
@@ -29,7 +31,8 @@ const App = () => {
   const blogRef = useRef(null);
   const contactRef = useRef(null);
   const serviceRef = useRef(null);
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(!!localStorage.getItem('adminToken'));
+  const [isLoggedIn, setisLoggedIn] = useState(!!localStorage.getItem('usertoken'));
+  const [userRole, setUserRole] = useState('user');
 
   return (
     <Router>
@@ -42,7 +45,8 @@ const App = () => {
                 blogRef={blogRef}
                 contactRef={contactRef}
                 serviceRef={serviceRef}
-                isAdminLoggedIn={isAdminLoggedIn}
+                isLoggedIn={isLoggedIn}
+                userRole={userRole}
               />
               <FeaturedHostels />
               <TopCities />
@@ -56,14 +60,14 @@ const App = () => {
           } />
           <Route path="/blog/:id" element={
             <div>
-              <Nav isAdminLoggedIn={isAdminLoggedIn} />
+              <Nav isLoggedIn={isLoggedIn} />
               <BlogDetail />
             </div>
           } />
           <Route path="/search-results" element={
             <>
               <div>
-                <Nav isAdminLoggedIn={isAdminLoggedIn} />
+                <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
                 <div className="results-search-bar">
                   <SearchBar />
                 </div>
@@ -73,31 +77,47 @@ const App = () => {
           } />
           <Route path="/hostel/:id" element={
             <div>
-              <Nav isAdminLoggedIn={isAdminLoggedIn} />
+              <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
               <HostelDetails />
             </div>
           } />
-          <Route path="/admin-login" element={
+          <Route path="/login" element={
             <>
-              <Nav isAdminLoggedIn={isAdminLoggedIn} />
-              <AdminLogin setIsAdminLoggedIn={setIsAdminLoggedIn} />
+              <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
+              <AdminLogin setIsLoggedIn={setisLoggedIn}  setUserRole={setUserRole} />
             </>
           } />
+
+          <Route path="/register" element={
+            <>
+              <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
+              <Register />
+            </>
+          } />
+
           <Route path="/admin" element={
             <>
-              <Nav isAdminLoggedIn={isAdminLoggedIn} />
-              <AdminPage setIsAdminLoggedIn={setIsAdminLoggedIn}/>
+              <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
+              <AdminPage setisLoggedIn={setisLoggedIn} setUserRole={setUserRole}/>
             </>
           } />
+
+          <Route path="/user" element={
+            <>
+              <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
+              <UserPage setisLoggedIn={setisLoggedIn} setUserRole={setUserRole}/>
+            </>
+          } />
+
           <Route path="/list-your-hostel" element={
             <>
-              <Nav isAdminLoggedIn={isAdminLoggedIn}/>
+              <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
               <ListYourHostel />
             </>
           } />
           <Route path="/add-blog" element={
             <>
-              <Nav isAdminLoggedIn={isAdminLoggedIn}/>
+              <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
               <AddBlog />
             </>
           } />

@@ -28,7 +28,7 @@ const ListYourHostel = () => {
     feeStructure: {},
     messMenu: [],
     rules: [],
-    role: "",
+    // role: "",
     // latitude: 0,
     // longitude: 0,  
   });
@@ -153,7 +153,7 @@ const ListYourHostel = () => {
         formDataToSend.append("additional_images", photo); // Additional images
       });
       
-      formDataToSend.append("role", formData.role);
+      // formDataToSend.append("role", formData.role);
       
       // for (let [key, value] of formDataToSend.entries()) {
       //   console.log(key, value);
@@ -374,7 +374,7 @@ return (
         </label>
       </div>
 
-      <h3>Register as: </h3>
+      {/* <h3>Register as: </h3>
       <div className="create-role">
       <label>
           <input
@@ -398,7 +398,7 @@ return (
           />
           Renter
         </label>
-      </div>
+      </div> */}
 
       <button type="button" className="submit-button" onClick={handleSubmit}>
         Register Your Hostel
