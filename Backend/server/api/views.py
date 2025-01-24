@@ -209,9 +209,10 @@ class HostelViewSet(viewsets.ModelViewSet):
         hostels = Hostel.objects.all()
 
         # Apply manual pagination
-        paginated_hostels = hostels[offset:offset + limit]
         if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
             paginated_hostels = paginated_hostels.exclude(approved=False)
+
+        paginated_hostels = hostels[offset:offset + limit]
 
         # Serialize the data
         serializer = self.get_serializer(paginated_hostels, many=True)
@@ -234,6 +235,7 @@ class HostelViewSet(viewsets.ModelViewSet):
         return Response(response_data)      
     
     def create(self, request, *args, **kwargs):
+        print(request.data)
         if request.user.is_authenticated and request.user.custom_user.role != 'user':
             data = request.data.copy()
             
@@ -248,7 +250,7 @@ class HostelViewSet(viewsets.ModelViewSet):
                 serializer_data = serializer.data.copy()
                 serializer_data['user'] = request.user.custom_user
                 
-                cover_image = request.FILES.get('cover_image', None)
+                cover_image = request.FILES.get('image', None)
                 additional_images = request.FILES.getlist('additional_images', [])
 
                 # Create the Hostel object

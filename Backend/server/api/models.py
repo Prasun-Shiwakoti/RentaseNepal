@@ -37,7 +37,7 @@ class Hostel(models.Model):
     rating = models.FloatField(default=0)
     gender = models.IntegerField(choices=GENDER_CHOICES)
 
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to='hostel_cover_images/', null=True, blank=True)
 
     # Accommodation Details (Price of Seater Rooms)
     admission_price = models.IntegerField(default=0)
@@ -89,17 +89,17 @@ class Hostel(models.Model):
 
 class HostelImage(models.Model):
     hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE, related_name='additional_images')
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to='hostel_additinal_images/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.hostel.name}"
+        return f"{self.hostel.name} - {self.image.name}"
 
 class Blog(models.Model):
     author = models.ForeignKey(CustomUsers, on_delete=models.CASCADE, related_name='blogs')
     title = models.CharField(max_length=255)
     summary = models.CharField(max_length=300, default="")
     content = models.TextField(default="")
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to='blog_cover_images/', null=True, blank=True)
     link = models.URLField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
