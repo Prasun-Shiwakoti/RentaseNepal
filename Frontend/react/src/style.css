@@ -96,8 +96,10 @@ nav .nav-list .login_section {
 
 }
 
- nav .nav-list ul li:nth-last-child(1), 
- nav .nav-list ul li:nth-last-child(2)  {
+ /* nav .nav-list ul li:nth-last-child(1), 
+ nav .nav-list ul li:nth-last-child(2)  { */
+ .list-hostel,
+ .login_section{
     border: 1px solid gray;
     border-radius: 20px;
     padding: 3px 20px;
@@ -1142,7 +1144,7 @@ color: #555;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
   }
 
   .form-group {
@@ -1176,17 +1178,54 @@ color: #555;
     text-align: center;
   }
   
-  .login-box>.error {
-    color: #ff4d4d;
+  .login-box>.error, 
+  .login-box>.success{
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
+  }
+  
+  .login-box>.success{
+    color: #53ff4d;
+  }
+
+  .login-box>.error {
+    color: #ff4d4d;
   }
 
   .login-button{
     width: 100%;
   }
 
+  .create-account {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .create-account a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .create-account a:hover {
+    text-decoration: underline;
+  }
+
+  .radio-group {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px;
+  }
+  
+  .radio-group label {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .radio-group input[type="radio"] {
+    margin-right: 5px;
+  }  
 
   /* ListYourHostel */
 

@@ -2,22 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const AdminPage = ({ setIsAdminLoggedIn }) => {
+const AdminPage = ({ setisLoggedIn, setUserRole }) => {
   const [hostels, setHostels] = useState([]);
   const [filter, setFilter] = useState('all'); // Default filter
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('admin-token');
     if (!token) {
-      setIsAdminLoggedIn(false);
-      navigate('/admin-login');
+      setisLoggedIn(false);
+      setUserRole('user');
+      navigate('/login');
     } else {
       fetchHostels();
       fetchBlogs();
     }
-  }, [navigate, setIsAdminLoggedIn]);
+  }, [navigate, setisLoggedIn, setUserRole]);
 
   // Fetch hostels with the selected filter
   const fetchHostels = async () => {
@@ -74,7 +75,7 @@ const AdminPage = ({ setIsAdminLoggedIn }) => {
   // Toggle featured status
   const toggleFeatured = async (id, isFeatured) => {
     try {
-      // const token = localStorage.getItem('adminToken');
+      // const token = localStorage.getItem('admin-token');
       const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
       const response = await fetch(`http://127.0.0.1:8000/api/hostels/${id}/`, {
         method: 'PATCH',
@@ -100,7 +101,7 @@ const AdminPage = ({ setIsAdminLoggedIn }) => {
   // Delete hostel
   const deleteHostel = async (id) => {
     try {
-      // const token = localStorage.getItem('adminToken');
+      // const token = localStorage.getItem('admin-token');
       const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
       const response = await fetch(`http://127.0.0.1:8000/api/hostels/${id}/`, {
         method: 'DELETE',
@@ -163,9 +164,10 @@ const AdminPage = ({ setIsAdminLoggedIn }) => {
 
   // Handle logout
   const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    setIsAdminLoggedIn(false);
-    navigate('/admin-login');
+    localStorage.removeItem('admin-token');
+    setisLoggedIn(false);
+    setUserRole('user');
+    navigate('/login');
   };
 
   return (
