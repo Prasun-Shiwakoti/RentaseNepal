@@ -10,7 +10,7 @@ from rest_framework.authtoken.models import Token
 
 
 # Local models and serializers
-from .models import Hostel, Blog
+from .models import Hostel, Blog, CustomUsers
 from .serializers import (
     HostelSerializer,
     UserSerializer,
@@ -235,7 +235,6 @@ class HostelViewSet(viewsets.ModelViewSet):
         return Response(response_data)      
     
     def create(self, request, *args, **kwargs):
-        print(request.data)
         if request.user.is_authenticated and request.user.custom_user.role != 'user':
             data = request.data.copy()
             
@@ -342,6 +341,7 @@ class HostelViewSet(viewsets.ModelViewSet):
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
+    custom_user = CustomUsers.objects.all()
     serializer_class = UserSerializer
 
     def list(self, request, *args, **kwargs):
@@ -353,7 +353,12 @@ class UserViewSet(viewsets.ModelViewSet):
                 "data": {}
             }, status=status.HTTP_403_FORBIDDEN)
         
-        return super().list(request, *args, **kwargs)
+
+        return Response({
+            "status": True,
+            "message": "Success",
+            "data": CustomUserSerializer(self.custom_user, many=True).data
+        }, status=status.HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
         # Allow access only if the logged-in user is accessing their own record or if the user is an admin.
@@ -365,7 +370,11 @@ class UserViewSet(viewsets.ModelViewSet):
                 "data": {}
             }, status=status.HTTP_403_FORBIDDEN)
         
-        return super().retrieve(request, *args, **kwargs)
+        return Response({
+            "status": True,
+            "message": "Success",
+            "data": CustomUserSerializer(user_instance.custom_user).data
+        }, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         if request.data.get('role', 'user') == "admin":
@@ -437,6 +446,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 return Response({
                     "status": True,
                     "message": "Login successful.",
+                    "role": user.custom_user.role,
                     "data": {
                         "token": str(token),
                     }
