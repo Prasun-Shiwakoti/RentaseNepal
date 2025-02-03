@@ -39,7 +39,8 @@ const SearchBar = () => {
       outline: "none",
       border: "none",
       borderRadius: "20px",
-      width: "280px",
+      // width: "280px",
+      minWidth: "0",
       backgroundColor: "#fff",
       color: "hsl(228, 15%, 50%)",
       padding: "15px 20px",
@@ -80,7 +81,7 @@ const SearchBar = () => {
       <form action="" className="home-search" onSubmit={handleSearchInstitute}>
         <i className="bi bi-buildings-fill"></i>
         <Select
-          placeholder="Select Nearby Institute"
+          placeholder="Nearby Institute"
           styles={searchStyles}
           options={institutes}
           value={institutes.find((option) => option.value.lat === institute.lat && option.value.lon === institute.lon) || null}

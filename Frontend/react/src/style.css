@@ -41,6 +41,14 @@ h1{
 /* .fix{
   position: fixed;
 } */
+/* General Navbar Styling */
+.header-section {
+  width: 100%;
+  height: 85vh;
+  margin: auto;
+  transition: .3s linear;
+}
+
 .navBar {
   width: 100%;
   height: 80px;
@@ -49,6 +57,7 @@ h1{
   justify-content: space-between;
   top: 0;
   position: sticky;
+  z-index: 1000; /* Ensure the navbar is on top */
 }
 
 .navBar::before {
@@ -59,17 +68,15 @@ h1{
   top: 0;
   left: 0;
   position: absolute;
-  z-index: -1;
+  z-index: -1; /* Put the background behind the navbar */
   opacity: 0.75;
 }
 
-.nav-list > ul{
+.nav-list > ul {
   display: flex;
   align-items: center;
-  display: flex;
   list-style: none;
 }
-
 
 .nav-list > ul > li {
   padding: 3px 15px;
@@ -82,20 +89,82 @@ nav .nav-list a {
   font-size: 15px;
   font-weight: 500;
   transition: .3s linear;
-
 }
 
 nav .nav-list li a:hover {
-
   color: black;
-
 }
 
 nav .nav-list .login_section {
   display: flex;
   align-items: center;
   margin: 31px;
+}
 
+/* Mobile Hamburger Styles */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1500; /* Make sure the hamburger is above other components */
+  margin-left: auto; /* Align hamburger to the rightmost side */
+  outline: none; /* Remove default blue outline on click */
+}
+
+.hamburger .bar {
+  width: 30px;
+  height: 3px;
+  background-color: #333;
+  transition: transform 0.3s ease;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .nav-list {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Make sure nav-list is above other content */
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .nav-list.active {
+    display: flex;
+  }
+
+  .nav-list ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-list li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hamburger.open .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(6px);
+  }
+
+  .hamburger.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(-6px);
+  }
 }
 
 /* nav .nav-list ul li:nth-last-child(1), 
@@ -171,7 +240,8 @@ width: 80%;
 .home-search {
 display: flex;
 align-items: center;
-gap: 40px;
+min-width: fit-content;
+/* gap: 40px; */
 padding: 10px 30px;
 margin: auto;
 background-color: #fff;
@@ -230,7 +300,9 @@ border-color: hsl(228, 45%, 75%)
 flex-direction: column;
 gap:20px;
 width: 80%;
+margin: auto;
 }
+
 
 }
 
@@ -765,6 +837,7 @@ button:hover {
 /* search-filter responsive */
 
 @media (max-width: 768px) {
+  /* SearchBar additional*/
     .search-bar {
         flex-direction: column;
     }
@@ -798,9 +871,16 @@ button:hover {
 /* Search Result*/
 .results-search-bar {
     display: flex;
-    margin: 20px auto;
+    margin: 40px auto;
     width: 60%;
 }
+
+@media (max-width: 1180px) {
+  .results-search-bar{
+    display: none;
+  }
+}
+
 .search-results {
     padding: 20px;
     display: flex;
@@ -808,10 +888,77 @@ button:hover {
     gap:25px;
 }
   
+.hamburger-btn {
+  display: none;
+  /* background: none; */
+  /* border: none; */
+  font-size: 1rem;
+  /* cursor: pointer; */
+  width: fit-content;
+  margin: auto;
+
+}
+
+.hamburger-btn p {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  /* font-size: large; */
+  line-height: 0;
+  /* color:#000; */
+}
+
+/*filters*/
+
+.filters.hidden {
+  display: none;
+}
+
+.filters.visible {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .search-results{
+    flex-direction: column;
+  }
+  .filters-title{
+    display:none;
+  }
+  .hamburger-btn {
+    display: block;
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grid layout for filters */
+    gap: 20px;
+    padding: 20px;
+    width: 100%; /* Full width of its container */
+  }
+
+  .filters.visible {
+    transform: translateX(0);
+  }
+
+  .filter-option input,
+  .filter-option select,
+  .sort-section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .hostel-grid {
+    margin-left: 0;
+  }
+}
+
 .filters {
     display: flex;
     flex-direction: column;
-    width: 20%;
+    /* width: 20%; */
     padding: 20px;
   }
   

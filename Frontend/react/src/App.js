@@ -78,7 +78,7 @@ const App = () => {
           <Route path="/hostel/:id" element={
             <div>
               <Nav isLoggedIn={isLoggedIn} userRole={userRole} />
-              <HostelDetails />
+              <HostelDetails userRole={userRole}/>
             </div>
           } />
           <Route path="/login" element={
