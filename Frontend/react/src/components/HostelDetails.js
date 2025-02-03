@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 
 // import hostels from "../data/hostels.json"; 
 
-const HostelDetails = () => {
+const HostelDetails = ({userRole}) => {
+  console.log(userRole);
   const { id } = useParams(); // Get the hostel ID from the URL
   const [hostel, setHostel] = useState(null);
 
@@ -31,7 +32,7 @@ const HostelDetails = () => {
     { value: "Water Cooler", name: "cooler", emoji: "🚰" },
   ];
 
-  
+
   const fetchHostel = async () => {
     setLoading(true);
     setError(null);
@@ -59,7 +60,7 @@ const HostelDetails = () => {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     fetchHostel();
   }, [id]);
@@ -101,13 +102,16 @@ const HostelDetails = () => {
   };
 
   const enquire = () => {
+    alert('Contact our representative with the hostel id');
     console.log(`${hostel.name} added to wishlist!`);
   };
 
   return (
     <>
       <div className="hostelmain-container">
-        <h2>{hostel.name}</h2>
+        {hostel.name ? (<h2>{hostel.name}</h2>) :
+          (<h2>Hostel {parseInt(1000) + parseInt(id)}</h2>)}
+
         <br />
         <div className="hostelmain-content">
           <div className="left-section">
@@ -160,13 +164,13 @@ const HostelDetails = () => {
               {/* Facilities */}
               <div className="hosteldetail-info">
                 <div className="hosteldetail-title">Facilities</div>
-                  {allAmenities.map((amenity) => (
-                    hostel[amenity.name] && (
-                      <li key={amenity.name}>
-                        <span>{amenity.emoji}</span> {amenity.value}
-                      </li>
-                    )
-                  ))}
+                {allAmenities.map((amenity) => (
+                  hostel[amenity.name] && (
+                    <li key={amenity.name}>
+                      <span>{amenity.emoji}</span> {amenity.value}
+                    </li>
+                  )
+                ))}
               </div>
 
 
@@ -215,7 +219,7 @@ const HostelDetails = () => {
           {/* Right Section */}
           <div className="right-section">
             {/* Map */}
-            <div className="map-box hosteldetail-info">
+            {userRole === 'admin' && (<div className="map-box hosteldetail-info">
               <div className="hosteldetail-title">Location</div>
               <iframe
                 // src={hostel.mapLocation}
@@ -228,16 +232,18 @@ const HostelDetails = () => {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
-            <button className="toggle-button" onClick={openGoogleMaps}>
+            )}
+            {userRole === 'admin' && (<button className="toggle-button" onClick={openGoogleMaps}>
               View on Google Maps
             </button>
+            )}
 
             {/* Mess Menu */}
             <div className="mess-menu hosteldetail-info">
               <div className="hosteldetail-title">Mess Menu</div>
               <table>
                 <thead>
-                  <tr>  
+                  <tr>
                     <th>Day</th>
                     <th>Breakfast</th>
                     <th>Lunch</th>

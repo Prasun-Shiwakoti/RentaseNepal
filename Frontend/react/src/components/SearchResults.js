@@ -20,10 +20,32 @@ const SearchResults = () => {
   const [unfilteredHostels, setUnfilteredHostels] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [filterVisible, setFilterVisible] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const priceSliderRef = useRef(null);
   const sliderInstanceRef = useRef(null);
 
+  const toggleFilterVisibility = () => {
+    setFilterVisible((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (windowWidth < 768) { // Consider mobile devices as screen width < 768px
+      setFilterVisible(false);
+    } else {
+      setFilterVisible(true);
+    }
+  }, [windowWidth]);
+
+  // Listen for window resize events
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   // Initialize the slider
   useEffect(() => {
     if (priceSliderRef.current && !sliderInstanceRef.current) {
@@ -61,7 +83,7 @@ const SearchResults = () => {
     if (sliderInstanceRef.current) {
       const currentValues = sliderInstanceRef.current.get();
       const newValues = priceRange.map(String);
-      
+
       // Only update if values are different to prevent loops
       if (currentValues[0] !== newValues[0] || currentValues[1] !== newValues[1]) {
         sliderInstanceRef.current.set(newValues);
@@ -73,14 +95,14 @@ const SearchResults = () => {
     setLoading(true);
     setError(null);
 
-    const payload = locationQuery?{
+    const payload = locationQuery ? {
       approved: true,
       gender: parseInt(gender), // 0: Female, 1: Male, 2: Any
       max_price: priceRange[1],
       min_price: priceRange[0],
       location: locationQuery,
       // Additional filters can be added as required
-    }:{
+    } : {
       approved: true,
       gender: parseInt(gender), // 0: Female, 1: Male, 2: Any
       max_price: priceRange[1],
@@ -94,11 +116,18 @@ const SearchResults = () => {
     console.log(JSON.stringify(payload));
 
     try {
+      const token=localStorage.getItem('admin-token') || localStorage.getItem('user-token');
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      
+      // Only add Authorization header if the token exists
+      if (token) {
+        headers['Authorization'] = `token ${token}`;
+      }
       const response = await fetch('http://127.0.0.1:8000/api/hostels/filter/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headers,
         body: JSON.stringify(payload),
       });
       console.log(response);
@@ -114,7 +143,7 @@ const SearchResults = () => {
     } finally {
       setLoading(false);
     }
-  },[priceRange, gender, locationQuery, lat, lon] );
+  }, [priceRange, gender, locationQuery, lat, lon]);
 
   useEffect(() => {
     fetchFilteredHostels();
@@ -126,17 +155,17 @@ const SearchResults = () => {
     let result = unfilteredHostels.filter((hostel) => {
       return hostel.rating >= minRating;
     });
-  
+
     result = result.sort((a, b) => {
       if (sortBy === 'price') {
         return sortOrder === 'asc' ? a.admission_price - b.admission_price : b.admission_price - a.admission_price;
       }
       return sortOrder === 'asc' ? a.rating - b.rating : b.rating - a.rating;
     });
-  
+
     return result;
   }, [unfilteredHostels, minRating, sortBy, sortOrder]);
-  
+
   useEffect(() => {
     console.log(minRating);
     setFilteredHostels(filterAndSortHostels());
@@ -150,85 +179,98 @@ const SearchResults = () => {
     setSortOrder('asc');
   };
 
-  if(error){
+  if (error) {
     return <div className="search-results">{error}</div>;
   }
-  if(loading){
+  if (loading) {
     return <div className="search-results">Loading Featured Hostels...</div>;
   }
 
   return (
     <>
-    <div className="search-results">
-      <div className="filters">
-        <div className="filter-section">
+      <div className="search-results">
+        {/* Hamburger button for mobile */}
+        <button className="hamburger-btn"  onClick={toggleFilterVisibility}>
+          {filterVisible ? (
+            <p>
+              Hide and Apply
+            </p>
+          ) : (
+            <p>
+              Show Filters <i className="bi bi-funnel-fill" />
+            </p>
+          )} {/* Hamburger icon */}
+        </button>
 
-          
-          <h2>Filters <i className="bi bi-funnel-fill"/></h2>
+        <div className={`filters ${filterVisible ? 'visible' : 'hidden'}`}>
+          <div className="filter-section">
 
-          <div className="filter-option">
-            <label>Price: Rs. {priceRange[0]} - Rs. {priceRange[1]}</label>
-            <div ref={priceSliderRef} style={{ marginBottom: '10px', marginTop: '50px' }}></div>
+
+            <h2 className="filters-title">Filters <i className="bi bi-funnel-fill" /></h2>
+
+            <div className="filter-option">
+              <label>Price: Rs. {priceRange[0]} - Rs. {priceRange[1]}</label>
+              <div ref={priceSliderRef} style={{ marginBottom: '10px', marginTop: '50px' }}></div>
+            </div>
+
+            <div className="filter-option">
+              <label>Gender:</label>
+              <select onChange={(e) => setGender(e.target.value)} value={gender}>
+                <option value={2}>All</option>
+                <option value={1}>Boys</option>
+                <option value={0}>Girls</option>
+                {/* <option value="Co-ed">Co-ed</option> */}
+              </select>
+            </div>
+
+            <div className="filter-option">
+              <label>Minimum Rating:</label>
+              <select onChange={(e) => setMinRating(Number(e.target.value))} value={minRating}>
+                <option value={0}>All</option>
+                <option value={2}>2+</option>
+                <option value={3}>3+</option>
+                <option value={4}>4+</option>
+                <option value={4.5}>4.5+</option>
+              </select>
+            </div>
           </div>
 
-          <div className="filter-option">
-            <label>Gender:</label>
-            <select onChange={(e) => setGender(e.target.value)} value={gender}>
-              <option value={2}>All</option>
-              <option value={1}>Boys</option>
-              <option value={0}>Girls</option>
-              {/* <option value="Co-ed">Co-ed</option> */}
+          <div className="sort-section">
+            <label>Sort By</label>
+            <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+              <option value="price">Price</option>
+              <option value="rating">Rating</option>
+            </select>
+
+            <select onChange={(e) => setSortOrder(e.target.value)} value={sortOrder}>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
             </select>
           </div>
 
-          <div className="filter-option">
-            <label>Minimum Rating:</label>
-            <select onChange={(e) => setMinRating(Number(e.target.value))} value={minRating}>
-              <option value={0}>All</option>
-              <option value={2}>2+</option>
-              <option value={3}>3+</option>
-              <option value={4}>4+</option>
-              <option value={4.5}>4.5+</option>
-            </select>
-          </div>
+          <button onClick={resetFilters} className="reset-filters">Reset Filters</button>
         </div>
 
-        <div className="sort-section">
-          <label>Sort By</label>
-          <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
-            <option value="price">Price</option>
-            <option value="rating">Rating</option>
-          </select>
-
-          <select onChange={(e) => setSortOrder(e.target.value)} value={sortOrder}>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
+        <div className="hostel-grid">
+          {filteredHostels.length > 0 ? (
+            filteredHostels.map((hostel) => (
+              <HostelCard
+                key={hostel.id}
+                id={hostel.id}
+                image={hostel.image}
+                name={hostel.name}
+                isFeatured={hostel.isFeatured}
+                rating={hostel.rating}
+                location={hostel.location}
+                price={hostel.admission_price}
+                gender={hostel.gender}
+              />
+            ))
+          ) : (
+            <p>No hostels found based on your search criteria.</p>
+          )}
         </div>
-
-        <button onClick={resetFilters} className="reset-filters">Reset Filters</button>
       </div>
-
-      <div className="hostel-grid">
-        {filteredHostels.length > 0 ? (
-          filteredHostels.map((hostel) => (
-            <HostelCard
-              key={hostel.id}
-              id={hostel.id}
-              image={hostel.image}
-              // name={hostel.name}
-              isFeatured={hostel.isFeatured}
-              rating={hostel.rating}
-              location={hostel.location}
-              price={hostel.admission_price}
-              gender={hostel.gender}
-            />
-          ))
-        ) : (
-          <p>No hostels found based on your search criteria.</p>
-        )}
-      </div>
-    </div>
     </>
   );
 };

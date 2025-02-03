@@ -17,8 +17,8 @@ const AdminLogin = ({ setIsLoggedIn, setUserRole }) => {
       const data = await response.json();
       console.log(data);
       if (response.ok) {
-        // const role=data.data.role;
-        const role='user';
+        const role=data.role;
+        console.log(data);
 
         if(role === 'admin')
           localStorage.setItem('admin-token', data.data.token); // Save token

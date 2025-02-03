@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../style.css';
 import { scrollToSection } from '../App.js';
 import { Link } from 'react-router-dom';
 
-
 const Nav = ({ blogRef, contactRef, serviceRef, isHome, isLoggedIn, userRole }) => {
-  console.log(isLoggedIn);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className="navBar">
       <h4>
@@ -15,9 +19,8 @@ const Nav = ({ blogRef, contactRef, serviceRef, isHome, isLoggedIn, userRole }) 
           </Link>
         </div>
       </h4>
-      <div className="nav-list">
+      <div className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
         <ul>
-
           <li><Link to="/">Home</Link></li>
 
           {isHome &&
@@ -27,20 +30,23 @@ const Nav = ({ blogRef, contactRef, serviceRef, isHome, isLoggedIn, userRole }) 
               <li onClick={() => scrollToSection(contactRef)}><a href="#">Contact</a></li>
             </>
           }
-          {/* <li ><a  href="#"><i className="bi bi-globe"></i>Language</a></li> */}
           {isLoggedIn && <li className="list-hostel"><Link to="/list-your-hostel">List Your Hostel</Link></li>}
 
           <div className="login_section">
             {!isLoggedIn ? (
               <li><Link to="/login">Log In</Link></li>
             ) : (
-              <li><Link to={userRole === 'admin'? '/admin': '/user'}><i className="bi bi-person"></i></Link></li>
+              <li><Link to={userRole === 'admin' ? '/admin' : '/user'}><i className="bi bi-person"></i></Link></li>
             )}
           </div>
-
         </ul>
       </div>
-    </nav >
+      <button style={{ background: "none" , flex:"none"}} className="hamburger" onClick={toggleMenu}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </button>
+    </nav>
   );
 };
 
