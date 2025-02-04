@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 // import hostels from "../data/hostels.json"; 
 
-const HostelDetails = ({userRole}) => {
+const HostelDetails = ({ userRole }) => {
   console.log(userRole);
   const { id } = useParams(); // Get the hostel ID from the URL
   const [hostel, setHostel] = useState(null);
@@ -145,7 +145,7 @@ const HostelDetails = ({userRole}) => {
                 <i className="bi bi-geo-alt-fill"></i> {hostel.location}
               </p>
               <button className="toggle-button" onClick={enquire}>
-                Enquire now <i className="bi bi-suit-heart"></i>
+                Inquire now <i className="bi bi-suit-heart"></i>
               </button>
             </div>
 
@@ -203,10 +203,16 @@ const HostelDetails = ({userRole}) => {
               <div className="hosteldetail-info">
                 <div className="hosteldetail-title">Rules</div>
                 <div className="rule">
+                  <div className="rule-icon-box">
+                    <p>
+                      <i className="bi bi-alarm"></i>
+                    </p>
+                    <p>Arrival time: {hostel.arrival_time}</p>
+                  </div>
                   {hostel.rules && hostel.rules.split('\n').map((rule, index) => (
                     <div key={index} className="rule-icon-box">
                       <p>
-                        <i className={rule.icon}></i>
+                        <i className="bi bi-exclamation-octagon"></i>
                       </p>
                       <p>{rule}</p>
                     </div>
@@ -247,21 +253,18 @@ const HostelDetails = ({userRole}) => {
                     <th>Day</th>
                     <th>Breakfast</th>
                     <th>Lunch</th>
+                    <th>Snacks</th>
                     <th>Dinner</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(hostel.food_menu).map(([day, meals]) => ({
-                    day,
-                    breakfast: meals.Breakfast,
-                    lunch: meals.Lunch,
-                    dinner: meals.Dinner,
-                  })).map((menu, index) => (
+                  {Object.entries(hostel.food_menu).map(([day, meals], index) => (
                     <tr key={index}>
-                      <td>{menu.day}</td>
-                      <td>{menu.breakfast}</td>
-                      <td>{menu.lunch}</td>
-                      <td>{menu.dinner}</td>
+                      <td>{day}</td>
+                      <td>{meals.Breakfast || "N/A"}</td>
+                      <td>{meals.Lunch || "N/A"}</td>
+                      <td>{meals.Snacks || "N/A"}</td>
+                      <td>{meals.Dinner || "N/A"}</td>
                     </tr>
                   ))}
                 </tbody>

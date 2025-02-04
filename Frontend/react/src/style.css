@@ -1529,7 +1529,7 @@ color: #555;
   
   .weekly-menu-grid {
     display: grid;
-    grid-template-columns: 1fr repeat(3, 2fr);
+    grid-template-columns: 1fr repeat(4, 2fr);
     gap: 10px;
     margin: 20px 0;
   }
