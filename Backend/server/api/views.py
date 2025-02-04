@@ -59,6 +59,8 @@ class HostelViewSet(viewsets.ModelViewSet):
             'gym': request.data.get('gym', 2),
             'security_guard': request.data.get('security_guard', 2),
             'lift': request.data.get('lift', 2),
+            'sanitary_pad': request.data.get('sanitary_pad', 2),
+            'first_aid': request.data.get('first_aid', 2),
 
             'approved': request.data.get('approved', 2),
             'isFeatured': request.data.get('isFeatured', 2),
@@ -184,12 +186,12 @@ class HostelViewSet(viewsets.ModelViewSet):
         # Get the serialized data
         data = serializer.data
         if getattr(request.user,'custom_user.role', None) != 'admin':
-            # if (instance.approved == False or True):
-            #     return Response({
-            #         "status": False,
-            #         "message": "No Hostel matches the given query.",
-            #         "data": {},
-            #     }, status=status.HTTP_404_NOT_FOUND)
+            if (instance.approved == False):
+                return Response({
+                    "status": False,
+                    "message": "No Hostel matches the given query.",
+                    "data": {},
+                }, status=status.HTTP_404_NOT_FOUND)
             
             exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
 
@@ -210,7 +212,7 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         # Apply manual pagination
         if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):
-            paginated_hostels = paginated_hostels.exclude(approved=False)
+            hostels = hostels.exclude(approved=False)
 
         paginated_hostels = hostels[offset:offset + limit]
 
@@ -220,7 +222,7 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         serializer_data = copy.deepcopy(serializer.data)
 
-        if not getattr(request.user.custom_user, 'role', None) == 'admin':
+        if not getattr(request.user, 'custom_user.role', None) == 'admin':
             exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
             for obj in serializer_data:
                 for field in exclude_fields:
@@ -463,6 +465,7 @@ class UserViewSet(viewsets.ModelViewSet):
         }, status=status.HTTP_400_BAD_REQUEST)
     
 class BlogsViewSet(viewsets.ModelViewSet):
+
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
 

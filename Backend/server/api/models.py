@@ -67,6 +67,8 @@ class Hostel(models.Model):
     gym = models.BooleanField(default=False)
     security_guard = models.BooleanField(default=False)
     lift = models.BooleanField(default=False)
+    sanitary_pad = models.BooleanField(default=False)
+    first_aid = models.BooleanField(default=False)
 
     # Arrival Time
     arrival_time = models.TimeField()
