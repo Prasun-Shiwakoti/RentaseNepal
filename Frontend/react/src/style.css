@@ -233,7 +233,7 @@ margin: 300px auto;
 .search_bar,
 .search_bar_results {
 display: flex;
-/* gap:20px; */
+gap:20px;
 width: 100%;
 }
 
