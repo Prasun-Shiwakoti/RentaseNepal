@@ -7,9 +7,9 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
   const [filter, setFilter] = useState('all'); // Default filter
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
+  const token = localStorage.getItem('admin-token');
 
   useEffect(() => {
-    const token = localStorage.getItem('admin-token');
     if (!token) {
       setisLoggedIn(false);
       setUserRole('user');
@@ -22,7 +22,7 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
 
   // Fetch hostels with the selected filter
   const fetchHostels = async () => {
-    const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
+    const token = localStorage.getItem('admin-token');
     let filters = {};
     if (filter === 'all') filters = {};
     else if (filter === 'approved') filters = { approved: true };
@@ -54,7 +54,6 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
   // Approve hostel
   const approveHostel = async (id) => {
     try {
-      const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
       const response = await fetch(`http://127.0.0.1:8000/api/hostels/${id}/`, {
         method: 'PATCH',
         headers: {
@@ -76,7 +75,6 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
   const toggleFeatured = async (id, isFeatured) => {
     try {
       // const token = localStorage.getItem('admin-token');
-      const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
       const response = await fetch(`http://127.0.0.1:8000/api/hostels/${id}/`, {
         method: 'PATCH',
         headers: {
@@ -102,7 +100,6 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
   const deleteHostel = async (id) => {
     try {
       // const token = localStorage.getItem('admin-token');
-      const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
       const response = await fetch(`http://127.0.0.1:8000/api/hostels/${id}/`, {
         method: 'DELETE',
         headers: {
@@ -120,7 +117,6 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
   };
 
   const fetchBlogs = async () => {
-    const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
     try {
       const response = await fetch('http://127.0.0.1:8000/api/blogs/', {
         method: 'GET',
@@ -138,7 +134,6 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
   };
 
   const deleteBlog = async (id) => {
-    const token = "fdc19eacbd64d055f80b9486b4b4d1fc443f67cb";
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/blogs/${id}/`, {
         method: 'DELETE',
@@ -207,8 +202,9 @@ const AdminPage = ({ setisLoggedIn, setUserRole }) => {
                 <tr key={hostel.id}>
                   {/* Hostel Name as a clickable link */}
                   <td>
-                    <Link to={`/hostel/${hostel.id}`} target="_blank" rel="noopener noreferrer">
-                      {/* {hostel.name} */ `Hostel ${parseInt(1000 + hostel.id)}`};
+                    <Link to={`/hostel/${hostel.id}`}>
+                      {hostel.name}
+                      {/*`Hostel ${parseInt(1000 + hostel.id)}`*/}
                     </Link>
                   </td>
 

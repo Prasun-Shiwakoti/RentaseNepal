@@ -19,6 +19,8 @@ const allAmenities = [
   { value: "Security Guard", name: "security_guard", emoji: "🛡️" },
   { value: "Lift", name: "lift" ,emoji: "🛗" },
   { value: "Water Cooler", name: "cooler", emoji: "🚰" },
+  { value: "Sanitary Pads", name: "sanitary_pad", emoji: "🩸"},
+  { value: "First Aid", name: "first_aid", emoji: "🩺"}
 ];
 
 const AmenitiesSelector = ({ amenities, setAmenities }) => {

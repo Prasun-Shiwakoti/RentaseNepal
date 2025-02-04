@@ -5,6 +5,7 @@ import WeeklyMenu from "./WeeklyMenu";
 import RulesInput from "./RulesInput";
 
 const ListYourHostel = () => {
+  const token=localStorage.getItem('user-token') || localStorage.getItem('admin-token');
   const [formData, setFormData] = useState({
     name: "",
     owner_name: "", // Added owner name
@@ -140,6 +141,8 @@ const ListYourHostel = () => {
         "gym",
         "security_guard",
         "lift",
+        "sanitary_pad",
+        "first_aid"
       ];
       amenitiesList.forEach((amenity) => {
         formDataToSend.append(amenity, formData.amenities.includes(amenity));
@@ -165,7 +168,7 @@ const ListYourHostel = () => {
       const response = await fetch("http://127.0.0.1:8000/api/hostels/", {
         method: "POST",
         headers: {
-          Authorization: "token fdc19eacbd64d055f80b9486b4b4d1fc443f67cb",
+          Authorization: `token ${token}`,
         },
         body: formDataToSend,
       });
