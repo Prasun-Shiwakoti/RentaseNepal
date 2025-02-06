@@ -11,7 +11,8 @@ const Nav = ({ blogRef, contactRef, serviceRef, isHome, isLoggedIn, userRole }) 
   };
 
   return (
-    <nav className="navBar">
+    
+    <nav className="navBar">   
       <h4>
         <div className="image">
           <Link to="/">

@@ -29,6 +29,8 @@ h1{
   font-size: 55px;
 }
 
+
+
 /* navbar stylinggg */
 
 .header-section {
@@ -166,6 +168,9 @@ nav .nav-list .login_section {
     transform: rotate(-45deg) translateY(-6px);
   }
 }
+
+
+
 
 /* nav .nav-list ul li:nth-last-child(1), 
 nav .nav-list ul li:nth-last-child(2)  { */
@@ -316,6 +321,28 @@ margin: auto;
 
 }
 
+
+/* for responsiveness below 360px to 288px overflow issue solved */
+@media (max-width: 360px){
+
+  h1{
+    font-size: 41px;
+  }
+
+  .button{
+    padding: 9px 1px;
+
+  }
+
+  .home-search{
+
+    padding: 10px 8px;
+  }
+
+
+
+
+}
 
 
 
@@ -1225,6 +1252,7 @@ margin-top: 10px;
 padding: 10px;
 text-align: left;
 border: 1px solid #ddd;
+font-size: 17px;
 }
 
 .mess-menu table th {
@@ -1527,13 +1555,18 @@ color: #555;
     font-size: 14px;
   }
   
-  .weekly-menu-grid {
+   .weekly-menu-grid {
     display: grid;
     grid-template-columns: 1fr repeat(4, 2fr);
     gap: 10px;
     margin: 20px 0;
-  }
+  } 
   
+  
+
+
+
+
   .menu-header,
   .menu-day-name {
     text-align: center;
@@ -2014,4 +2047,68 @@ color: #555;
     .blog-social-icons {
         gap: 15px;
     }
+}
+
+
+
+
+ /* the below media queries is just a rough responsiveness css for listyourhostel and hosteldetail page, it works for the responnsiveness but not the correct method to implement */
+
+ @media (max-width: 500px) {
+
+   .weekly-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, 1.5fr); /* Reduced column size */
+    gap: 5px; /* Smaller gap between components */
+    margin: 10px 0; /* Reduced margin */
+}
+
+.weekly-menu-grid button {
+    padding: 5px 10px; /* Smaller padding inside buttons */
+    font-size: 9px; /* Smaller font for the text */
+}
+
+.weekly-menu-grid div {
+    padding: 5px;
+    font-size: 9px;
+}
+
+.hostel-form input{
+
+  font-size: 9px;
+}
+
+
+
+
+} 
+
+
+@media (max-width: 840px) {
+
+  .hostelmain-content{
+
+    flex-direction: column;
+  }
+
+  .mess-menu table th, td{
+font-size: 11px;
+padding: 4px;
+
+  }
+  .mess-menu table th, .mess-menu table td{
+font-size: 9px;
+padding: 4px;
+
+  }
+
+  .toggle-button{
+
+    padding: 10px 6px;
+  }
+
+
+
+
+
 }
