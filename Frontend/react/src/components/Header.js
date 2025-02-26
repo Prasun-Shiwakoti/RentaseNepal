@@ -16,7 +16,7 @@ const Header = ({ blogRef, contactRef, serviceRef, isLoggedIn, userRole }) => {
       <div className="upper-home">
         <div className="upperhome-box">
           <h1>Rentase</h1>
-          <p>find your ideal accomodation <br /> Hostels of your choice</p>
+          <p >  Making It Simple </p>
         </div>
         <div className="search_bar">
           <SearchBar/>

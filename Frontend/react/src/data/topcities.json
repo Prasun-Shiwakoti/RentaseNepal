@@ -3,48 +3,48 @@
     "id": 1,
     "name": "Bagbazar",
     "image": "img/bagbazar.jpeg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "description": "A lively hub near top colleges, Bagbazar offers hostels with easy access to campuses, libraries, and student-friendly cafes."
   },
   {
     "id": 2,
-    "name": "Maitidevi",
-    "image": "img/maitidevi.jpg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "name": "Dillibazar",
+    "image": "img/dillibazar.jpg",
+    "description": "A peaceful yet accessible area, ideal for students seeking a quiet and convenient stay."
   },
   {
     "id": 3,
-    "name": "Baneshwor",
+    "name": "New-Baneshwor",
     "image": "img/baneshwor.jpg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "description": "A prime Kathmandu location, Baneshwor offers well-equipped hostels with great connectivity, restaurants, and shopping centers."
   },
   {
     "id": 4,
-    "name": "Kalimati",
-    "image": "img/maitidevi.jpg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "name": "Putalisadak",
+    "image": "img/putalisadak.jpg",
+    "description": "A vibrant student hub known for coaching centers, bookstores, and hostels near major institutions."
   },
   {
     "id": 5,
     "name": "Koteshwor",
     "image": "img/koteshwor.jpg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "description": "A rapidly growing area with hostels offering easy access to public transport, markets, and major highways."
   },
   {
-    "id": 5,
-    "name": "Koteshwor",
-    "image": "img/koteshwor.jpg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "id": 6,
+    "name": "Mid-Baneshwor",
+    "image": "img/midbaneshwor.jpg",
+    "description": "A well-connected area with student-friendly hostels, close to colleges, cafes, and essential services."
   },
   {
-    "id": 5,
-    "name": "Koteshwor",
-    "image": "img/koteshwor.jpg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "id": 7,
+    "name": "Old banshwor",
+    "image": "img/oldbaneshwor.jpg",
+    "description": "A well-connected neighborhood with comfortable hostels, close to educational hubs and essential amenities."
   },
   {
-    "id": 5,
-    "name": "Koteshwor",
-    "image": "img/koteshwor.jpg",
-    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolorem sit quaerat sunt repudiandae."
+    "id": 8,
+    "name": "Kupondole",
+    "image": "img/kupondole.jpg",
+    "description": "A peaceful yet central location with quality hostels, close to colleges, cafes, and business centers."
   }
 ]

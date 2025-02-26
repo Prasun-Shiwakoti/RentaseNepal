@@ -20,7 +20,7 @@ const TopCities = () => {
     <div className="topcities-section">
       <div className="topcities-container">
         <h2>Our Top Places</h2>
-        <p>Choose The places You’ll Be Living In Next, Or Look For Flatmates And Rooms Near You</p>
+        <p>Discover the perfect hostel for your stay or explore top hostel options near you.</p>
         <div className="grid top-cities-grid">
           {topCitiesData
             .slice(0, showAll ? topCitiesData.length : 4)

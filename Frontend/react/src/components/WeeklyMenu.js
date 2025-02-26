@@ -2,7 +2,7 @@ import React from "react";
 
 const WeeklyMenu = ({ messMenu, setMessMenu }) => {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  const meals = ["Breakfast", "Lunch", "Snacks", "Dinner"];
+  const meals = ["Breakfast", "Lunch", "Meal", "Dinner"];
 
   const handleInputChange = (day, meal, value) => {
     const updatedMenu = { ...messMenu, [day]: { ...messMenu[day], [meal]: value } };
