@@ -38,7 +38,13 @@ const Register = () => {
         setSuccess('Account created successfully. You can now log in.');
         // setTimeout(() => navigate('/login'), 2000); // Redirect to login after success
       } else {
-        setError(data.data.username[0] || 'Registration failed.');
+        setSuccess('');
+        if(data.data.email)
+          setError(data.data.email[0]);
+        else if(data.data.username)
+          setError(data.data.username[0]);
+        else 
+          setError('Registration Failed');
       }
     } catch (err) {
       setError('Something went wrong. Please try again.');
