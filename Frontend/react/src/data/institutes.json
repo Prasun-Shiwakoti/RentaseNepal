@@ -1,82 +1,58 @@
 [
-  {
-    "id": 1,
-    "name": "Tribhuvan University",
-    "nearbyHostels": [1, 2, 5]
-  },
-  {
-    "id": 2,
-    "name": "Kathmandu University",
-    "nearbyHostels": [2, 3]
-  },
-  {
-    "id": 3,
-    "name": "Patan Academy of Health Sciences",
-    "nearbyHostels": [3]
-  },
-  {
-    "id": 4,
-    "name": "Pokhara University",
-    "nearbyHostels": [4]
-  },
-  {
-    "id": 5,
-    "name": "Agriculture and Forestry University",
-    "nearbyHostels": [5]
-  },
-  {
-    "id": 6,
-    "name": "Lumbini Buddhist University",
-    "nearbyHostels": [6]
-  },
-  {
-    "id": 7,
-    "name": "Mid-Western University",
-    "nearbyHostels": [7]
-  },
-  {
-    "id": 8,
-    "name": "Far-Western University",
-    "nearbyHostels": [8]
-  },
-  {
-    "id": 9,
-    "name": "Nepal Sanskrit University",
-    "nearbyHostels": [9]
-  },
-  {
-    "id": 10,
-    "name": "Rajarshi Janak University",
-    "nearbyHostels": [10]
-  },
-  {
-    "id": 11,
-    "name": "Purbanchal University",
-    "nearbyHostels": [11]
-  },
-  {
-    "id": 12,
-    "name": "Janakpur Engineering College",
-    "nearbyHostels": [12]
-  },
-  {
-    "id": 13,
-    "name": "Nepal Medical College",
-    "nearbyHostels": [13]
-  },
-  {
-    "id": 14,
-    "name": "Dharan Nursing College",
-    "nearbyHostels": [14]
-  },
-  {
-    "id": 15,
-    "name": "Mahendra Ratna Campus",
-    "nearbyHostels": [15]
-  },
-  {
-    "id": 16,
-    "name": "Hetauda College of Management",
-    "nearbyHostels": [16]
-  }
+  { "label": "Tribhuvan University", "value": { "lat": 27.682, "lon": 85.324 } },
+  { "label": "Kathmandu University", "value": { "lat": 27.602, "lon": 85.535 } },
+  { "label": "Pulchowk Campus", "value": { "lat": 27.682, "lon": 85.317 } },
+  { "label": "Kantipur Engineering College", "value": { "lat": 27.641, "lon": 85.293 } },
+  { "label": "St. Xavier’s College", "value": { "lat": 27.706, "lon": 85.327 } },
+  { "label": "Nepal Engineering College", "value": { "lat": 27.682, "lon": 85.314 } },
+  { "label": "Thapathali Campus", "value": { "lat": 27.688, "lon": 85.318 } },
+  { "label": "King's College Kathmandu", "value": { "lat": 27.706, "lon": 85.316 } },
+  { "label": "Reliance College", "value": { "lat": 27.708, "lon": 85.322 } },
+  { "label": "National College", "value": { "lat": 27.712, "lon": 85.319 } },
+  { "label": "Islington College", "value": { "lat": 27.709, "lon": 85.309 } },
+  { "label": "Presidential Business School", "value": { "lat": 27.712, "lon": 85.329 } },
+  { "label": "Ace Institute of Management", "value": { "lat": 27.697, "lon": 85.317 } },
+  { "label": "Little Angels' School", "value": { "lat": 27.669, "lon": 85.324 } },
+  { "label": "Budhanilkantha School", "value": { "lat": 27.781, "lon": 85.352 } },
+  { "label": "Rato Bangala School", "value": { "lat": 27.687, "lon": 85.312 } },
+  { "label": "Ullens School", "value": { "lat": 27.689, "lon": 85.304 } },
+  { "label": "DAV Sushil Kedia Vishwa Bharati Higher Secondary School", "value": { "lat": 27.699, "lon": 85.315 } },
+  { "label": "GEMS School", "value": { "lat": 27.659, "lon": 85.307 } },
+  { "label": "Trinity International College", "value": { "lat": 27.697, "lon": 85.319 } },
+  { "label": "Xavier International College", "value": { "lat": 27.696, "lon": 85.317 } },
+  { "label": "GoldenGate International College", "value": { "lat": 27.705, "lon": 85.323 } },
+  { "label": "Morgan International College", "value": { "lat": 27.694, "lon": 85.318 } },
+  { "label": "Oxford College of Engineering and Management", "value": { "lat": 27.689, "lon": 85.321 } },
+  { "label": "Kathmandu Model College", "value": { "lat": 27.701, "lon": 85.318 } },
+  { "label": "Prasadi Academy", "value": { "lat": 27.712, "lon": 85.326 } },
+  { "label": "Apex College", "value": { "lat": 27.705, "lon": 85.321 } },
+  { "label": "Ambition College", "value": { "lat": 27.703, "lon": 85.320 } },
+  { "label": "Universal College", "value": { "lat": 27.698, "lon": 85.316 } },
+  { "label": "Cosmos College", "value": { "lat": 27.702, "lon": 85.325 } },
+  { "label": "Asian College of Management", "value": { "lat": 27.707, "lon": 85.324 } },
+  { "label": "KIST College", "value": { "lat": 27.700, "lon": 85.320 } },
+  { "label": "NCCS College", "value": { "lat": 27.704, "lon": 85.322 } },
+  { "label": "Herald College Kathmandu", "value": { "lat": 27.710, "lon": 85.318 } },
+  { "label": "Softwarica College of IT and E-Commerce", "value": { "lat": 27.708, "lon": 85.320 } },
+  { "label": "British College", "value": { "lat": 27.707, "lon": 85.317 } },
+  { "label": "Lord Buddha Education Foundation", "value": { "lat": 27.698, "lon": 85.318 } },
+  { "label": "DAV College", "value": { "lat": 27.699, "lon": 85.315 } },
+  { "label": "Capital College and Research Center", "value": { "lat": 27.702, "lon": 85.319 } },
+  { "label": "Kathmandu Don Bosco College", "value": { "lat": 27.706, "lon": 85.325 } },
+  { "label": "Nobel College", "value": { "lat": 27.695, "lon": 85.317 } },
+  { "label": "United Academy", "value": { "lat": 27.693, "lon": 85.319 } },
+  { "label": "White House Graduate School of Management", "value": { "lat": 27.697, "lon": 85.318 } },
+  { "label": "St. Mary's High School", "value": { "lat": 27.708, "lon": 85.327 } },
+  { "label": "Adarsha Vidya Mandir", "value": { "lat": 27.700, "lon": 85.319 } },
+  { "label": "Shuvatara School", "value": { "lat": 27.671, "lon": 85.313 } },
+  { "label": "SOS Hermann Gmeiner School Sanothimi", "value": { "lat": 27.689, "lon": 85.347 } },
+  { "label": "Pushpa Sadan Higher Secondary School", "value": { "lat": 27.703, "lon": 85.320 } },
+  { "label": "Brighton International Secondary School", "value": { "lat": 27.705, "lon": 85.321 } },
+  { "label": "Pathshala Nepal Foundation", "value": { "lat": 27.696, "lon": 85.316 } },
+  { "label": "DAV College of Management", "value": { "lat": 27.699, "lon": 85.315 } },
+  { "label": "Asian School of Management and Technology", "value": { "lat": 27.707, "lon": 85.324 } },
+  { "label": "Kathmandu Forestry College", "value": { "lat": 27.683, "lon": 85.325 } },
+  { "label": "Nepal College of Information Technology", "value": { "lat": 27.706, "lon": 85.322 } },
+  { "label": "Modern Indian School", "value": { "lat": 27.701, "lon": 85.317 } },
+  { "label": "Gyanodaya Bal Batika School", "value": { "lat": 27.685, "lon": 85.322 }}
 ]

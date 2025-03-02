@@ -2,6 +2,7 @@
   import { useNavigate } from 'react-router-dom';
   import Select from 'react-select';
   import '../style.css';
+  import institutes from '../data/institutes.json'
 
   const SearchBar = () => {
     const [location, setLocation] = useState('');
@@ -64,15 +65,15 @@
       }),
 
     }
-    const institutes = [
-      { label: 'Tribhuvan University', value: { lat: 27.682, lon: 85.324 } },
-      { label: 'Kathmandu University', value: { lat: 27.602, lon: 85.535 } },
-      { label: 'Pulchowk Campus', value: { lat: 27.682, lon: 85.317 } },
-      { label: 'Kantipur Engineering College', value: { lat: 27.641, lon: 85.293 } },
-      { label: 'St. Xavier’s College', value: { lat: 27.706, lon: 85.327 } },
-      { label: 'Nepal Engineering College', value: { lat: 27.682, lon: 85.314 } },
-      { label: 'Thapathali Campus', value: { lat: 27.688, lon: 85.318 } },
-    ];
+    // const institutes = [
+    //   { label: 'Tribhuvan University', value: { lat: 27.682, lon: 85.324 } },
+    //   { label: 'Kathmandu University', value: { lat: 27.602, lon: 85.535 } },
+    //   { label: 'Pulchowk Campus', value: { lat: 27.682, lon: 85.317 } },
+    //   { label: 'Kantipur Engineering College', value: { lat: 27.641, lon: 85.293 } },
+    //   { label: 'St. Xavier’s College', value: { lat: 27.706, lon: 85.327 } },
+    //   { label: 'Nepal Engineering College', value: { lat: 27.682, lon: 85.314 } },
+    //   { label: 'Thapathali Campus', value: { lat: 27.688, lon: 85.318 } },
+    // ];
     return (
       <div className="search_bar_results">
         <form action="" className="home-search" onSubmit={handleSearchLocation}>
