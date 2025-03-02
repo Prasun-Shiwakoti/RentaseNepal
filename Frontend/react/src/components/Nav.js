@@ -31,7 +31,7 @@ const Nav = ({ blogRef, contactRef, serviceRef, isHome, isLoggedIn, userRole }) 
               <li onClick={() => scrollToSection(contactRef)}><a href="#">Contact</a></li>
             </>
           }
-          {isLoggedIn && <li className="list-hostel"><Link to="/list-your-hostel">List Your Hostel</Link></li>}
+          {(userRole === 'renter' || userRole === 'admin') && <li className="list-hostel"><Link to="/list-your-hostel">List Your Hostel</Link></li>}
 
           <div className="login_section">
             {!isLoggedIn ? (
