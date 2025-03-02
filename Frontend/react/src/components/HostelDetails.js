@@ -102,9 +102,13 @@ const HostelDetails = ({ userRole }) => {
   };
 
   const enquire = () => {
-    alert('Contact our representative with the hostel id');
+    // alert('Contact our representative with the hostel ID');
     console.log(`${hostel.name} added to wishlist!`);
-  };
+    
+    // Open the Messenger link in a new tab
+    window.open('https://m.me/312376875293075', '_blank');
+};
+
 
   return (
     <>
