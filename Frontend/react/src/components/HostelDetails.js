@@ -38,11 +38,19 @@ const HostelDetails = ({ userRole }) => {
     setError(null);
 
     try {
+      const token=localStorage.getItem('admin-token') || localStorage.getItem('user-token');
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      
+      // Only add Authorization header if the token exists
+      if (token) {
+        headers['Authorization'] = `token ${token}`;
+      }
+
       const response = await fetch(`http://127.0.0.1:8000/api/hostels/${id}/`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headers,
       });
       if (!response.ok) {
         throw new Error('Failed to fetch hostels. Please try again.');
@@ -156,11 +164,11 @@ const HostelDetails = ({ userRole }) => {
               {/* Fee Structure */}
               <div className="hosteldetail-info">
                 <div className="hosteldetail-title">Fee Structure</div>
-                <li>Admission Fee: NPR {hostel.admission_price}</li>
-                <li>One-seater: NPR {hostel.admission_price}</li>
-                <li>Two-seater: NPR {hostel.admission_price}</li>
-                <li>Three-seater: NPR {hostel.admission_price}</li>
-                <li>Four-seater: NPR {hostel.admission_price}</li>
+                {hostel.admission_price>0 && <li>Admission Fee: NPR {hostel.admission_price}</li>}
+                {hostel.single_seater_price>0 && <li>One-seater: NPR {hostel.single_seater_price}</li>}
+                {hostel.two_seater_price>0 && <li>Two-seater: NPR {hostel.two_seater_price}</li>}
+                {hostel.three_seater_price>0 && <li>Three-seater: NPR {hostel.three_seater_price}</li>}
+                {hostel.four_seater_price>0 && <li>Four-seater: NPR {hostel.four_seater_price}</li>}
               </div>
 
               {/* Facilities */}

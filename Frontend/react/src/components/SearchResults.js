@@ -96,14 +96,13 @@ const SearchResults = () => {
     setError(null);
 
     const payload = locationQuery ? {
-      approved: true,
+
       gender: parseInt(gender), // 0: Female, 1: Male, 2: Any
       max_price: priceRange[1],
       min_price: priceRange[0],
       location: locationQuery,
       // Additional filters can be added as required
     } : {
-      approved: true,
       gender: parseInt(gender), // 0: Female, 1: Male, 2: Any
       max_price: priceRange[1],
       min_price: priceRange[0],

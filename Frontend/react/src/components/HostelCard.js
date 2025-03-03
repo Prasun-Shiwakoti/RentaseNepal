@@ -14,13 +14,13 @@ const HostelCard = ({ id, image, name, isFeatured, rating, location, price, gend
       <img src={image} alt={name} />
       <div className="card-content">
         <div className="card-title">{name}</div>
-        <div className="card-rating">
+        {/* <div className="card-rating">
           <i className="bi bi-star-fill"></i> {rating} / 5
-        </div>
+        </div> */}
         <div className="card-location">
           <i className="bi bi-geo-alt-fill"></i> {location}
         </div>
-        <div className="card-price">Rs. {price}</div>
+        <div className="card-price">Starting from Rs. {price}</div>
         <div className="card-gender">
           {gender === 0 ? 'Girls Hostel' : 'Boys Hostel'}
         </div>
