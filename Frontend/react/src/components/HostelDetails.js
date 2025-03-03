@@ -104,12 +104,10 @@ const HostelDetails = ({ userRole }) => {
   const enquire = () => {
     // alert('Contact our representative with the hostel ID');
     console.log(`${hostel.name} added to wishlist!`);
-    
+
     // Open the Messenger link in a new tab
     window.open('https://m.me/312376875293075', '_blank');
-};
-
-
+  };
   return (
     <>
       <div className="hostelmain-container">
@@ -232,8 +230,7 @@ const HostelDetails = ({ userRole }) => {
             {userRole === 'admin' && (<div className="map-box hosteldetail-info">
               <div className="hosteldetail-title">Location</div>
               <iframe
-                // src={hostel.mapLocation}
-                src={`https://maps.google.com/?q=${hostel.longitude},${hostel.latitude}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&q=${hostel.latitude},${hostel.longitude}`}
                 width="600"
                 height="450"
                 style={{ border: "0" }}
@@ -241,6 +238,7 @@ const HostelDetails = ({ userRole }) => {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
+
             </div>
             )}
             {userRole === 'admin' && (<button className="toggle-button" onClick={openGoogleMaps}>

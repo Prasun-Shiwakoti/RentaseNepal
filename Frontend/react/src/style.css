@@ -347,7 +347,10 @@ margin: auto;
 
 
 /* map styling */
-
+#map button{
+  min-width: unset !important;
+  min-height: unset !important;
+}
 .map {
     position: relative;
     width: 100%;

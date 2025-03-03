@@ -3,12 +3,14 @@ import AmenitiesSelector from "./AmenitiesSelector";
 import FeeStructure from "./FeeStructure";
 import WeeklyMenu from "./WeeklyMenu";
 import RulesInput from "./RulesInput";
+import GoogleMapsInput from "./GoogleMapsInput";
 
 const ListYourHostel = () => {
   const token=localStorage.getItem('user-token') || localStorage.getItem('admin-token');
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
   const [formData, setFormData] = useState({
     name: "",
-    owner_name: "", // Added owner name
+    owner_name: "",
     contact: "",
     description: "",
     arrivalTime: "",
@@ -28,22 +30,8 @@ const ListYourHostel = () => {
     additionalPhotos: [],
     feeStructure: {},
     messMenu: [],
-    rules: [],
-    // role: "",
-    // latitude: 0,
-    // longitude: 0,  
+    rules: [], 
   });
-
-  const extractCoordinates = (url) => {
-    const match = url.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-    if (match) {
-      const latitude = match[1];
-      const longitude = match[2];
-      return { latitude, longitude };
-    } else {
-      throw new Error("Invalid Map Link");
-    }
-  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -76,8 +64,6 @@ const ListYourHostel = () => {
         throw new Error("Upload at least 3 additional photos");
       }
 
-      const coordinates= extractCoordinates(formData.mapLocation) || {latitude:0, longitude:0};
-      // console.log(formData.amenities);
       const formDataToSend = new FormData();
     
       // Add text fields
@@ -85,8 +71,11 @@ const ListYourHostel = () => {
       formDataToSend.append("owner_name", formData.owner_name);
       formDataToSend.append("contact_information", formData.contact);
       formDataToSend.append("location", formData.location);
-      formDataToSend.append("latitude", coordinates.latitude);
-      formDataToSend.append("longitude", coordinates.longitude);
+      formDataToSend.append("latitude", coordinates.lat);
+      formDataToSend.append("longitude", coordinates.lng);
+      console.log(coordinates.lat);
+      console.log(coordinates.lng);
+
       formDataToSend.append(
         "gender",
         formData.gender === "Boys" ? 1 : formData.gender === "Girls" ? 2 : 0
@@ -153,18 +142,10 @@ const ListYourHostel = () => {
         formDataToSend.append("image", formData.profilePhoto); // Profile photo as the first image
       }
       formData.additionalPhotos.forEach((photo, index) => {
-        formDataToSend.append("additional_images", photo); // Additional images
+        formDataToSend.append("additional_images", photo);
       });
-      
-      // formDataToSend.append("role", formData.role);
-      
-      // for (let [key, value] of formDataToSend.entries()) {
-      //   console.log(key, value);
-      // }
-      // console.log(formData.messMenu);
-  
-      // Send request
 
+      console.log(formDataToSend)
       const response = await fetch("http://127.0.0.1:8000/api/hostels/", {
         method: "POST",
         headers: {
@@ -243,7 +224,7 @@ return (
         </select>
       </label>
       <label>
-        Location:
+        Location / Area:
         <input
           type="text"
           name="location"
@@ -254,14 +235,7 @@ return (
       </label>
       <label>
         Google Maps Location:
-        <input
-          type="text"
-          name="mapLocation"
-          value={formData.mapLocation}
-          onChange={handleInputChange}
-          placeholder="Paste Google Maps link"
-          required
-        />
+        <GoogleMapsInput setCoordinates={setCoordinates} />
       </label>
 
       <label>
@@ -376,32 +350,6 @@ return (
           />
         </label>
       </div>
-
-      {/* <h3>Register as: </h3>
-      <div className="create-role">
-      <label>
-          <input
-            type="radio"
-            name="role"
-            value="user"
-            checked={formData.role === "user"}
-            onChange={handleInputChange}
-            required
-          />
-          User
-      </label>
-      <label>
-          <input
-            type="radio"
-            name="role"
-            value="renter"
-            checked={formData.role === "renter"}
-            onChange={handleInputChange}
-            required
-          />
-          Renter
-        </label>
-      </div> */}
 
       <button type="button" className="submit-button" onClick={handleSubmit}>
         Register Your Hostel
