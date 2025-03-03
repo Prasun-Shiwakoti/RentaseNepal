@@ -14,8 +14,8 @@ env/
 *.pyc
 *.pyo
 *.pyd
-db.sqlite3
-db.sqlite3-journal
+# db.sqlite3
+# db.sqlite3-journal
 
 # Django migrations (optional, if you don’t want to track them)
 **/migrations/**

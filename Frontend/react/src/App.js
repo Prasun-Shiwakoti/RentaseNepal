@@ -131,3 +131,23 @@ const App = () => {
 };
 
 export default App;
+
+// import React, { useState } from "react";
+// import GoogleMapsInput from "./components/GoogleMapsInput";
+
+// const App = () => {
+//   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+
+//   return (
+//     <div>
+//       <h2>Select Location</h2>
+//       <GoogleMapsInput setCoordinates={setCoordinates} />
+//       {coordinates.lat && coordinates.lng && (
+//         <p>Latitude: {coordinates.lat}, Longitude: {coordinates.lng}</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default App;
+
