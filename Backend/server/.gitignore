@@ -35,6 +35,6 @@ static/
 Thumbs.db
 
 # Environment variables and secrets
-# .env
-# *.env
+.env
+*.env
 config/settings/local.py
