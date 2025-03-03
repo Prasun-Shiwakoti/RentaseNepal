@@ -185,7 +185,7 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         # Get the serialized data
         data = serializer.data
-        if getattr(request.user,'custom_user.role', None) != 'admin':
+        if getattr(getattr(request.user, 'custom_user', None), 'role', None) != 'admin':
             if (instance.approved == False):
                 return Response({
                     "status": False,
@@ -193,7 +193,7 @@ class HostelViewSet(viewsets.ModelViewSet):
                     "data": {},
                 }, status=status.HTTP_404_NOT_FOUND)
             
-            exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
+            exclude_fields = ['contact_information', 'longitude', 'latitugitde', 'name', 'owner_name']
 
             for field in exclude_fields:
                 if field in data:
@@ -222,7 +222,7 @@ class HostelViewSet(viewsets.ModelViewSet):
 
         serializer_data = copy.deepcopy(serializer.data)
 
-        if not getattr(request.user, 'custom_user.role', None) == 'admin':
+        if not getattr(getattr(request.user, 'custom_user', None), 'role', None) == 'admin':
             exclude_fields = ['contact_information', 'longitude', 'latitude', 'name', 'owner_name']
             for obj in serializer_data:
                 for field in exclude_fields:
@@ -237,10 +237,11 @@ class HostelViewSet(viewsets.ModelViewSet):
         return Response(response_data)      
     
     def create(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.custom_user.role != 'user':
+        customUser = getattr(request.user, 'custom_user', None)
+        if customUser and customUser.role != 'user':
             data = request.data.copy()
             
-            if (request.user.custom_user.role == 'renter') :
+            if (customUser.role == 'renter') :
                 data.update({'approved': 0, 'isFeatured': 0, 'rating': 0})
 
             
@@ -290,11 +291,12 @@ class HostelViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             instance = self.get_object()
+            userRole = request.user.custom_user.role
 
-            if (request.user.custom_user == instance.user or request.user.custom_user.role == 'admin'):
+            if (request.user.custom_user == instance.user or userRole == 'admin'):
                 data = request.data
                 
-                if request.user.custom_user.role != 'admin':
+                if userRole != 'admin':
                     data.update({'approved': 0})
                     data.pop('isFeatured', None)
                     data.pop('rating', None)
@@ -327,7 +329,9 @@ class HostelViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             instance = self.get_object()
-            if request.user.custom_user == instance.user or request.user.custom_user.role == 'admin':
+            userRole = request.user.custom_user.role
+
+            if request.user.custom_user == instance.user or userRole == 'admin':
                 instance.delete()
                 return Response({
                     "status": True,
@@ -348,7 +352,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
 
-        if not (request.user.is_authenticated and request.user.custom_user.role == 'admin'):  
+        if not getattr(getattr(request.user, 'custom_user', None), 'role', None) == 'admin':  
             return Response({
                 "status": False,
                 "message": "Unauthorized",
@@ -365,7 +369,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         # Allow access only if the logged-in user is accessing their own record or if the user is an admin.
         user_instance = self.get_object()
-        if request.user != user_instance and not request.user.custom_user.role == 'admin':
+        if not (request.user == user_instance or getattr(getattr(request.user, 'custom_user', None), 'role', None) == 'admin'):
             return Response({
                 "status": False,
                 "message": "Unauthorized",
@@ -544,7 +548,7 @@ class BlogsViewSet(viewsets.ModelViewSet):
                     data.pop('views', None)
                     data.pop('date', None)
             
-                partial = kwargs.pop('partial', False)  # Determines whether it's a partial update
+                partial = kwargs.pop('partial', False)  
                 serializer = self.get_serializer(instance, data=data, partial=partial)
                 if serializer.is_valid():
                     serializer.save()
