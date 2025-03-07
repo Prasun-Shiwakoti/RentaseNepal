@@ -78,9 +78,9 @@ const FeaturedHostels = () => {
           pagination={{ clickable: true, dynamicBullets: true, }}
           navigation={true}
           breakpoints={{
-            0: { slidesPerView: 1, },
-            520: { slidesPerView: 2, },
-            950: { slidesPerView: 3, },
+            0: {slidesPerView: 1, slidesPerGroup:1,},
+            520: {slidesPerView: 2, slidesPerGroup:2,},
+            950: {slidesPerView: 3, slidesPerGroup:3,},
           }}
           modules={[Pagination, Navigation]}
         >
