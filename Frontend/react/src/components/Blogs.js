@@ -57,9 +57,9 @@ const Blogs = () => {
         grabCursor={true}
         pagination={{ clickable: true, dynamicBullets: true, }}
         breakpoints={{
-            0: {slidesPerView: 1,},
-            1000: {slidesPerView: 2,},
-            1250: {slidesPerView: 3,},
+            0: {slidesPerView: 1, slidesPerGroup:1,},
+            520: {slidesPerView: 2, slidesPerGroup:2,},
+            950: {slidesPerView: 3, slidesPerGroup:3,},
         }}
         modules={[Pagination]}
       >
