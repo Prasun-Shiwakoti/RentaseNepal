@@ -99,7 +99,7 @@ const HostelDetails = ({ userRole }) => {
   // }
 
   const openGoogleMaps = () => {
-    window.open(`https://maps.google.com/?q=${hostel.longitude},${hostel.latitude}`, "_blank");
+    window.open(`https://maps.google.com/?q=${hostel.latitude},${hostel.longitude}`, "_blank");
   };
 
   const showMorePhotos = () => {
