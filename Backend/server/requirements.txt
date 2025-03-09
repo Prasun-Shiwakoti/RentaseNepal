@@ -1,5 +1,5 @@
 asgiref==3.8.1
-Django==5.1.5
+Django==5.1.7
 django-admin==2.0.2
 django-cors-headers==4.5.0
 django-excel-response2==3.0.6
