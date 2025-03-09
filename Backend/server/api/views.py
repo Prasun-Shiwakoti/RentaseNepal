@@ -119,18 +119,18 @@ class HostelViewSet(viewsets.ModelViewSet):
         # Apply price filter
         if min_price is not None:
             hostels = hostels.filter(
-                Q(single_seater_price__gte=min_price) |
-                Q(two_seater_price__gte=min_price) |
-                Q(three_seater_price__gte=min_price) |
-                Q(four_seater_price__gte=min_price)
+                Q(single_seater_price_min__gte=min_price) |
+                Q(two_seater_price_min__gte=min_price) |
+                Q(three_seater_price_min__gte=min_price) |
+                Q(four_seater_price_min__gte=min_price)
             )
         
         if max_price is not None:
             hostels = hostels.filter(
-                Q(single_seater_price__lte=max_price) |
-                Q(two_seater_price__lte=max_price) |
-                Q(three_seater_price__lte=max_price) |
-                Q(four_seater_price__lte=max_price)
+                Q(single_seater_price_max__lte=max_price) |
+                Q(two_seater_price_max__lte=max_price) |
+                Q(three_seater_price_max__lte=max_price) |
+                Q(four_seater_price_max__lte=max_price)
             )
 
         # Apply boolean filters (0: No, 1: Yes, 2: Any)

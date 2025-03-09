@@ -41,11 +41,15 @@ class Hostel(models.Model):
 
     # Accommodation Details (Price of Seater Rooms)
     admission_price = models.IntegerField(default=0)
-    single_seater_price = models.IntegerField( default=0)
-    two_seater_price = models.IntegerField( default=0)
-    three_seater_price = models.IntegerField(default=0)
-    four_seater_price = models.IntegerField(default=0)
-
+    single_seater_price_min = models.IntegerField( default=0)
+    single_seater_price_max = models.IntegerField(default=0)
+    two_seater_price_min = models.IntegerField( default=0)
+    two_seater_price_max = models.IntegerField(default=0)
+    three_seater_price_min = models.IntegerField(default=0)
+    three_seater_price_max = models.IntegerField(default=0)
+    four_seater_price_min = models.IntegerField(default=0)
+    four_seater_price_max = models.IntegerField(default=0)
+    
     # Amenities
     internet = models.BooleanField(default=False)
     washing_machine = models.BooleanField(default=False)
