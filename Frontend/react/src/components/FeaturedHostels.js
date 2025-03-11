@@ -94,7 +94,7 @@ const FeaturedHostels = () => {
                 isFeatured={hostel.isFeatured}
                 rating={hostel.rating}
                 location={hostel.location}
-                price={hostel.admission_price}
+                price={hostel.admission_price_min}
                 gender={hostel.gender}
               />
             </SwiperSlide>

@@ -6,7 +6,6 @@ import RulesInput from "./RulesInput";
 import GoogleMapsInput from "./GoogleMapsInput";
 
 const ListYourHostel = () => {
-  const token=localStorage.getItem('user-token') || localStorage.getItem('admin-token');
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
   const [formData, setFormData] = useState({
     name: "",
@@ -53,10 +52,10 @@ const ListYourHostel = () => {
     setFormData({ ...formData, [key]: file });
   };
 
-  
 
   const handleSubmit = async () => {
-    try{
+    const token = localStorage.getItem('user-token') || localStorage.getItem('admin-token');
+    try {
       if (!formData.profilePhoto) {
         throw new Error("Upload Profile photo");
       }
@@ -65,7 +64,7 @@ const ListYourHostel = () => {
       }
 
       const formDataToSend = new FormData();
-    
+
       // Add text fields
       formDataToSend.append("name", formData.name);
       formDataToSend.append("owner_name", formData.owner_name);
@@ -99,15 +98,15 @@ const ListYourHostel = () => {
         formData.nearbyFacilities.cafesAndRestaurants
       );
       formDataToSend.append("description", formData.description);
-  
+
       for (const [key, value] of Object.entries(formData.feeStructure)) {
         formDataToSend.append(key, value);
       }
-  
+
       formDataToSend.append("rules", formData.rules.join('\n'));
-  
-      formDataToSend.append("food_menu",JSON.stringify(formData.messMenu));
-    
+
+      formDataToSend.append("food_menu", JSON.stringify(formData.messMenu));
+
       // Convert amenities to individual boolean fields
       const amenitiesList = [
         "internet",
@@ -136,7 +135,7 @@ const ListYourHostel = () => {
       amenitiesList.forEach((amenity) => {
         formDataToSend.append(amenity, formData.amenities.includes(amenity));
       });
-    
+
       // Add files
       if (formData.profilePhoto) {
         formDataToSend.append("image", formData.profilePhoto); // Profile photo as the first image
@@ -153,7 +152,7 @@ const ListYourHostel = () => {
         },
         body: formDataToSend,
       });
-  
+
       if (response.status === 201) {
         const data = await response.json();
         alert("Request sent to admin! Pending Approval...");
@@ -167,21 +166,21 @@ const ListYourHostel = () => {
     }
   };
 
-return (
-  <div className="hostel-form-container">
-    <form className="hostel-form" onSubmit={(e) => e.preventDefault()}>
-      <h2>List Your Hostel</h2>
-      <label>
-        Hostel Name:
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          required
-        />
-      </label>
-      <label>
+  return (
+    <div className="hostel-form-container">
+      <form className="hostel-form" onSubmit={(e) => e.preventDefault()}>
+        <h2>List Your Hostel</h2>
+        <label>
+          Hostel Name:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
           Owner Name:
           <input
             type="text"
@@ -191,172 +190,172 @@ return (
             required
           />
         </label>
-      <label>
-        Owner Contact (+977):
-        <input
-          type="text"
-          name="contact"
-          value={formData.contact}
-          onChange={handleInputChange}
-          required
-        />
-      </label>
-      <label>
-        Description:
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          placeholder="Enter a brief description of your hostel"
-          required
-        />
-      </label>
-      <label>
-        Gender:
-        <select
-          name="gender"
-          value={formData.gender}
-          onChange={handleInputChange}
-        >
-          <option value="Unisex">Unisex</option>
-          <option value="Boys">Boys</option>
-          <option value="Girls">Girls</option>
-        </select>
-      </label>
-      <label>
-        Location / Area:
-        <input
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleInputChange}
-          required
-        />
-      </label>
-      <label>
-        Google Maps Location:
-        <GoogleMapsInput setCoordinates={setCoordinates} />
-      </label>
+        <label>
+          Owner Contact (+977):
+          <input
+            type="text"
+            name="contact"
+            value={formData.contact}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          Description:
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Enter a brief description of your hostel"
+            required
+          />
+        </label>
+        <label>
+          Gender:
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleInputChange}
+          >
+            <option value="Unisex">Unisex</option>
+            <option value="Boys">Boys</option>
+            <option value="Girls">Girls</option>
+          </select>
+        </label>
+        <label>
+          Location / Area:
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <label>
+          Google Maps Location:
+          <GoogleMapsInput setCoordinates={setCoordinates} />
+        </label>
 
-      <label>
-        Profile Photo:
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleFileChange(e, "profilePhoto")}
-          required
-        />
-      </label>
+        <label>
+          Profile Photo:
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleFileChange(e, "profilePhoto")}
+            required
+          />
+        </label>
 
-      <label>
-        Additional Photos (Minimum 3):
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          onChange={(e) =>
-            setFormData({ ...formData, additionalPhotos: [...e.target.files] })
+        <label>
+          Additional Photos (Minimum 3):
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={(e) =>
+              setFormData({ ...formData, additionalPhotos: [...e.target.files] })
+            }
+            required
+          />
+        </label>
+
+        <h3>Amenities</h3>
+        <AmenitiesSelector
+          amenities={formData.amenities}
+          setAmenities={(amenities) =>
+            setFormData({ ...formData, amenities })
           }
-          required
         />
-      </label>
 
-      <h3>Amenities</h3>
-      <AmenitiesSelector
-        amenities={formData.amenities}
-        setAmenities={(amenities) =>
-          setFormData({ ...formData, amenities })
-        }
-      />
-
-      <h3>Fee Structure</h3>
-      <FeeStructure
-        feeStructure={formData.feeStructure}
-        setFeeStructure={(feeStructure) =>
-          setFormData({ ...formData, feeStructure })
-        }
-      />
-
-      <h3>Mess Menu</h3>
-      <WeeklyMenu
-        messMenu={formData.messMenu}
-        setMessMenu={(messMenu) =>
-          setFormData({ ...formData, messMenu })
-        }
-      />
-
-
-      <h3>Rules</h3>
-      <RulesInput
-        rules={formData.rules}
-        setRules={(rules) => setFormData({ ...formData, rules })}
-      />
-      <label>
-        Gate Closure Time:
-        <input
-          type="time"
-          name="arrivalTime"
-          value={formData.arrivalTime}
-          onChange={handleInputChange}
-          required
+        <h3>Fee Structure</h3>
+        <FeeStructure
+          feeStructure={formData.feeStructure}
+          setFeeStructure={(feeStructure) =>
+            setFormData({ ...formData, feeStructure })
+          }
         />
-      </label>
 
-      <h3>Nearby Facilities</h3>
-      <div className="nearby-facilities">
-        <label>
-          Transportation:
-          <input
-            type="text"
-            name="transportation"
-            value={formData.nearbyFacilities.transportation}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Hospital/Pharmacy:
-          <input
-            type="text"
-            name="hospitalOrPharmacy"
-            value={formData.nearbyFacilities.hospitalOrPharmacy}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Schools:
-          <input
-            type="text"
-            name="schools"
-            value={formData.nearbyFacilities.schools}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Shopping Malls:
-          <input
-            type="text"
-            name="shoppingMalls"
-            value={formData.nearbyFacilities.shoppingMalls}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Cafes/Restaurants:
-          <input
-            type="text"
-            name="cafesAndRestaurants"
-            value={formData.nearbyFacilities.cafesAndRestaurants}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
+        <h3>Mess Menu</h3>
+        <WeeklyMenu
+          messMenu={formData.messMenu}
+          setMessMenu={(messMenu) =>
+            setFormData({ ...formData, messMenu })
+          }
+        />
 
-      <button type="button" className="submit-button" onClick={handleSubmit}>
-        Register Your Hostel
-      </button>
-    </form>
-  </div>
-);
+
+        <h3>Rules</h3>
+        <RulesInput
+          rules={formData.rules}
+          setRules={(rules) => setFormData({ ...formData, rules })}
+        />
+        <label>
+          Gate Closure Time:
+          <input
+            type="time"
+            name="arrivalTime"
+            value={formData.arrivalTime}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+
+        <h3>Nearby Facilities</h3>
+        <div className="nearby-facilities">
+          <label>
+            Transportation:
+            <input
+              type="text"
+              name="transportation"
+              value={formData.nearbyFacilities.transportation}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Hospital/Pharmacy:
+            <input
+              type="text"
+              name="hospitalOrPharmacy"
+              value={formData.nearbyFacilities.hospitalOrPharmacy}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Schools:
+            <input
+              type="text"
+              name="schools"
+              value={formData.nearbyFacilities.schools}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Shopping Malls:
+            <input
+              type="text"
+              name="shoppingMalls"
+              value={formData.nearbyFacilities.shoppingMalls}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Cafes/Restaurants:
+            <input
+              type="text"
+              name="cafesAndRestaurants"
+              value={formData.nearbyFacilities.cafesAndRestaurants}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+
+        <button type="button" className="submit-button" onClick={handleSubmit}>
+          Register Your Hostel
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default ListYourHostel;
