@@ -4,36 +4,58 @@ const FeeStructure = ({ feeStructure, setFeeStructure }) => {
   const [field, setField] = useState("");
   const [minAmount, setMinAmount] = useState("");
   const [maxAmount, setMaxAmount] = useState("");
+  const [singleAmount, setSingleAmount] = useState("");
 
   const feeOptions = [
-    { value: "Admission Fee", name: "admission_price" },
+    { value: "Admission Fee", name: "admission_price", isSingle: true },
     { value: "Single Seater", name: "single_seater_price" },
     { value: "Two Seater", name: "two_seater_price" },
     { value: "Three Seater", name: "three_seater_price" },
     { value: "Four Seater", name: "four_seater_price" },
   ];
 
+  const selectedFee = feeOptions.find((fee) => fee.name === field);
+
   const handleAddFee = () => {
-    if (field.trim() && minAmount.trim() && maxAmount.trim() && parseInt(minAmount)<=parseInt(maxAmount)) {
-      const updatedFeeStructure = {
-        ...feeStructure,
-        [`${field}_min`]: minAmount,
-        [`${field}_max`]: maxAmount,
-      };
-      setFeeStructure(updatedFeeStructure);
-      setField("");
+    if (!field.trim()) {
+      alert("Please select a fee type");
+      return;
+    }
+
+    const updatedFeeStructure = { ...feeStructure };
+
+    if (selectedFee.isSingle) {
+      // Handling Admission Fee (single value)
+      if (!singleAmount.trim()) {
+        alert("Please enter the amount for Admission Fee");
+        return;
+      }
+      updatedFeeStructure[field] = singleAmount;
+      setSingleAmount("");
+    } else {
+      // Handling Other Fees (min-max values)
+      if (!minAmount.trim() || !maxAmount.trim() || parseInt(minAmount) > parseInt(maxAmount)) {
+        alert("Invalid min-max values");
+        return;
+      }
+      updatedFeeStructure[`${field}_min`] = minAmount;
+      updatedFeeStructure[`${field}_max`] = maxAmount;
       setMinAmount("");
       setMaxAmount("");
     }
-    else{
-      alert('Invalid input');
-    }
+
+    setFeeStructure(updatedFeeStructure);
+    setField("");
   };
 
   const deleteFee = (keyToDelete) => {
     const updatedFeeStructure = { ...feeStructure };
-    delete updatedFeeStructure[`${keyToDelete}_min`];
-    delete updatedFeeStructure[`${keyToDelete}_max`];
+    if (keyToDelete === "admission_price") {
+      delete updatedFeeStructure[keyToDelete];
+    } else {
+      delete updatedFeeStructure[`${keyToDelete}_min`];
+      delete updatedFeeStructure[`${keyToDelete}_max`];
+    }
     setFeeStructure(updatedFeeStructure);
   };
 
@@ -48,34 +70,44 @@ const FeeStructure = ({ feeStructure, setFeeStructure }) => {
             </option>
           ))}
         </select>
-        <input
-          type="number"
-          placeholder="Min"
-          value={minAmount}
-          onChange={(e) => setMinAmount(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Max"
-          value={maxAmount}
-          onChange={(e) => setMaxAmount(e.target.value)}
-        />
+
+        {selectedFee?.isSingle ? (
+          <input
+            type="number"
+            placeholder="Amount"
+            value={singleAmount}
+            onChange={(e) => setSingleAmount(e.target.value)}
+          />
+        ) : (
+          <>
+            <input
+              type="number"
+              placeholder="Min"
+              value={minAmount}
+              onChange={(e) => setMinAmount(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={maxAmount}
+              onChange={(e) => setMaxAmount(e.target.value)}
+            />
+          </>
+        )}
+
         <button type="button" onClick={handleAddFee}>Add</button>
       </div>
-      {feeOptions.map(({ name, value }) => (
-        feeStructure[`${name}_min`] && feeStructure[`${name}_max`] ? (
+
+      {feeOptions.map(({ name, value, isSingle }) => (
+        feeStructure[name] || feeStructure[`${name}_min`] ? (
           <div key={name} className="fee-item">
             <span>{value}</span>
-            {(feeStructure[`${name}_min`] !== feeStructure[`${name}_max`]) ? (
-            <span>Rs.{feeStructure[`${name}_min`]} - Rs.{feeStructure[`${name}_max`]}</span>
+            {isSingle || (feeStructure[`${name}_min`] === feeStructure[`${name}_max`])? (
+              <span>Rs.{feeStructure[name] || feeStructure[`${name}_min`]}</span>
             ) : (
-            <span>Rs.{feeStructure[`${name}_min`]}</span>
+              <span>Rs.{feeStructure[`${name}_min`]} - Rs.{feeStructure[`${name}_max`]}</span>
             )}
-            <button
-              type="button"
-              className="delete-button"
-              onClick={() => deleteFee(name)}
-            >
+            <button type="button" className="delete-button" onClick={() => deleteFee(name)}>
               Delete
             </button>
           </div>
