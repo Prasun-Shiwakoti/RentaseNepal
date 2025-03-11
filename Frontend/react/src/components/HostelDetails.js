@@ -164,11 +164,11 @@ const HostelDetails = ({ userRole }) => {
               {/* Fee Structure */}
               <div className="hosteldetail-info">
                 <div className="hosteldetail-title">Fee Structure</div>
-                {hostel.admission_price>0 && <li>Admission Fee: NPR {hostel.admission_price}</li>}
-                {hostel.single_seater_price>0 && <li>One-seater: NPR {hostel.single_seater_price}</li>}
-                {hostel.two_seater_price>0 && <li>Two-seater: NPR {hostel.two_seater_price}</li>}
-                {hostel.three_seater_price>0 && <li>Three-seater: NPR {hostel.three_seater_price}</li>}
-                {hostel.four_seater_price>0 && <li>Four-seater: NPR {hostel.four_seater_price}</li>}
+                {hostel.admission_price_min>0 && <li>Admission Fee: NPR {hostel.admission_price_min}</li>}
+                {hostel.single_seater_price_min>0 && <li>One-seater: NPR {hostel.single_seater_price_min}</li>}
+                {hostel.two_seater_price_min>0 && <li>Two-seater: NPR {hostel.two_seater_price_min}</li>}
+                {hostel.three_seater_price_min>0 && <li>Three-seater: NPR {hostel.three_seater_price_min}</li>}
+                {hostel.four_seater_price_min>0 && <li>Four-seater: NPR {hostel.four_seater_price_min}</li>}
               </div>
 
               {/* Facilities */}
