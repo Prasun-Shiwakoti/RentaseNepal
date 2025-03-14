@@ -31,7 +31,7 @@ const AddBlog = ({ fetchBlogs }) => {
       formData.append('image', image); // Append the image file
     }
 
-    const token = 'fdc19eacbd64d055f80b9486b4b4d1fc443f67cb'; // Use the appropriate token
+    const token = localStorage.getItem('admin-token');
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/blogs/', {
