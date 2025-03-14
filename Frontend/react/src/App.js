@@ -31,7 +31,7 @@ const App = () => {
   const blogRef = useRef(null);
   const contactRef = useRef(null);
   const serviceRef = useRef(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(
+  const [isLoggedIn, setisLoggedIn] = useState(
     !!localStorage.getItem('admin-token') || !!localStorage.getItem('user-token')
   );
   const [userRole, setUserRole] = useState(
