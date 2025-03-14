@@ -72,8 +72,6 @@ const ListYourHostel = () => {
       formDataToSend.append("location", formData.location);
       formDataToSend.append("latitude", coordinates.lat);
       formDataToSend.append("longitude", coordinates.lng);
-      console.log(coordinates.lat);
-      console.log(coordinates.lng);
 
       formDataToSend.append(
         "gender",
@@ -143,8 +141,11 @@ const ListYourHostel = () => {
       formData.additionalPhotos.forEach((photo, index) => {
         formDataToSend.append("additional_images", photo);
       });
-
-      console.log(formDataToSend)
+      console.log(formData)
+      formDataToSend.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+      
       const response = await fetch("http://127.0.0.1:8000/api/hostels/", {
         method: "POST",
         headers: {
