@@ -16,6 +16,8 @@ const FeaturedHostels = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const token = localStorage.getItem('admin-token')
+
   const fetchFeaturedHostels = async () => {
     setLoading(true);
     setError(null);
@@ -29,6 +31,7 @@ const FeaturedHostels = () => {
       const response = await fetch('http://127.0.0.1:8000/api/hostels/filter/', {
         method: 'POST',
         headers: {
+          ...(token && { Authorization: `token ${token}` }),
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
@@ -90,11 +93,11 @@ const FeaturedHostels = () => {
                 key={index}
                 id={hostel.id}
                 image={hostel.image}
-                // name={hostel.name}
+                name={hostel.name}
                 isFeatured={hostel.isFeatured}
                 rating={hostel.rating}
                 location={hostel.location}
-                price={hostel.admission_price_min}
+                price={hostel.admission_price}
                 gender={hostel.gender}
               />
             </SwiperSlide>
