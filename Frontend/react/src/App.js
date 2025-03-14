@@ -31,8 +31,13 @@ const App = () => {
   const blogRef = useRef(null);
   const contactRef = useRef(null);
   const serviceRef = useRef(null);
-  const [isLoggedIn, setisLoggedIn] = useState(!!localStorage.getItem('usertoken'));
-  const [userRole, setUserRole] = useState('user');
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem('admin-token') || !!localStorage.getItem('user-token')
+  );
+  const [userRole, setUserRole] = useState(
+    localStorage.getItem('admin-token') ? 'admin' : 'user'
+  );
+  
 
   return (
     <Router>
